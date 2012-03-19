@@ -28,3 +28,14 @@ ConsoleBundle is application setup for ease of starting new project in Symfony2.
                 // ...
             );
         }
+
+4. Add the routing to the `config.yml` routing
+
+        _console_bundle:
+        resource: "@ManhattanConsoleBundle/Resources/config/routing.yml"
+
+5. Under the `imports:` line in `app/config.yml` put the security file for the bundle before the `security.yml` line. This will allow application overloading of the bundle security file:
+
+        - { resource: parameters.ini }
+        - { resource: '@ManhattanConsoleBundle/Resources/config/security.yml' }
+        - { resource: security.yml }
