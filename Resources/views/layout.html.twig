@@ -1,0 +1,67 @@
+{% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8" />
+{% block head_style %}
+{% stylesheets filter='less,?yui_css'
+   	'@ManhattanConsoleBundle/Resources/public/less/bootstrap-setup.less'
+%}
+<link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+{% endstylesheets %}
+
+{% endblock head_style %}
+
+{% block head_script %}
+{# Overwrite this block to add your own js here, to get them generated into final files #}
+{% endblock head_script %}
+
+<title>{% block title %}Management Console{% endblock %}</title>
+<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+    {% block navbar %}
+    
+	{% endblock navbar %}
+
+	{% block container %}
+	<div class="container">
+      <div class="content">
+        <div class="page-header">
+              <h1>{% block headline %}Management Console{% endblock %}</h1>
+        </div>
+		{% block flashes %}
+		    {{ session_flash() }}
+		{% endblock flashes %}
+		<div class="row">
+			{% block content %}
+			<div class="span9">
+				<strong>Content</strong>
+			</div>
+			<div class="span3">
+				{% block content_sidebar %}
+                <h2>Sidebar</h2>
+				{% endblock content_sidebar %}
+			</div>
+			{% endblock content %}
+		</div>
+      </div>
+      <footer>
+        {% block footer %}
+        <p>&copy; <a href="http://www.frodosghost.com" target="_blank">Manhattan Management Console</a> 2011</p>
+        {% endblock footer %}
+      </footer>
+	</div> <!-- /container -->
+	{% endblock container %}
+	{% block foot_script %}
+	{# To only use a subset or add more js overwrite and copy paste this block #}
+	{%- javascripts
+	    	'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'
+	    	filter="?yui_js"
+	    %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock foot_script %}
+</body>
+</html>

@@ -1,0 +1,15 @@
+/*
+ * ManhattanConsoleBundle
+ * 
+ * Include less locations for styles for display of twitter bootstrap and related files.
+ * Used because the Mopa bundle is not locating the bootstrap files in the dependency include.
+ */
+
+// Main bootstrap.less entry point
+@import "../../../../../../../twitter/bootstrap/v2/less/bootstrap.less";
+
+// The Paginator less for MopaBootstrapBundle
+@import "../../../../../../Mopa/BootstrapBundle/Resources/public/less/paginator.less";
+
+// include the responsive after all of your stuff!
+@import "../../../../../../../twitter/bootstrap/v2/less/responsive.less";

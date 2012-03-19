@@ -1,0 +1,26 @@
+{
+    "name": "manhattan/console-bundle",
+    "type": "symfony-bundle",
+    "description": "Easy integration of console system for Manhattan Console in Symfony2",
+    "keywords": ["security", "layout"],
+    "license": "MIT",
+    "version": "master",
+    "authors": [
+        {
+            "name": "James Rickard",
+            "email": "james@frodosghost.com",
+            "homepage": "www.frodosghost.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "2.*",
+        "symfony/form": "2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Manhattan\\Bundle\\ConsoleBundle": ""
+        }
+    },
+    "target-dir": "Manhattan//Bundle//ConsoleBundle"
+}

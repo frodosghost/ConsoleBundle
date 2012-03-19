@@ -1,0 +1,7 @@
+_security:
+    resource: "@ManhattanConsoleBundle/Controller/SecurityController.php"
+    type:     annotation
+
+_console:
+    resource: "@ManhattanConsoleBundle/Controller/ConsoleController.php"
+    type:     annotation
