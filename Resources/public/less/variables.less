@@ -1,6 +1,6 @@
 // Variables.less
 // Variables to customize the look and feel of Bootstrap
-// Swatch: Cerulean
+// Swatch: Simplex
 // Version: 2.0.2
 // -----------------------------------------------------
 
@@ -13,35 +13,35 @@
 // Grays
 // -------------------------
 @black:                 #000;
-@grayDarker:            #222;
+@grayDarker:            #2C2C2C;
 @grayDark:              #333;
 @gray:                  #555;
 @grayLight:             #999;
-@grayLighter:           #F5F5F5;
+@grayLighter:           #eee;
 @white:                 #fff;
 
 
 // Accent colors
 // -------------------------
-@blue:                  #3E78B3;
-@blueDark:              #033C73;
-@green:                 #73A839;
-@red:                   #C71C22;
-@yellow:                #F7B42C;
-@orange:                #DD5600;
-@pink:                  #F49AC1;
-@purple:                #9760B3;
+@blue:                  #15C;
+@blueDark:              #043755;
+@green:                 #3D9400;
+@red:                   #E32C3B;
+@yellow:                #FFCA27;
+@orange:                #FF6600;
+@pink:                  #ED2590;
+@purple:                #9B479F;
 
 
 // Scaffolding
 // -------------------------
-@bodyBackground:        @white;
+@bodyBackground:        #EDEDED;
 @textColor:             @gray;
 
 
 // Links
 // -------------------------
-@linkColor:             #369BD7;
+@linkColor:             #366DDC;
 @linkColorHover:        darken(@linkColor, 15%);
 
 
@@ -52,9 +52,9 @@
 @baseLineHeight:        18px;
 @altFontFamily:         Georgia, "Times New Roman", Times, serif;
 
-@headingsFontFamily:    'Telex', sans-serif; // empty to use BS default, @baseFontFamily
+@headingsFontFamily:    inherit; // empty to use BS default, @baseFontFamily
 @headingsFontWeight:    bold;    // instead of browser default, bold
-@headingsColor:         #317EAC; // empty to use BS default, @textColor
+@headingsColor:         @grayDark; // empty to use BS default, @textColor
 
 
 // Tables
@@ -74,19 +74,19 @@
 @btnPrimaryBackground:              @linkColor;
 @btnPrimaryBackgroundHighlight:     spin(@btnPrimaryBackground, 15%);
 
-@btnInfoBackground:                 @purple;
+@btnInfoBackground:                 #5bc0de;
 @btnInfoBackgroundHighlight:        #2f96b4;
 
-@btnSuccessBackground:              @green;
+@btnSuccessBackground:              #62c462;
 @btnSuccessBackgroundHighlight:     #51a351;
 
-@btnWarningBackground:              @orange;
+@btnWarningBackground:              lighten(@orange, 15%);
 @btnWarningBackgroundHighlight:     @orange;
 
-@btnDangerBackground:               @red;
+@btnDangerBackground:               #ee5f5b;
 @btnDangerBackgroundHighlight:      #bd362f;
 
-@btnInverseBackground:              @yellow;
+@btnInverseBackground:              @gray;
 @btnInverseBackgroundHighlight:     @grayDarker;
 
 
@@ -131,7 +131,7 @@
 
 // Input placeholder text color
 // -------------------------
-@placeholderText:         @grayLight;
+@placeholderText:         @gray;
 
 
 // Hr border color
@@ -142,12 +142,12 @@
 // Navbar
 // -------------------------
 @navbarHeight:                    40px;
-@navbarBackground:                @linkColor;
-@navbarBackgroundHighlight:       lighten(@linkColor, 10%);
+@navbarBackground:                #F3F3F3;
+@navbarBackgroundHighlight:       @navbarBackground;
 
-@navbarText:                      @grayLighter;
-@navbarLinkColor:                 @grayLighter;
-@navbarLinkColorHover:            @white;
+@navbarText:                      @gray;
+@navbarLinkColor:                 @gray;
+@navbarLinkColorHover:            @grayDark;
 @navbarLinkColorActive:           @navbarLinkColorHover;
 @navbarLinkBackgroundHover:       transparent;
 @navbarLinkBackgroundActive:      @navbarBackground;
@@ -155,7 +155,7 @@
 @navbarSearchBackground:          lighten(@navbarBackground, 25%);
 @navbarSearchBackgroundFocus:     @white;
 @navbarSearchBorder:              darken(@navbarSearchBackground, 30%);
-@navbarSearchPlaceholderColor:    @white;
+@navbarSearchPlaceholderColor:    #ccc;
 
 
 // Hero unit
@@ -167,20 +167,20 @@
 
 // Form states and alerts
 // -------------------------
-@warningText:             darken(@linkColor, 20%);
-@warningBackground:       lighten(@linkColor, 20%);
+@warningText:             @orange;
+@warningBackground:       #fcf8e3;
 @warningBorder:           darken(spin(@warningBackground, -10), 3%);
 
-@errorText:               darken(#C45559, 5%);
-@errorBackground:         #EDDBE3;
+@errorText:               @red;
+@errorBackground:         #f2dede;
 @errorBorder:             darken(spin(@errorBackground, -10), 3%);
 
-@successText:             darken(@green, 5%);
-@successBackground:       #CDB;
+@successText:             @green;
+@successBackground:       #dff0d8;
 @successBorder:           darken(spin(@successBackground, -10), 5%);
 
-@infoText:                darken(#908A62, 5%);
-@infoBackground:          #EDEBE1;
+@infoText:                @blue;
+@infoBackground:          #d9edf7;
 @infoBorder:              darken(spin(@infoBackground, -10), 7%);
 
 

@@ -1,97 +1,276 @@
 // Bootswatch.less
-// Swatch: Cerulean
+// Swatch: Simplex
 // Version: 2.0.2
 // -----------------------------------------------------
+
+@boxShadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 
 // TYPOGRAPHY
 // -----------------------------------------------------
 
-@import url(https://fonts.googleapis.com/css?family=Telex);
-
-.navbar, .subnav {
-	font-family: @headingsFontFamily;
+h6, .hero-unit h1 {
+	color: @headingsColor;
 }
 
 // NAVBAR
 // -----------------------------------------------------
 
-.navbar-inner {
-  #gradient > .vertical-three-colors(@navbarBackground, @navbarBackground, 90%, @navbarBackgroundHighlight);
+.navbar .navbar-inner {
+	.box-shadow(inset 0 -1px #CFCACA);
+	border-bottom: 1px solid #FFF;
+	border-bottom: none;
+}
+
+.navbar .brand {
+	padding-top: 10px;
+	color: @headingsColor;
+}
+
+.navbar .nav > li > a {
+	padding-top: 14px;
+	text-shadow: none;
+	font-weight: normal;
+	font-size: 11px;
+}
+
+.navbar .nav > li > a:hover {
+	text-decoration: underline;
 }
 
 .navbar .nav .active > a,
 .navbar .nav .active > a:hover {
-  background-color: @navbarBackground;
-  background-color: rgba(0,0,0,.2);
+	background-color: transparent;
 }
 
-.navbar .search-query {
-	border: 1px solid darken(@linkColor, 10%);
+.navbar .nav .dropdown-toggle .caret,
+.navbar .nav .open.dropdown .caret {
+	border-top-color: @textColor;
 }
 
-// responsive menu colors
+.dropdown.open .dropdown-toggle {
+	color: @headingsColor;
+}
 
-.navbar .nav-collapse.in > .nav > li .dropdown-menu a {
-	color: @white;
+div.subnav {
+	background-image: none;
+	background-color: @navbarBackground;
+	border-bottom: 1px solid transparent;
+	.box-shadow(@boxShadow);
+}
+
+div.subnav.subnav-fixed {
+	.box-shadow(inset 0 5px #fff~"," @boxShadow);
+}
+
+div.subnav .nav > li > a {
+	padding-top: 12px;
+	color: @navbarText;
+	font-weight: normal;
+	font-size: 11px;
 	
 	&:hover {
-		color: @white;
+		text-decoration: underline;
 	}
 }
 
+.dropdown-menu {
+	.border-radius(0);
+	font-size: 11px;
+}
+
+.nav .nav-header {
+	font-weight: normal;
+	text-transform: none;
+}
 .navbar .nav-collapse.in .nav li > a {
-	color: @white;
-	
-	&:hover {
-		background-color: #2B7CAC;
+	color: @headingsColor;
+	font-weight: normal;
+}
+
+.navbar .nav-collapse.in .nav li > a:hover {
+	background-color: transparent;
+	color: @black;
+	text-decoration: underline;
+}
+
+@media (max-width: 979px) {
+	form.navbar-form, form.navbar-search {
+		border-top: 1px solid #ccc;
+		border-bottom: 1px solid #ccc;
 	}
 }
 
-.btn-navbar:hover {
-    background-color: darken(@white, 20%);
+// NAV
+// -----------------------------------------------------
+
+.nav > li > a {
+	font-size: 11px;
+	border-width: 1px;
+}
+
+.nav-tabs > li > a,
+.nav-tabs > li > a:hover,
+.tabbable > .nav-tabs > li > a,
+.tabbable > .nav-tabs > li > a:hover {
+	background-color: darken(@bodyBackground, 3%);
+	border: 1px solid #ccc;
+}
+
+.tabbable > .nav-tabs > li.active > a {
+	border-bottom: 1px solid transparent;
+}
+
+.tabbable.tabs-below > .nav-tabs > li.active > a,
+.tabbable.tabs-left > .nav-tabs > li.active > a,
+.tabbable.tabs-right > .nav-tabs > li.active > a {
+	border-bottom: 1px solid #ccc;
+}
+
+
+.nav-pills > li > a:hover {
+	background-color: transparent;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover {
+	background-color: @bodyBackground;
+}
+
+
+// FORMS
+// -----------------------------------------------------
+
+input, textarea, select, .uneditable-input {
+	.border-radius(0);
+}
+
+.navbar-search .search-query {
+	border: 1px solid #CCC;
+	.border-radius(0);
+	background-color: @bodyBackground;
+	color: @gray;
+}
+
+.help-inline, .help-block {
+	font-size: 11px;
+}
+
+.input-prepend input,
+.input-append input,
+.input-prepend select,
+.input-append select,
+.input-prepend .uneditable-input,
+.input-append .uneditable-input {
+	.border-radius(0);
+}
+
+.input-prepend .add-on,
+.input-append .add-on,
+.input-prepend .btn,
+.input-append .btn {
+	.border-radius(0);
+}
+
+// TABLES
+// -----------------------------------------------------
+
+.table th {
+	font-weight: normal;
 }
 
 // BUTTONS
 // -----------------------------------------------------
 
 .btn {
-  #gradient > .vertical-three-colors(@white, @white, 5%, darken(@white, 0%));
-  @shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
-  .box-shadow(@shadow);
-  
-  &:hover {
-  	background-position: 0 0;
-  }
+  .border-radius(2px);
+  font-weight: bold;
+  #gradient > .vertical-three-colors(@white, @white, 25%, darken(@white, 10%));
 }
 
 .btn-primary {
   .buttonBackground(lighten(@btnPrimaryBackground, 5%), @btnPrimaryBackground);
 }
 
-.btn-info {
-  .buttonBackground(lighten(@btnInfoBackground, 5%), @btnInfoBackground);
-}
-
-.btn-success {
-  .buttonBackground(lighten(@btnSuccessBackground, 5%), @btnSuccessBackground);
-}
-
 .btn-warning {
-  .buttonBackground(lighten(@btnWarningBackground, 5%), @btnWarningBackground);
+  .buttonBackground(lighten(@orange, 5%), @orange);
 }
 
 .btn-danger {
-  .buttonBackground(lighten(@btnDangerBackground, 5%), @btnDangerBackground);
+  .buttonBackground(lighten(@red, 5%), @red);
+}
+
+.btn-success {
+  .buttonBackground(lighten(@green, 5%), @green);
+}
+
+.btn-info {
+  .buttonBackground(lighten(#5bc0de, 5%), #5bc0de);
 }
 
 .btn-inverse {
-  .buttonBackground(lighten(@btnInverseBackground, 5%), @btnInverseBackground);
+  .buttonBackground(lighten(@purple, 5%), @purple);
 }
 
-// ICONS
+// MODALS
 // -----------------------------------------------------
 
-// Make icons gray
+.modal,
+.modal-header,
+.modal-footer {
+	.border-radius(0);
+}
+
+.modal-header {
+	border-bottom: none;
+}
+
+.modal-header,
+.modal-body {
+	background-color: @navbarBackground;
+}
+
+.modal-footer {
+	background-color: @bodyBackground;
+}
+
+// MISCELLANEOUS
+// -----------------------------------------------------
+
 i[class^="icon-"]{
-	opacity: 0.8;
+	opacity: 0.6;
+	vertical-align: -2px;
+}
+
+.alert, .alert p, .alert-heading {
+	font-size: 11px;
+}
+
+.progress {
+    #gradient > .vertical(#e0e0e0, #e8e8e8);
+}
+
+.label {
+	font-size: 11px;
+	font-weight: normal;
+}
+
+.hero-unit {
+	background-color: @white;
+	.box-shadow(@boxShadow);
+}
+
+.well {
+	.box-shadow(@boxShadow);
+	background-color: @white;
+	border: none;
+}
+
+.breadcrumb {
+	.box-shadow(@boxShadow);
+	border: 0px solid transparent;
+	font-size: 11px;
+}
+
+footer.footer p {
+	font-size: 11px;
 }
