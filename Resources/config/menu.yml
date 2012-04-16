@@ -1,0 +1,25 @@
+parameters:
+    manhattan.console.navbar.generic: Mopa\Bundle\BootstrapBundle\Navbar\GenericNavbar
+
+services:
+    manhattan.console.menu_builder:
+        class: Manhattan\Bundle\ConsoleBundle\Navbar\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+
+    manhattan.console.menu:
+        class: Knp\Menu\MenuItem
+        factory_service: manhattan.console.menu_builder
+        factory_method: createMainMenu
+        arguments: ["@request"]
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: mainmenu }
+            
+    manhattan.console.rightmenu:
+        class: Knp\Menu\MenuItem
+        factory_service: manhattan.console.menu_builder
+        factory_method: createRightSideMenu
+        arguments: ["@request"]
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: rightmenu }

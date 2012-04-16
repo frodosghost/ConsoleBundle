@@ -1,4 +1,4 @@
-{% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}
+{#% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %#}
 <!DOCTYPE html>
 
 <html>
@@ -7,6 +7,7 @@
 {% block head_style %}
 {% stylesheets filter='less,?yui_css'
    	'@ManhattanConsoleBundle/Resources/public/less/bootstrap-setup.less'
+   	'@ManhattanConsoleBundle/Resources/public/less/console.less'
 %}
 <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
 {% endstylesheets %}
@@ -20,22 +21,25 @@
 <title>{% block title %}Management Console{% endblock %}</title>
 <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 </head>
-<body>
+<body data-spy="scroll" data-target=".subnav" data-offset="50">
     {% block navbar %}
-    
+    {{ mopa_bootstrap_navbar('frontendNavbar') }}
 	{% endblock navbar %}
 
 	{% block container %}
 	<div class="container">
       <div class="content">
+      	{% block page_header %}
         <div class="page-header">
               <h1>{% block headline %}Management Console{% endblock %}</h1>
         </div>
+        {% endblock page_header %}
 		{% block flashes %}
-		    {{ session_flash() }}
+		    {#{ session_flash() }#}
 		{% endblock flashes %}
-		<div class="row">
-			{% block content %}
+		
+		{% block content %}
+	    <div class="row">
 			<div class="span9">
 				<strong>Content</strong>
 			</div>
@@ -44,8 +48,8 @@
                 <h2>Sidebar</h2>
 				{% endblock content_sidebar %}
 			</div>
-			{% endblock content %}
-		</div>
+	    </div>
+		{% endblock content %}
       </div>
       <footer>
         {% block footer %}
@@ -55,13 +59,13 @@
 	</div> <!-- /container -->
 	{% endblock container %}
 	{% block foot_script %}
-	{# To only use a subset or add more js overwrite and copy paste this block #}
+	{# To only use a subset or add more js overwrite and copy paste this block }
 	{%- javascripts
 	    	'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'
 	    	filter="?yui_js"
-	    %}
+	%}
 <script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
+{% endjavascripts %#}
 {% endblock foot_script %}
 </body>
 </html>

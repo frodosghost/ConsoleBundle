@@ -1,15 +1,17 @@
 {% extends 'ManhattanConsoleBundle::layout.html.twig' %}
 
+{% block page_header %}{% endblock %}
+
 {% block content %}
+<div class="row">
+    <div class="span6 offset2">
     <h1>Login</h1>
-
-    <p>Choose between two default users: <em>user/userpass</em> <small>(ROLE_USER)</small> or <em>admin/adminpass</em> <small>(ROLE_ADMIN)</small></p>
-
+    <p>Please sign in with your <em>username</em> and <em>password</em>.</p>
     {% if error %}
-        <div class="error">{{ error.message }}</div>
+        <div class="alert alert-error">{{ error.message }}</div>
     {% endif %}
 
-    <form action="{{ path("_security_check") }}" class="form-stacked" method="post" id="login">
+    <form action="{{ path("_security_check") }}" class="form-stacked well" method="post" id="login">
         <div>
             <label for="username">Username</label>
             <input type="text" id="username" name="_username" value="{{ last_username }}" />
@@ -22,4 +24,6 @@
 
         <input type="submit" class="btn primary" value="LOGIN" />
     </form>
+    </div>
+</div>
 {% endblock %}
