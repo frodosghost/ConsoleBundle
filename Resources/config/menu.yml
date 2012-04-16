@@ -1,3 +1,8 @@
+# Bootstrap Bundle
+mopa_bootstrap:
+    navbar: ~
+    form: ~
+
 parameters:
     manhattan.console.navbar.generic: Mopa\Bundle\BootstrapBundle\Navbar\GenericNavbar
 
