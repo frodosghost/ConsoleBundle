@@ -13,9 +13,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.2",
-        "symfony/framework-bundle":            "2.*",
-        "symfony/form":                        "2.*",
+        "php":                                 ">=5.3.2",
 
         "doctrine/doctrine-migrations-bundle": "*",
         "stof/doctrine-extensions-bundle":     "*",
@@ -23,7 +21,7 @@
 
         "mopa/bootstrap-bundle":               "dev-master",
         "twitter/bootstrap":                   "master",
-        "knplabs/knp-paginator-bundle":        "2.*",
+        "knplabs/knp-paginator-bundle":        "dev-master",
         "knplabs/knp-menu-bundle":             "dev-master",
         "craue/formflow-bundle":               "dev-master",
 
