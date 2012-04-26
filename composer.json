@@ -4,7 +4,7 @@
     "description": "Easy integration of console system for Manhattan Console in Symfony2",
     "keywords": ["security", "layout"],
     "license": "MIT",
-    "version": "master",
+    "version": "1.0",
     "authors": [
         {
             "name": "James Rickard",
@@ -14,21 +14,21 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "symfony/framework-bundle":     "2.*",
-        "symfony/form":                 "2.*",
+        "symfony/framework-bundle":            "2.*",
+        "symfony/form":                        "2.*",
 
         "doctrine/doctrine-migrations-bundle": "*",
-        "stof/doctrine-extensions-bundle":    "*",
-        "stfalcon/tinymce-bundle":      "*",
+        "stof/doctrine-extensions-bundle":     "*",
+        "stfalcon/tinymce-bundle":             "*",
 
-        "mopa/bootstrap-bundle":        "dev-master",
-        "twitter/bootstrap":            "master",
-        "knplabs/knp-paginator-bundle": "dev-master",
-        "knplabs/knp-menu-bundle":      "dev-master",
-        "craue/formflow-bundle":        "dev-master",
+        "mopa/bootstrap-bundle":               "dev-master",
+        "twitter/bootstrap":                   "master",
+        "knplabs/knp-paginator-bundle":        "2.*",
+        "knplabs/knp-menu-bundle":             "dev-master",
+        "craue/formflow-bundle":               "dev-master",
 
-        "behat/behat-bundle":             "*",
-        "behat/mink-bundle":              "*"
+        "behat/behat-bundle":                  "*",
+        "behat/mink-bundle":                   "*"
     },
     "repositories": [
         {
@@ -40,14 +40,10 @@
                     "url": "https://github.com/twitter/bootstrap.git",
                     "type": "git",
                     "reference": "master"
-                },
-                "dist": {
-                    "url": "https://github.com/twitter/bootstrap/zipball/master",
-                    "type": "zip"
                 }
             }
         }
-    ],
+    ]
     "autoload": {
         "psr-0": {
             "Manhattan\\ConsoleBundle": ""
@@ -60,6 +56,13 @@
         "post-update-cmd": [
             "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
         ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web"
     },
     "target-dir": "Manhattan/ConsoleBundle"
 }
