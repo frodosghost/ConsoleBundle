@@ -17,8 +17,8 @@
         "symfony/framework-bundle":     "2.*",
         "symfony/form":                 "2.*",
 
-        "doctrine-migrations":          "*",
-        "gedmo-doctrine-extensions":    "*",
+        "doctrine/doctrine-migrations-bundle": "*",
+        "stof/doctrine-extensions-bundle":    "*",
         "stfalcon/tinymce-bundle":      "*",
 
         "mopa/bootstrap-bundle":        "dev-master",
