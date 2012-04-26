@@ -34,7 +34,7 @@
         {
             "type": "package",
             "package": {
-                "version": "2.1.*",
+                "version": "master",
                 "name": "twitter/bootstrap",
                 "source": {
                     "url": "https://github.com/twitter/bootstrap.git",
