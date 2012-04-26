@@ -34,7 +34,7 @@
         {
             "type": "package",
             "package": {
-                "version": "master", /* whatever version you want */
+                "version": "2.1.*",
                 "name": "twitter/bootstrap",
                 "source": {
                     "url": "https://github.com/twitter/bootstrap.git",
@@ -60,7 +60,6 @@
         "post-update-cmd": [
             "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
         ]
-    }
+    },
     "target-dir": "Manhattan/ConsoleBundle"
-
 }
