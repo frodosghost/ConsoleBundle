@@ -20,7 +20,7 @@
         "stfalcon/tinymce-bundle":             "*",
 
         "mopa/bootstrap-bundle":               "dev-master",
-        "twitter/bootstrap":                   "master",
+        "twitter/bootstrap":                   "dev-master",
         "knplabs/knp-paginator-bundle":        "dev-master",
         "knplabs/knp-menu-bundle":             "dev-master",
         "craue/formflow-bundle":               "dev-master",
@@ -32,13 +32,17 @@
         {
             "type": "package",
             "package": {
-                "version": "master",
+                "version": "dev-master",
                 "name": "twitter/bootstrap",
                 "source": {
                     "url": "https://github.com/twitter/bootstrap.git",
                     "type": "git",
                     "reference": "master"
-                }
+                },
+                "dist": {
+                    "url": "https://github.com/twitter/bootstrap/zipball/master",
+                    "type": "zip"
+                 }
             }
         }
     ],
