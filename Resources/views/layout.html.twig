@@ -10,7 +10,26 @@
 {% endblock head_style %}
 
 {% block title %}Manhattan Management Console{% endblock %}
+
 {% block headline %}Manhattan Management Console{% endblock %}
+
+{% block foot_script %}
+	{% block main_javascript %}
+		{%- javascripts
+	    	'@ManhattanConsoleBundle/Resources/public/js/mootools-core-1.4.5-full-nocompat.js'
+	    	'@ManhattanConsoleBundle/Resources/public/js/mootools-more-1.4.0.1.js'
+	    	filter="?yui_js"
+	    	output="js/main.js"
+	    %}
+		<script type="text/javascript" src="{{ asset_url }}"></script>
+		{% endjavascripts %}
+	{% endblock main_javascript %}
+
+	{% block page_javascript %}
+		{# Javascript specific to pages is included in here. #}
+	{% endblock page_javascript %}
+{% endblock foot_script %}
+
 {% block footer %}
 <p>&copy; <a href="http://www.frodosghost.com" target="_blank">Manhattan Management Console</a> 2011</p>
 {% endblock footer %}
