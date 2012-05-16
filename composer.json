@@ -4,7 +4,6 @@
     "description": "Easy integration of console system for Manhattan Console in Symfony2",
     "keywords": ["security", "layout"],
     "license": "MIT",
-    "version": "1.0",
     "authors": [
         {
             "name": "James Rickard",
@@ -13,12 +12,9 @@
         }
     ],
     "require": {
-        "php": ">=5.3.2",
+        "php": ">=5.3.2"
     },
     "autoload": {
-        "psr-0": {
-            "Manhattan\\ConsoleBundle": ""
-        }
-    },
-    "target-dir": "Manhattan/ConsoleBundle"
+        "psr-0": { "Manhattan\\ConsoleBundle": "" }
+    }
 }
