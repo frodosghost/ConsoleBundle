@@ -49,11 +49,12 @@ RepeatableContainer = new Class({
     		throw new Error("The prototype element is required but was not included in the Element or could not be found.");
     	}
 
-    	this._protected.container        = element,
-    	this._protected.clone            = this._protected.container.get('data-prototype'),
-    	this._protected.collection       = this._protected.container.getChildren('div.collection.controls'),
-    	this._protected.action_container = this._protected.collection.getElement('div.collection.action'),
-		this._protected.add_button       = this._protected.action_container.getElement('input.btn')
+    	this._protected.container        = element;
+        var element_id                   = this._protected.container.get('id');
+    	this._protected.clone            = this._protected.container.get('data-prototype');
+    	this._protected.collection       = this._protected.container.getChildren('div.collection.controls');
+		this._protected.add_button       = this._protected.container.getElement('[data-collection-add-btn='+element_id+']');
+        this._protected.action_container = this._protected.add_button.getParent('div.collection.action'),
 
 		this.setCollectionItems();
 		this.addListeners();
@@ -245,9 +246,9 @@ CollectionItem = new Class({
 				}
 			}),
 			remove_button: new Element('a', {
-				'class': 'btn btn-warning',
+				'class': 'btn btn-danger',
 				href:  '#',
-				html:  '<i class="icon-remove icon-white"></i>Remove',
+				html:  '<i class="icon-remove icon-white"></i>',
 				events: {
 					'click': function(event){
 						event.stop();
