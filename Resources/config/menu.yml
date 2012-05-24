@@ -1,7 +1,9 @@
 # Bootstrap Bundle
 mopa_bootstrap:
-    navbar: ~
-    form: ~
+    navbar:
+        service: manhattan.console.navbar
+    form:
+        show_legend: false # default is true
 
 parameters:
     manhattan.console.navbar.generic: Mopa\Bundle\BootstrapBundle\Navbar\GenericNavbar
