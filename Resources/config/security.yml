@@ -1,34 +1,25 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        Manhattan\Bundle\ConsoleBundle\Entity\User: sha512
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        in_memory:
-            users:
-                user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        fos_userbundle:
+            id: fos_user.user_manager
 
-    firewalls:
-        dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
-        login:
-            pattern:  ^/console/login$
-            security: false
-
-        secured_area:
+    firewalls: 
+        main:
             pattern:    ^/console/
             form_login:
                 check_path: /console/login_check
                 login_path: /console/login
+                provider: fos_userbundle
             logout:
                 path:   /console/logout
-                target: /console
+                target: /console/
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

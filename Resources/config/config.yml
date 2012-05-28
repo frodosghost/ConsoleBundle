@@ -1,3 +1,8 @@
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Manhattan\Bundle\ConsoleBundle\Entity\User
+
 # Bootstrap Bundle
 mopa_bootstrap:
     navbar:
@@ -21,7 +26,6 @@ services:
         scope: request
         tags:
             - { name: knp_menu.menu, alias: mainmenu }
-            
     manhattan.console.rightmenu:
         class: Knp\Menu\MenuItem
         factory_service: manhattan.console.menu_builder
