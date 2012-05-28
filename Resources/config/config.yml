@@ -1,6 +1,7 @@
+# FOS UserBundle
 fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
-    firewall_name: main
+    db_driver: orm
+    firewall_name: secured_area
     user_class: Manhattan\Bundle\ConsoleBundle\Entity\User
 
 # Bootstrap Bundle
