@@ -1,9 +1,3 @@
-# FOS UserBundle
-fos_user:
-    db_driver: orm
-    firewall_name: secured_area
-    user_class: Manhattan\Bundle\ConsoleBundle\Entity\User
-
 # Bootstrap Bundle
 mopa_bootstrap:
     navbar:
@@ -35,3 +29,9 @@ services:
         scope: request
         tags:
             - { name: knp_menu.menu, alias: rightmenu }
+
+# FOS UserBundle
+fos_user:
+    db_driver: orm
+    firewall_name: secured_area
+    user_class: Manhattan\Bundle\ConsoleBundle\Entity\User

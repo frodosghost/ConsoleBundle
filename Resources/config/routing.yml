@@ -2,26 +2,26 @@
     #resource: "@ManhattanConsoleBundle/Controller/SecurityController.php"
     #type:     annotation
 
-_console:
-    resource: "@ManhattanConsoleBundle/Controller/ConsoleController.php"
-    type:     annotation
+#_console:
+  #  resource: "@ManhattanConsoleBundle/Controller/ConsoleController.php"
+ #   type:     annotation
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-    prefix: /console
+   # prefix: /console
 
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-    prefix: /console/profile
+    prefix: /profile
 
 fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
-    prefix: /console/register
+    prefix: /register
 
 fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
-    prefix: /console/resetting
+    prefix: /resetting
 
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
-    prefix: /console/profile
+    prefix: /profile

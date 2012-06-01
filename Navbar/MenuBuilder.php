@@ -27,7 +27,7 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
         $menu->setCurrentUri($request->getRequestUri());
         $menu->setChildrenAttribute('class', 'nav pull-right');
 
-        $menu->addChild('Logout', array('route' => '_logout'));
+        $menu->addChild('Logout', array('route' => 'fos_user_security_logout'));
 
         return $menu;
     }

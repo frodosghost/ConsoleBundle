@@ -16,7 +16,9 @@
 {% block title %}Manhattan Management Console{% endblock %}
 
 {% block headline %}Manhattan Management Console{% endblock %}
-
+{% block content %}
+ {{ block('fos_user_content') }}
+{% endblock %}
 {% block foot_script %}
 	{% block main_javascript %}
 		{%- javascripts
