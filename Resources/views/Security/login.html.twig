@@ -3,27 +3,31 @@
 {% block page_header %}{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="span6 offset2">
-    <h1>Login</h1>
-    <p>Please sign in with your <em>username</em> and <em>password</em>.</p>
-    {% if error %}
-        <div class="alert alert-error">{{ error.message }}</div>
-    {% endif %}
 
-    <form action="{{ path("_security_check") }}" class="form-stacked well" method="post" id="login">
-        <div>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="_username" value="{{ last_username }}" />
-        </div>
-
-        <div>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="_password" />
-        </div>
-
-        <input type="submit" class="btn primary" value="LOGIN" />
-    </form>
+    <div class="span2">
+        
     </div>
-</div>
+    <div class="span6">
+        <h1>Login</h1>
+        <p>Please sign in with your <em>username</em> and <em>password</em>.</p>
+
+        {% if error %}
+            <div class="alert alert-error">{{ error.message }}</div>
+        {% endif %}
+
+        <form action="{{ path("_security_check") }}" class="form-stacked well" method="post" id="login">
+            <div>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" />
+            </div>
+
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="_password" />
+            </div>
+
+            <input type="submit" class="btn primary" value="LOGIN" />
+        </form>
+    </div>
+
 {% endblock %}
