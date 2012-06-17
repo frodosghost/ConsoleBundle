@@ -12,7 +12,7 @@
 {% block navbar %}
     {{ mopa_bootstrap_navbar('consoleNavbar') }}
 {% endblock navbar %}
-
+{% block container_class %}container-fluid main-display{% endblock container_class %}
 {% block title %}Manhattan Management Console{% endblock %}
 
 {% block headline %}Manhattan Management Console{% endblock %}
@@ -26,7 +26,9 @@
 	    	output="js/main.js"
 	    %}
 		<script type="text/javascript" src="{{ asset_url }}"></script>
+
 		{% endjavascripts %}
+		{{ tinymce_init() }}
 	{% endblock main_javascript %}
 
 	{% block page_javascript %}
