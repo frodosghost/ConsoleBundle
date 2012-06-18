@@ -7,7 +7,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Mopa\Bundle\BootstrapBundle\Navbar\AbstractNavbarMenuBuilder;
 
-use Manhattan\Bundle\ConsoleBundle\MenuEvents;
+use Manhattan\Bundle\ConsoleBundle\Event\MenuEvents;
 use Manhattan\Bundle\ConsoleBundle\Event\ConfigureMenuEvent;
 
 /**
@@ -80,7 +80,7 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
 
     public function createMainMenu(Request $request)
     {
-        $menu = $this->factory->createItem('root');
+        $menu = $this->getFactory()->createItem('root');
         $menu->setCurrentUri($request->getRequestUri());
         $menu->setChildrenAttribute('class', 'nav');
 
