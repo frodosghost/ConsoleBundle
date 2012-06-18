@@ -6,58 +6,56 @@ body {
 form.actions-delete {
 	display: inline-block;
     margin: 0 0 0 3px;
-    position: absolute;
+    position: relative;
+    float: right;
 }
 form label {
 	font-weight: bold;
 	color: #3f3f3f;
 }
-	form div.collection.controls .control-group {
-		margin-bottom: 5px;
-	}
-	form div.collection.controls .control-group .controls label {
-		display: inline-block;
-	}
-	div.collection.controls div.collection-item {
-		padding: 1%;
-		border: 1px solid #d0d0d0;
-		margin-bottom: 1%;
-	}
 
-	div.collection-item .action-container {
-		float: right;
-		width: auto;
-	}
-		div.collection-item .action-container .btn {
-			margin-left: 5px;
-			top: 0;
-		}
-
-	div.collection.controls div.collection-item.staged label {
-		color: #D4D4D4;
-	}
-
-.btn {
-	vertical-align: middle;
+.main-display { 
+    max-width: 1170px;
+    margin: 0 auto;
 }
 
-/* List Page
-   -------------*/
-div.content div.row {
-	margin: 18px 0;
-}
-	div.content div.row h1{
-		padding: 0 0 20px 0;
-	}
-
-div.content div.row table.table {
-	background: #F3F3F3;
-    border: 1px solid #DDDDDD;	
+.records_list.table.table-striped tbody {
+    background: #FCFCFC;
 }
 
-.records_list .actions {
-	width: 120px;
+/*  ----------
+    :: NavBar MainMenu Display
+    ---------- */
+.menu-dropdown {
+    margin-left: 0;
+    border: 1px solid #BBBBBB;
+    border-top: none;
+    display: none;
+    float: left;
+    list-style: none outside none;
+    min-width: 120px;
+    position: absolute;
+    z-index: 1000;
+    background: #F3F3F3;
 }
-.records_list .title {
-	width: 60%;
-}
+    .menu-dropdown li a{
+        display: block;
+        padding: 0.8em 1em;
+    }
+    .nav .dropdown:hover ul.menu-dropdown { display: inline-block }
+
+    .navbar .nav .menu-dropdown li.active > a, .navbar .nav .menu-dropdown li.active > a:hover {
+        color: #366DDC;
+        font-weight: bold; 
+    }
+    .navbar .nav .menu-dropdown li.active > a:hover { text-decoration: underline }
+    .menu-dropdown li:hover { background: #E4E4E4 }
+
+    .navbar .nav li.dropdown.active > .dropdown-toggle
+    {
+        background: #EDEDED;
+        border-left: 1px solid #BBBBBB;
+        border-right: 1px solid #BBBBBB;
+    }
+    .navbar .nav li.dropdown.active:hover { background: #E4E4E4 !important }
+    .navbar .nav li.dropdown.active > .dropdown-toggle:hover { color: #333342; border-bottom: none; }
