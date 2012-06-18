@@ -22,3 +22,40 @@ form label {
 .records_list.table.table-striped tbody {
     background: #FCFCFC;
 }
+
+/*  ----------
+    :: NavBar MainMenu Display
+    ---------- */
+.menu-dropdown {
+    margin-left: 0;
+    border: 1px solid #BBBBBB;
+    border-top: none;
+    display: none;
+    float: left;
+    list-style: none outside none;
+    min-width: 120px;
+    position: absolute;
+    z-index: 1000;
+    background: #F3F3F3;
+}
+    .menu-dropdown li a{
+        display: block;
+        padding: 0.8em 1em;
+    }
+    .nav .dropdown:hover ul.menu-dropdown { display: inline-block }
+
+    .navbar .nav .menu-dropdown li.active > a, .navbar .nav .menu-dropdown li.active > a:hover {
+        color: #366DDC;
+        font-weight: bold; 
+    }
+    .navbar .nav .menu-dropdown li.active > a:hover { text-decoration: underline }
+    .menu-dropdown li:hover { background: #E4E4E4 }
+
+    .navbar .nav li.dropdown.active > .dropdown-toggle
+    {
+        background: #EDEDED;
+        border-left: 1px solid #BBBBBB;
+        border-right: 1px solid #BBBBBB;
+    }
+    .navbar .nav li.dropdown.active:hover { background: #E4E4E4 !important }
+    .navbar .nav li.dropdown.active > .dropdown-toggle:hover { color: #333342; border-bottom: none; }
