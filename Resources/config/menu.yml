@@ -9,7 +9,7 @@ parameters:
 services:
     manhattan.console.menu_builder:
         class: Manhattan\Bundle\ConsoleBundle\Navbar\MenuBuilder
-        arguments: ["@knp_menu.factory"]
+        arguments: ["@knp_menu.factory", "@event_dispatcher", "@security.context"]
 
     manhattan.console.menu:
         class: Knp\Menu\MenuItem
@@ -19,7 +19,7 @@ services:
         scope: request
         tags:
             - { name: knp_menu.menu, alias: mainmenu }
-            
+
     manhattan.console.rightmenu:
         class: Knp\Menu\MenuItem
         factory_service: manhattan.console.menu_builder
