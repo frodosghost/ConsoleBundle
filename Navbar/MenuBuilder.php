@@ -81,7 +81,7 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
     public function createMainMenu(Request $request)
     {
         $menu = $this->getFactory()->createItem('root');
-        $menu->setCurrentUri($request->getRequestUri());
+        //$menu->setCurrentUri($request->getRequestUri());
         $menu->setChildrenAttribute('class', 'nav');
 
         $this->getEventDispatcher()->dispatch(MenuEvents::CONFIGURE, new ConfigureMenuEvent($this->getFactory(), $menu, $this->getSecurityContext()));
@@ -92,7 +92,7 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
     public function createRightSideMenu(Request $request)
     {
         $menu = $this->factory->createItem('root');
-        $menu->setCurrentUri($request->getRequestUri());
+        //$menu->setCurrentUri($request->getRequestUri());
         $menu->setChildrenAttribute('class', 'nav pull-right');
 
         if ($this->is_logged_in) {
