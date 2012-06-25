@@ -19,8 +19,9 @@
 
 {% block headline %}Manhattan Management Console{% endblock %}
 {% block content %}
- {{ block('fos_user_content') }}
+    {{ block('fos_user_content') }}
 {% endblock %}
+
 {% block foot_script %}
 	{% block main_javascript %}
 		{%- javascripts
@@ -32,7 +33,6 @@
 		<script type="text/javascript" src="{{ asset_url }}"></script>
 
 		{% endjavascripts %}
-		{{ tinymce_init() }}
 	{% endblock main_javascript %}
 
 	{% block page_javascript %}
@@ -41,5 +41,5 @@
 {% endblock foot_script %}
 
 {% block footer %}
-<p>&copy; <a href="http://www.frodosghost.com" target="_blank">Manhattan Management Console</a> 2011</p>
+	<p>&copy; <a href="http://www.frodosghost.com" target="_blank">Manhattan Management Console</a> 2011</p>
 {% endblock footer %}
