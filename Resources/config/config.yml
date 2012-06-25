@@ -29,6 +29,16 @@ services:
         tags:
             - { name: knp_menu.menu, alias: rightmenu }
 
+# JMS Security
+jms_security_extra:
+    secure_all_services: true
+
+jms_di_extra:
+    locations:
+        all_bundles: false
+        bundles: [ConsoleBundle]
+        directories: ["%kernel.root_dir%/../src"]
+
 # FOS UserBundle
 fos_user:
     db_driver: orm

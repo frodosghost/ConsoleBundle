@@ -51,7 +51,7 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
         $this->event_dispatcher = $event_dispatcher;
         $this->security_context = $security_context;
 
-        //$this->is_logged_in = $this->security_context->isGranted('IS_AUTHENTICATED_FULLY');
+        $this->is_logged_in = $this->security_context->isGranted('IS_AUTHENTICATED_FULLY');
     }
 
     /**
@@ -84,7 +84,9 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
         //$menu->setCurrentUri($request->getRequestUri());
         $menu->setChildrenAttribute('class', 'nav');
 
-        $this->getEventDispatcher()->dispatch(MenuEvents::CONFIGURE, new ConfigureMenuEvent($this->getFactory(), $menu, $this->getSecurityContext()));
+        if ($this->is_logged_in) {
+            $this->getEventDispatcher()->dispatch(MenuEvents::CONFIGURE, new ConfigureMenuEvent($this->getFactory(), $menu, $this->getSecurityContext()));
+        }
 
         return $menu;
     }
@@ -98,7 +100,7 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
         if ($this->is_logged_in) {
             $menu->addChild('Logout', array('route' => 'fos_user_security_logout'));
         } else {
-            $menu->addChild('Login', array('route' => '_login'));
+            $menu->addChild('Login', array('route' => 'fos_user_security_login'));
         }
 
         return $menu;

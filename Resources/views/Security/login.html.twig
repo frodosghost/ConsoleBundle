@@ -8,10 +8,11 @@
     <h1>Login</h1>
     <p>Please sign in with your <em>username</em> and <em>password</em>.</p>
     {% if error %}
-        <div class="alert alert-error">{{ error.message }}</div>
+        <div class="alert alert-error">{{ error|trans({}, 'FOSUserBundle') }}</div>
     {% endif %}
 
     <form action="{{ path("fos_user_security_check") }}" class="form-stacked well" method="post" id="login">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
         <div>
             <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
             <input type="text" id="username" name="_username" value="{{ last_username }}" />
