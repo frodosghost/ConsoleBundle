@@ -96,7 +96,7 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
         $menu->setChildrenAttribute('class', 'nav pull-right');
 
         if ($this->is_logged_in) {
-            $menu->addChild('Logout', array('route' => '_logout'));
+            $menu->addChild('Logout', array('route' => 'fos_user_security_logout'));
         } else {
             $menu->addChild('Login', array('route' => '_login'));
         }

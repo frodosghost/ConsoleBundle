@@ -2,32 +2,32 @@
 
 {% block page_header %}{% endblock %}
 
-{% block content %}
+{% block fos_user_content %}
+<div class="row">
+    <div class="span6 offset2">
+    <h1>Login</h1>
+    <p>Please sign in with your <em>username</em> and <em>password</em>.</p>
+    {% if error %}
+        <div class="alert alert-error">{{ error.message }}</div>
+    {% endif %}
 
-    <div class="span2">
-        
+    <form action="{{ path("fos_user_security_check") }}" class="form-stacked well" method="post" id="login">
+        <div>
+            <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" />
+        </div>
+
+        <div>
+            <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+            <input type="password" id="password" name="_password" />
+        </div>
+
+        <div>
+            <input type="checkbox" id="remember_me" name="_remember_me" value="" />
+            <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+
+        <input type="submit" class="btn primary" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+    </form>
     </div>
-    <div class="span6">
-        <h1>Login</h1>
-        <p>Please sign in with your <em>username</em> and <em>password</em>.</p>
-
-        {% if error %}
-            <div class="alert alert-error">{{ error.message }}</div>
-        {% endif %}
-
-        <form action="{{ path("_security_check") }}" class="form-stacked well" method="post" id="login">
-            <div>
-                <label for="username">Username</label>
-                <input type="text" id="username" name="_username" value="{{ last_username }}" />
-            </div>
-
-            <div>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="_password" />
-            </div>
-
-            <input type="submit" class="btn primary" value="LOGIN" />
-        </form>
-    </div>
-
-{% endblock %}
+</div>
+{% endblock fos_user_content %}
