@@ -1,23 +1,20 @@
 # Manhattan Console Bundle
 
 ## What
-ConsoleBundle is application setup for ease of starting new project in Symfony2. It intergrates the [MopaBootstrapBundle](https://github.com/phiamo/MopaBootstrapBundle) and is used as a basis for a client control system for the backend of a website.
+ConsoleBundle is application setup for ease of starting new project in Symfony2. It intergrates the [MopaBootstrapBundle](https://github.com/phiamo/MopaBootstrapBundle) and [FODUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle) is used as a basis for a client control system for the administration backend for websites.
 
 ## How
-1. Add this bundle to the deps file:
+1. Add this bundle to the composer file:
 
-        [ManhattanConsoleBundle]
-        git=git://github.com:frodosghost/ConsoleBundle.git
-        target=/bundles/Manhattan/Bundle/ConsoleBundle
+        {
+            "require": {
+                ...
+                "manhattan/console-bundle": "dev-master"
+                ...
+            }
+        }
 
-2. Add the `ConsoleBundle` class to your project's autoloader:
-
-        // app/autoload.php
-        $loader->registerPrefixes(array(
-            'Manhattan'        => __DIR__.'/../vendor/bundles',
-        ));
-
-3. Add this bundle to your app kernel:
+2. Add this bundle to your app kernel:
 
         // app/AppKernel.php
         public function registerBundles()
@@ -25,17 +22,19 @@ ConsoleBundle is application setup for ease of starting new project in Symfony2.
             return array(
                 // ...
                 new Manhattan\Bundle\ConsoleBundle\ManhattanConsoleBundle(),
+                new FOS\UserBundle\FOSUserBundle(),
                 // ...
             );
         }
 
-4. Add the routing to the `config.yml` routing
+3. Add the routing to the `config.yml` routing
 
         _console_bundle:
         resource: "@ManhattanConsoleBundle/Resources/config/routing.yml"
 
-5. Under the `imports:` line in `app/config.yml` put the security file for the bundle before the `security.yml` line. This will allow application overloading of the bundle security file:
+4. Under the `imports:` line in `app/config.yml` put the security file for the bundle before the `security.yml` line. This will allow application overloading of the bundle security file:
 
-        - { resource: parameters.ini }
         - { resource: '@ManhattanConsoleBundle/Resources/config/security.yml' }
         - { resource: security.yml }
+        - { resource: '@ManhattanConsoleBundle/Resources/config/config.yml' }
+        - { resource: '@ManhattanConsoleBundle/Resources/config/tinymce.yml' }
