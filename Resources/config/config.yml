@@ -31,7 +31,7 @@ services:
 
 # JMS Security
 jms_security_extra:
-    secure_all_services: true
+    secure_all_services: false
 
 jms_di_extra:
     locations:
