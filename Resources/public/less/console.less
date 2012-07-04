@@ -14,23 +14,31 @@ form label {
 	color: #3f3f3f;
 }
 
+.page-header h1 span { font-weight: normal }
+
 /*  ----------
     :: Manage Images
     ---------- */
 .manage h1 {
     font-size: 1.4em;
+    margin-bottom: 10px;
 }
 .manage h1 span {
     font-weight: normal;
 }
-.form-horizontal.well { position: relative }
-.form-horizontal.well a.btn.manage {
+div.manage { position: relative }
+div.manage a.btn.manage {
     position: absolute;
-    right: 20px;
+    right: 0;
 }
 
-.manage .control-group {
-    padding: 20px 0;
+.image-list {
+    padding: 0 20px;
+}
+.image-list .image {
+    width: auto;
+    float: left;
+    padding: 0 10px;
 }
 
 .main-display { 
@@ -42,8 +50,15 @@ form label {
     background: #FCFCFC;
 }
 
-#gallery_primary_photo_control_group .controls { margin-left: 0 }
-#gallery_primary_photo_control_group .controls .controls { margin-left: 160px }
+/*  ----------
+    :: Preview Images
+    ---------- */
+.control-group .preview {
+    padding-bottom: 10px;
+}
+
+#project_primary_photo_control_group .controls { margin-left: 0 }
+#project_primary_photo_control_group .controls .controls { margin-left: 160px }
 
 /*  ----------
     :: Login Form
@@ -77,9 +92,9 @@ div.remember-me input {
     z-index: 1000;
     background: #F3F3F3;
 }
-    .menu-dropdown li a{
+    .menu-dropdown li a {
         display: block;
-        padding: 0.8em 1em;
+        padding: 0.5em 1.5em;
     }
     .nav .dropdown:hover ul.menu-dropdown { display: inline-block }
 
@@ -98,6 +113,11 @@ div.remember-me input {
     }
     .navbar .nav li.dropdown.active:hover { background: #E4E4E4 !important }
     .navbar .nav li.dropdown.active > .dropdown-toggle:hover { color: #333342; border-bottom: none; }
+
+    .menu-dropdown li a.main { 
+        font-weight: bold;
+        padding: 0.5em 1.0em;
+    }
 
 /*  ----------
     :: Footer
