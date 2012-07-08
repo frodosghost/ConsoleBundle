@@ -2,8 +2,10 @@
 
 {% block head_style %}
 {% stylesheets filter='less,cssembed,?yui_css' 
-       '@ManhattanConsoleBundle/Resources/public/less/bootstrap-setup.less'
-       '@ManhattanConsoleBundle/Resources/public/less/console.less'
+		'@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle.less'
+    	'@ManhattanConsoleBundle/Resources/public/less/variables.less'
+    	'@ManhattanConsoleBundle/Resources/public/less/bootswatch.less'
+    	'@ManhattanConsoleBundle/Resources/public/less/console.less'
 %}
 <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
 {% endstylesheets %}
