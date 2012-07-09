@@ -1,9 +1,9 @@
 {% extends 'MopaBootstrapBundle::layout.html.twig' %}
 
 {% block head_style %}
-{% stylesheets filter='less,cssembed,?yui_css' 
+{% stylesheets filter='less,cssembed,?yui_css'
+		'@ManhattanConsoleBundle/Resources/public/less/bootswatch_variables.less'
 		'@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle.less'
-    	'@ManhattanConsoleBundle/Resources/public/less/variables.less'
     	'@ManhattanConsoleBundle/Resources/public/less/bootswatch.less'
     	'@ManhattanConsoleBundle/Resources/public/less/console.less'
 %}
