@@ -7,11 +7,6 @@
 namespace Manhattan\Bundle\ConsoleBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormViewInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
-use Doctrine\Common\Persistence\ObjectManager;
 
 class TelephoneType extends AbstractType
 {
@@ -20,7 +15,7 @@ class TelephoneType extends AbstractType
      */
     public function getParent()
     {
-        return 'field';
+        return 'text';
     }
 
     /**
