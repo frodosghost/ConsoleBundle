@@ -9,3 +9,10 @@
         {{ block('form_widget_simple') }}
     {% endspaceless %}
 {% endblock %}
+
+{% block telephone_widget %}
+{% spaceless %}
+    {% set type = type|default('tel') %}
+    {{ block('form_widget_simple') }}
+{% endspaceless %}
+{% endblock telephone_widget %}

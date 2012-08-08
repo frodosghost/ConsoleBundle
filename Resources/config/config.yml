@@ -29,6 +29,11 @@ services:
         tags:
             - { name: knp_menu.menu, alias: rightmenu }
 
+    form.type.telephone:
+        class: Manhattan\Bundle\ConsoleBundle\Form\Type\TelephoneType
+        tags:
+            - { name: form.type, alias: telephone }
+
 # JMS Security
 jms_security_extra:
     secure_all_services: false
