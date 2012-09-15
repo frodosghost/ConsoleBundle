@@ -1,6 +1,7 @@
 security:
     encoders:
         Manhattan\Bundle\ConsoleBundle\Entity\User: sha512
+        Symfony\Component\Security\Core\User\User: plaintext
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
@@ -9,6 +10,10 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_manager
+        test_console:
+            memory:
+                users:
+                    admin: { password: test, roles: 'ROLE_ADMIN' }
 
     firewalls:
         dev:
