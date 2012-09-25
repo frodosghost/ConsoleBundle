@@ -34,6 +34,11 @@ services:
         tags:
             - { name: form.type, alias: telephone }
 
+    form.type.preview_file:
+        class: Manhattan\Bundle\ConsoleBundle\Form\Type\PreviewFileType
+        tags:
+            - { name: form.type, alias: preview_file }
+
 # JMS Security
 jms_security_extra:
     secure_all_services: false

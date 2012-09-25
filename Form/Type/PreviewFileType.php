@@ -8,28 +8,30 @@ namespace Manhattan\Bundle\ConsoleBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormViewInterface;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Manhattan\Bundle\ConsoleBundle\Form\DataTransformer\FileTransformer;
 
 class PreviewFileType extends AbstractType
 {
 	/**
      * {@inheritdoc}
      */
-    public function buildView(FormViewInterface $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $preview = null;
 
         // Check if we have the Path available for the preview image
-        if (is_object($view->getParent()->getVar('value'))) {
-            if (method_exists($view->getParent()->getVar('value'), 'getWebPath')) {
-                $preview = $view->getParent()->getVar('value')->getWebPath();
+        if (is_object($view->getParent()->vars['value'])) {
+            if (method_exists($view->getParent()->vars['value'], 'getWebPath')) {
+                $preview = $view->getParent()->vars['value']->getWebPath();
             }
         }
         
-        $view->addVars(array(
+        $view->vars = array_replace($view->vars, array(
             'type'  => 'file',
             'value' => '',
             'preview' => $preview
