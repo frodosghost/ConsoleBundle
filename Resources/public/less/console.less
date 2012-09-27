@@ -56,7 +56,29 @@ div.manage a.btn.manage {
     border-top: 1px solid #E5E5E5;
     padding: 10px 0;
 }
+/*  ----------
+    :: Manage Documents
+    ---------- */
+.document.well {
+    padding: 5px 15px;
+    position: relative;
+}
+    .document.well p { margin: 10px 120px 10px 10px }
 
+.document-list .document ul.actions {
+    list-style: none;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+    .document-list .document ul.actions li { display: inline }
+    .document-list .document ul.actions:last-child { margin-right: 5px }
+
+.control-group ul.documents {
+    list-style: none;
+    margin: 0 0 10px;
+}
+    .control-group ul.documents li { margin-bottom: 5px }
 
 /*  ----------
     :: Preview Images
@@ -169,9 +191,10 @@ div.remember-me input {
     :: Footer
     ---------- */
 footer {
-    border-top: 1px solid #E5E5E5;
+    border-top: 1px solid #C6C6C6;
     margin-top: 45px;
-    padding: 35px 0 36px;
+    padding: 5px 0;
+    font-size: 0.8em;
 }
     footer p {
         color: #555555;
