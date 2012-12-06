@@ -3700,6 +3700,10 @@ var el = document.createElement('div');
 el.style.color = 'red';
 el.style.color = null;
 var doesNotRemoveStyles = el.style.color == 'red';
+// check for oldIE, which returns border* shorthand styles in the wrong order (color-width-style instead of width-style-color)
+var border = '1px solid #123abc';
+el.style.border = border;
+var returnsBordersInWrongOrder = el.style.border != border;
 el = null;
 //</ltIE9>
 
@@ -3769,12 +3773,19 @@ Element.implement({
 		} else if (value == String(Number(value))){
 			value = Math.round(value);
 		}
-		this.style[property] = value;
+
+		// IE8 throws error when the 'value' begins with NaN. Detect and bypass.
+		var not_a_number = new RegExp(/^NaN?/);
+		if (!not_a_number.test(value)) {
+			this.style[property] = value;
+		}
+
 		//<ltIE9>
 		if ((value == '' || value == null) && doesNotRemoveStyles && this.style.removeAttribute){
 			this.style.removeAttribute(property);
 		}
 		//</ltIE9>
+
 		return this;
 	},
 
@@ -3806,6 +3817,11 @@ Element.implement({
 			}
 			if (Browser.opera && String(result).indexOf('px') != -1) return result;
 			if ((/^border(.+)Width|margin|padding/).test(property)) return '0px';
+			//<ltIE9>
+			if (returnsBordersInWrongOrder && /^border(Top|Right|Bottom|Left)?$/.test(property) && /^#/.test(result)){
+				return result.replace(/^(.+)\s(.+)\s(.+)$/, '$2 $3 $1');
+			}
+			//</ltIE9>
 		}
 		return result;
 	},
