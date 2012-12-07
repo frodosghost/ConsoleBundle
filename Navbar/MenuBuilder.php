@@ -37,6 +37,11 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
     private $is_logged_in = false;
 
     /**
+     * @var Boolean
+     */
+    private $is_super_admin = false;
+
+    /**
      * Constructor
      *
      * @param Knp\Menu\FactoryInterface $factory
@@ -52,6 +57,7 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
         $this->security_context = $security_context;
 
         $this->is_logged_in = $this->security_context->isGranted('IS_AUTHENTICATED_FULLY');
+        $this->is_super_admin = $this->security_context->isGranted('ROLE_SUPER_ADMIN');
     }
 
     /**
@@ -94,11 +100,32 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
     public function createRightSideMenu(Request $request)
     {
         $menu = $this->factory->createItem('root');
-        //$menu->setCurrentUri($request->getRequestUri());
         $menu->setChildrenAttribute('class', 'nav pull-right');
 
+        if ($this->is_super_admin) {
+            $users = $menu->addChild('Users', array('route'=>'console_users'))
+                ->setLinkattribute('class', 'dropdown-toggle')
+                ->setLinkattribute('data-toggle', 'dropdown')
+                ->setAttribute('class', 'dropdown')
+                ->setChildrenAttribute('class', 'menu-dropdown');
+
+            $users->addChild('Add User', array('route' => 'fos_user_registration_register'));
+        }
+
         if ($this->is_logged_in) {
-            $menu->addChild('Logout', array('route' => 'fos_user_security_logout'));
+
+            $profile = $menu->addChild('Profile', array('route'=>'fos_user_profile_show'))
+                ->setLinkattribute('class', 'dropdown-toggle')
+                ->setLinkattribute('data-toggle', 'dropdown')
+                ->setAttribute('class', 'dropdown')
+                ->setChildrenAttribute('class', 'menu-dropdown');
+
+            $profile->addChild('Edit Profile', array('route' => 'fos_user_profile_edit'))
+                ->setLinkattribute('class', 'main');
+            $profile->addChild('Change Password', array('route' => 'fos_user_change_password'));
+
+            $profile->addChild('Logout', array('route' => 'fos_user_security_logout'))
+                ->setLinkattribute('class', 'main');
         } else {
             $menu->addChild('Login', array('route' => 'fos_user_security_login'));
         }
