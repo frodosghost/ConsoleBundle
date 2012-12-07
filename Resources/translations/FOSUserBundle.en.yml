@@ -97,8 +97,8 @@ fos_user_registration_form_plainPassword_first: "Password:"
 fos_user_registration_form_plainPassword_second: "Repeat Password:"
 
 fos_user_resetting_form_new_first: "New password:"
-fos_user_resetting_form_new_second: "Verification:"
+fos_user_resetting_form_new_second: "Repeat password:"
 
 fos_user_change_password_form_new_first: "New password:"
-fos_user_change_password_form_new_second: "Verification:"
+fos_user_change_password_form_new_second: "Repeat password:"
 fos_user_change_password_form_current: "Current password:"

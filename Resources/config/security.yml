@@ -4,12 +4,12 @@ security:
         Symfony\Component\Security\Core\User\User: plaintext
 
     role_hierarchy:
-        ROLE_ADMIN: ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ ROLE_USER, ROLE_ADMIN ]
 
     providers:
         fos_userbundle:
-            id: fos_user.user_manager
+            id: fos_user.user_provider.username_email
         test_console:
             memory:
                 users:
@@ -34,6 +34,6 @@ security:
 
     access_control:
         - { path: ^/console/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/console/register, role: ROLE_ADMIN }
+        - { path: ^/console/register, role: ROLE_SUPER_ADMIN }
         - { path: ^/console/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/console/admin/, role: ROLE_ADMIN }
