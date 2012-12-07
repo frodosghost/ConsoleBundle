@@ -109,6 +109,8 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
                 ->setAttribute('class', 'dropdown')
                 ->setChildrenAttribute('class', 'menu-dropdown');
 
+            $users->addChild('List Users', array('route' => 'console_users'))
+                ->setLinkattribute('class', 'main');
             $users->addChild('Add User', array('route' => 'fos_user_registration_register'));
         }
 
