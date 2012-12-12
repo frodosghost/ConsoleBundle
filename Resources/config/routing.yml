@@ -2,6 +2,10 @@ _console:
     resource: "@ManhattanConsoleBundle/Controller/ConsoleController.php"
     type:     annotation
 
+_console_users:
+    resource: "@ManhattanConsoleBundle/Controller/UserController.php"
+    type:     annotation
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
     prefix: /console
