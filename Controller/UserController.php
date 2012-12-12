@@ -12,7 +12,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 
+use Manhattan\Bundle\ConsoleBundle\Entity\User;
 use Manhattan\Bundle\ConsoleBundle\Form\UserType;
+
 /**
  * @Route("/console/users")
  */
@@ -35,26 +37,57 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/users/{id}/create", name="console_users_create")
+     * @Route("/new", name="console_users_new")
      * @Method({"GET"})
      * @Secure(roles="ROLE_SUPER_ADMIN")
      * @Template()
      */
-    public function createAction($id)
+    public function newAction()
     {
-        $user = $user_manager->findUserBy(array('id' => $id));
+        $user = new User();
 
-        $editForm = $this->createForm(new UserType(), $user);
-        $deleteForm = $this->createDeleteForm($id);
+        $createForm = $this->createForm(new UserType(), $user);
 
         return array(
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'user' => $user,
+            'form' => $createForm->createView()
         );
     }
 
     /**
-     * @Route("/users/{id}/edit", name="console_users_edit")
+     * @Route("/create", name="console_users_create")
+     * @Method({"POST"})
+     * @Secure(roles="ROLE_SUPER_ADMIN")
+     * @Template("ManhattanConsoleBundle:User:new.html.twig")
+     */
+    public function createAction(Request $request)
+    {
+        $user = new User();
+        $user_manager = $this->get('fos_user.user_manager');
+
+        $createForm = $this->createForm(new UserType(), $user);
+        $createForm->bind($request);
+
+        if ($createForm->isValid()) {
+            /** Complete the Membership */
+            $temp_password = substr(sha1(md5(uniqid(mt_rand(), true))), 0, 8);
+
+            $user->setPlainPassword($temp_password);
+            $user_manager->createUser($user);
+            $user_manager->updateUser($user);
+
+            return $this->redirect($this->generateUrl('console_users'));
+        }
+
+        return array(
+            'user' => $user,
+            'form' => $createForm->createView()
+        );
+    }
+
+
+    /**
+     * @Route("/{id}/edit", name="console_users_edit")
      * @Method({"GET"})
      * @Secure(roles="ROLE_SUPER_ADMIN")
      * @Template()
@@ -80,7 +113,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/users/{id}/edit", name="console_users_update")
+     * @Route("/{id}/update", name="console_users_update")
      * @Method({"POST"})
      * @Secure(roles="ROLE_SUPER_ADMIN")
      * @Template("ManhattanConsoleBundle:Console:edit.html.twig")

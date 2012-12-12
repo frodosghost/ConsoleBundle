@@ -111,7 +111,7 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
 
             $users->addChild('List Users', array('route' => 'console_users'))
                 ->setLinkattribute('class', 'main');
-            $users->addChild('Add User', array('route' => 'fos_user_registration_register'));
+            $users->addChild('Add User', array('route' => 'console_users_new'));
         }
 
         if ($this->is_logged_in) {

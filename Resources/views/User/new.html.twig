@@ -1,0 +1,13 @@
+{% extends "ManhattanConsoleBundle::layout.html.twig" %}
+
+{% block content %}
+<form action="{{ path('console_users_create') }}" class="form-horizontal well" method="post" {{ form_enctype(form) }} novalidate>
+  <fieldset>  
+    {{ form_widget(form) }}
+    <div class="form-actions">
+        <a href="{{ path('console_users') }}" class="btn">Back to the list</a>
+        <button type="submit" class="btn btn-primary">Create</button>
+</form>
+    </div>
+</fieldset>
+{% endblock %}
