@@ -6,8 +6,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Email;
 
 class UserType extends AbstractType
 {
@@ -16,15 +14,10 @@ class UserType extends AbstractType
         $builder
             ->add('username', 'text', array(
                 'label' => 'Username',
-                'constraints' => new NotBlank(),
                 'help_block' => 'Username has no spaces. eg: johndoe'
             ))
             ->add('email', 'text', array(
-                'label' => 'Email',
-                'constraints' => array(
-                    new NotBlank(),
-                    new Email()
-                )
+                'label' => 'Email'
             ))
             ->add('enabled', 'choice', array(
                 'choices' => array(
@@ -38,8 +31,7 @@ class UserType extends AbstractType
                 'choices' => array(
                     'ROLE_ADMIN' => 'User',
                     'ROLE_SUPER_ADMIN' => 'Administrator'
-                ),
-                'constraints' => new NotBlank(),
+                )
             ))
         ;
     }

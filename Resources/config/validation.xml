@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="Manhattan\Bundle\ConsoleBundle\Entity\User">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">email</option>
+            <option name="message">This email already exists for a Member.</option>
+        </constraint>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">username</option>
+            <option name="message">This username already exists for a Member.</option>
+        </constraint>
+
+        <property name="username">
+            <constraint name="NotBlank">
+                <option name="message">Please provide a username.</option>
+            </constraint>
+        </property>
+        <property name="email">
+            <constraint name="NotBlank">
+                <option name="message">Please provide an email address</option>
+            </constraint>
+            <constraint name="Email">
+                <option name="message">The email "{{ value }}" is not a valid email.</option>
+                <option name="checkMX">true</option>
+            </constraint>
+        </property>
+        <property name="roles">
+            <constraint name="NotBlank">
+                <option name="message">Please select a Role for the new User to have.</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>
