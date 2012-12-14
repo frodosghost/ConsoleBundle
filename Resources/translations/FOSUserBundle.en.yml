@@ -16,7 +16,7 @@ group:
 
 security:
     login:
-        username: "Username:"
+        username: "Email:"
         password: "Password:"
         remember_me: Remember me
         submit: Login
@@ -60,8 +60,8 @@ resetting:
     password_already_requested: The password for this user has already been requested within the last 24 hours.
     check_email: An email has been sent to %email%. It contains a link you must click to reset your password.
     request:
-        invalid_username: The username or email address "%username%" does not exist.
-        username: "Username or email address:"
+        invalid_username: The email address "%username%" does not exist.
+        username: "Email Address:"
         submit: Reset password
     reset:
         submit: Change password
@@ -87,7 +87,7 @@ layout:
 # Form field labels
 fos_user_group_form_name: "Group name:"
 
-fos_user_profile_form_user_username: "Username:"
+fos_user_profile_form_user_username: "Email:"
 fos_user_profile_form_user_email: "Email:"
 fos_user_profile_form_current: "Current Password:"
 

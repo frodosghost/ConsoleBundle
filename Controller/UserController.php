@@ -74,6 +74,8 @@ class UserController extends Controller
 
             $user->setPlainPassword($temp_password);
             $user_manager->createUser($user);
+
+            $this->sendinitialemailAction($user);
             $user_manager->updateUser($user);
 
             return $this->redirect($this->generateUrl('console_users'));
@@ -145,11 +147,120 @@ class UserController extends Controller
         );
     }
 
+    /**
+     * New Users can create their passwords
+     * 
+     * @Route("/welcome/{token}", name="console_users_password_set")
+     * @Method({"GET", "POST"})
+     * @Template()
+     */
+    public function passwordsetAction($token)
+    {
+        $user = $this->get('fos_user.user_manager')->findUserByConfirmationToken($token);
+
+        if (null === $user) {
+            throw $this->createNotFoundException(sprintf('The user with "confirmation token" does not exist for value "%s"', $token));
+        }
+
+        if (!$user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
+            return $this->redirect($this->generateUrl('fos_user_security_login'));
+        }
+
+        $form = $this->get('fos_user.resetting.form');
+        $formHandler = $this->get('fos_user.resetting.form.handler');
+        $process = $formHandler->process($user);
+
+        if ($process) {
+            $this->get('session')->setFlash('fos_user_success', 'You password has been set. Welcome to The Console.');
+            $response = new RedirectResponse($this->get('router')->generate('fos_user_profile_show'));
+
+            try {
+                $this->get('fos_user.security.login_manager')->loginUser(
+                    $this->container->getParameter('fos_user.firewall_name'),
+                    $user,
+                    $response);
+            } catch (AccountStatusException $ex) {
+                // We simply do not authenticate users which do not pass the user
+                // checker (not enabled, expired, etc.).
+            }
+
+            return $response;
+        }
+
+        return array(
+            'token' => $token,
+            'form'  => $form->createView(),
+        );
+    }
+
+    /**
+     * Deletes a User.
+     *
+     * @Route("/{id}", name="console_user_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, $id)
+    {
+        $form = $this->createDeleteForm($id);
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('ManhattanConsoleBundle:User')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find User entity.');
+            }
+
+            $em->remove($entity);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl('console_users'));
+    }
+
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+    /**
+     * Configures User and inital email to send when User added
+     * 
+     * @param  User $user
+     */
+    private function sendinitialemailAction($user)
+    {
+        $emails = $this->container->getParameter('console.users');
+
+        if (null === $user->getConfirmationToken()) {
+            /** @var $tokenGenerator \FOS\UserBundle\Util\TokenGeneratorInterface */
+            $tokenGenerator = $this->container->get('fos_user.util.token_generator');
+            $user->setConfirmationToken($tokenGenerator->generateToken());
+        }
+
+        $url = $this->get('router')->generate('console_users_password_set', array('token' => $user->getConfirmationToken()), true);
+        $context = array(
+            'user' => $user,
+            'url'  => $url,
+            'console_name' => $emails['console_name']
+        );
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject($emails['subject'])
+            ->setFrom($emails['from'])
+            ->setTo(array($user->getEmail() => $user->getUsername()))
+            ->setBody($this->renderView($emails['templates']['setpassword_html'], $context))
+        ;
+        $message->addPart($this->renderView($emails['templates']['setpassword_txt'], $context), 'text/plain');
+        $message->getHeaders()->addTextHeader('X-SMTPAPI', '{"to": ["Testing <email+console@antelopestudios.com.au>", "'. $user->getUsername() .' <'. $user->getEmail() .'>"], "category": "'. $emails['subject'] .'"}');
+
+        $this->get('mailer')->send($message);
+
+        $user->setPasswordRequestedAt(new \DateTime());
+
     }
 }
