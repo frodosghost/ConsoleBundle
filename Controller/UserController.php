@@ -253,7 +253,7 @@ class UserController extends Controller
             ->setSubject($emails['subject'])
             ->setFrom($emails['from'])
             ->setTo(array($user->getEmail() => $user->getUsername()))
-            ->setBody($this->renderView($emails['templates']['setpassword_html'], $context))
+            ->setBody($this->renderView($emails['templates']['setpassword_html'], $context), 'text/html')
         ;
         $message->addPart($this->renderView($emails['templates']['setpassword_txt'], $context), 'text/plain');
         $message->getHeaders()->addTextHeader('X-SMTPAPI', '{"to": ["Testing <email+console@antelopestudios.com.au>", "'. $user->getUsername() .' <'. $user->getEmail() .'>"], "category": "'. $emails['subject'] .'"}');
