@@ -3,14 +3,20 @@
 namespace Manhattan\Bundle\ConsoleBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
 
 use Manhattan\Bundle\ConsoleBundle\Entity\User;
 use Manhattan\Bundle\ConsoleBundle\Form\UserType;
@@ -154,37 +160,51 @@ class UserController extends Controller
      * @Method({"GET", "POST"})
      * @Template()
      */
-    public function passwordsetAction($token)
+    public function passwordsetAction(Request $request, $token)
     {
-        $user = $this->get('fos_user.user_manager')->findUserByConfirmationToken($token);
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        $formFactory = $this->container->get('fos_user.resetting.form.factory');
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->container->get('fos_user.user_manager');
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->container->get('event_dispatcher');
+
+        $user = $userManager->findUserByConfirmationToken($token);
 
         if (null === $user) {
-            throw $this->createNotFoundException(sprintf('The user with "confirmation token" does not exist for value "%s"', $token));
+            throw new NotFoundHttpException(sprintf('The user with "confirmation token" does not exist for value "%s"', $token));
         }
 
-        if (!$user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
-            return $this->redirect($this->generateUrl('fos_user_security_login'));
+        $event = new GetResponseUserEvent($user, $request);
+        $dispatcher->dispatch(FOSUserEvents::RESETTING_RESET_INITIALIZE, $event);
+
+        if (null !== $event->getResponse()) {
+            return $event->getResponse();
         }
 
-        $form = $this->get('fos_user.resetting.form');
-        $formHandler = $this->get('fos_user.resetting.form.handler');
-        $process = $formHandler->process($user);
+        $form = $formFactory->createForm();
+        $form->setData($user);
 
-        if ($process) {
-            $this->get('session')->setFlash('fos_user_success', 'You password has been set. Welcome to The Console.');
-            $response = new RedirectResponse($this->get('router')->generate('fos_user_profile_show'));
+        if ('POST' === $request->getMethod()) {
+            $form->bind($request);
 
-            try {
-                $this->get('fos_user.security.login_manager')->loginUser(
-                    $this->container->getParameter('fos_user.firewall_name'),
-                    $user,
-                    $response);
-            } catch (AccountStatusException $ex) {
-                // We simply do not authenticate users which do not pass the user
-                // checker (not enabled, expired, etc.).
+            if ($form->isValid()) {
+                $event = new FormEvent($form, $request);
+                $dispatcher->dispatch(FOSUserEvents::RESETTING_RESET_SUCCESS, $event);
+
+                $userManager->updateUser($user);
+
+                if (null === $response = $event->getResponse()) {
+                    $this->get('session')->setFlash('fos_user_success', 'You password has been set. Welcome to The Console.');
+
+                    $url = $this->container->get('router')->generate('fos_user_profile_show');
+                    $response = new RedirectResponse($url);
+                }
+
+                $dispatcher->dispatch(FOSUserEvents::RESETTING_RESET_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+                return $response;
             }
-
-            return $response;
         }
 
         return array(
