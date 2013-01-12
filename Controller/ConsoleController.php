@@ -12,7 +12,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 
-
 use Manhattan\Bundle\ConsoleBundle\Form\UserType;
 /**
  * @Route("/console")
@@ -21,7 +20,7 @@ class ConsoleController extends Controller
 {
 
     /**
-     * @Route("/", name="console_index")
+     * @Route("", name="console_index")
      * @Method({"GET"})
      * @Secure(roles="ROLE_ADMIN")
      */

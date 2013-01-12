@@ -16,13 +16,13 @@ use Manhattan\Bundle\ConsoleBundle\Entity\User;
 use Manhattan\Bundle\ConsoleBundle\Form\UserType;
 
 /**
- * @Route("/console/users")
+ * @Route("/console")
  */
 class UserController extends Controller
 {
 
     /**
-     * @Route("/", name="console_users")
+     * @Route("/users", name="console_users")
      * @Method({"GET"})
      * @Secure(roles="ROLE_SUPER_ADMIN")
      * @Template()
@@ -37,7 +37,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/new", name="console_users_new")
+     * @Route("/users/new", name="console_users_new")
      * @Method({"GET"})
      * @Secure(roles="ROLE_SUPER_ADMIN")
      * @Template()
@@ -55,7 +55,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/create", name="console_users_create")
+     * @Route("/users/create", name="console_users_create")
      * @Method({"POST"})
      * @Secure(roles="ROLE_SUPER_ADMIN")
      * @Template("ManhattanConsoleBundle:User:new.html.twig")
@@ -89,7 +89,7 @@ class UserController extends Controller
 
 
     /**
-     * @Route("/{id}/edit", name="console_users_edit")
+     * @Route("/users/{id}/edit", name="console_users_edit")
      * @Method({"GET"})
      * @Secure(roles="ROLE_SUPER_ADMIN")
      * @Template()
@@ -115,7 +115,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/{id}/update", name="console_users_update")
+     * @Route("/users/{id}/update", name="console_users_update")
      * @Method({"POST"})
      * @Secure(roles="ROLE_SUPER_ADMIN")
      * @Template("ManhattanConsoleBundle:Console:edit.html.twig")
@@ -150,7 +150,7 @@ class UserController extends Controller
     /**
      * New Users can create their passwords
      * 
-     * @Route("/welcome/{token}", name="console_users_password_set")
+     * @Route("/users/welcome/{token}", name="console_users_password_set")
      * @Method({"GET", "POST"})
      * @Template()
      */
@@ -196,7 +196,7 @@ class UserController extends Controller
     /**
      * Deletes a User.
      *
-     * @Route("/{id}", name="console_user_delete")
+     * @Route("/users/{id}", name="console_user_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
