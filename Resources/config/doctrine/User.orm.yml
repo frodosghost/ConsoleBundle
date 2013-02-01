@@ -1,0 +1,19 @@
+ErrorApi\ManagerBundle\Entity\User:
+    type:  entity
+    table: error_user
+
+    repositoryClass: Manhattan\Bundle\ConsoleBundle\Entity\UserRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        created_at:
+            type: datetime
+        updated_at:
+            type: datetime
+
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate:  [ onUpdate ]
