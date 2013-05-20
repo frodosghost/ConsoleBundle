@@ -39,6 +39,15 @@ services:
         tags:
             - { name: form.type, alias: preview_file }
 
+    manhattan.console.navbar:
+        class: %manhattan.console.navbar.generic%
+        arguments:
+            - { leftmenu: @manhattan.console.menu=, rightmenu: @manhattan.console.rightmenu= }
+            - {  }
+            - { title: %console.navigation.title%, titleRoute: %console.navigation.link%, fixedTop: true, isFluid: false }
+        tags:
+            - { name: mopa_bootstrap.navbar, alias: consoleNavbar }
+
 # JMS Security
 jms_security_extra:
     secure_all_services: false

@@ -24,6 +24,10 @@ class ManhattanConsoleExtension extends Extension
 
         $container->setParameter('console.users', $config['users']);
 
+        // Navigation Bar Configuration Values
+        $container->setParameter('console.navigation.title', $config['navigation']['title']);
+        $container->setParameter('console.navigation.link', $config['navigation']['link']);
+
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
     }

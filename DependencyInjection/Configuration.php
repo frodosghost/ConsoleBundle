@@ -52,6 +52,18 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('navigation')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('title')
+                            ->defaultValue('Console')
+                            ->info('Title as appears in the main navigation header')
+                            ->end()
+                        ->scalarNode('link')
+                            ->defaultValue('console_index')
+                            ->info('Link as set in the main navigation header')
+                            ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;
