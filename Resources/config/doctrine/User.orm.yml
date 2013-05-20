@@ -1,4 +1,4 @@
-ErrorApi\ManagerBundle\Entity\User:
+Manhattan\Bundle\ConsoleBundle\Entity\User:
     type:  entity
     table: error_user
 
