@@ -28,6 +28,9 @@ class ManhattanConsoleExtension extends Extension
         $container->setParameter('console.navigation.title', $config['navigation']['title']);
         $container->setParameter('console.navigation.link', $config['navigation']['link']);
 
+        // Publish States
+        $container->setParameter('console.publish.states', $config['publish_states']);
+
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
     }

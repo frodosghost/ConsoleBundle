@@ -63,9 +63,20 @@ class Configuration implements ConfigurationInterface
                             ->defaultValue('console_index')
                             ->info('Link as set in the main navigation header')
                             ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('publish_states')
+                    ->prototype('array')->end()
+                    ->defaultValue(array(
+                        1 => 'Draft',
+                        2 => 'Publish',
+                        4 => 'Archived'
+                    ))
+                    ->end()
                 ->end()
             ->end();
 
         return $treeBuilder;
     }
+
 }
