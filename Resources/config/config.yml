@@ -1,7 +1,13 @@
 # Bootstrap Bundle
 mopa_bootstrap:
     navbar: ~
-    form: ~
+    form:
+        collection:
+            widget_remove_btn:
+                icon: trash
+                icon_color: white
+            widget_add_btn:
+                icon: plus-sign
 
 parameters:
     manhattan.console.navbar.generic: Mopa\Bundle\BootstrapBundle\Navbar\GenericNavbar
