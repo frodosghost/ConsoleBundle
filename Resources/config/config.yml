@@ -2,6 +2,8 @@
 mopa_bootstrap:
     navbar: ~
     form:
+        show_legend: false
+        show_child_legend: false
         collection:
             widget_remove_btn:
                 icon: trash
