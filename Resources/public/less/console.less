@@ -19,6 +19,10 @@ form label {
 
 .records_list table td .btn-mini { margin:0.4em 0 }
 
+/*.left {
+    float: left;
+}*/
+
 /*  ----------
     :: Manage Images
     ---------- */
@@ -138,13 +142,22 @@ div.manage a.btn.manage {
     width: 75%;
 }
 
-/*.container.controls { margin-left: 0 }
-    .container.controls .help-block { margin-left: 180px }*/
-
+.controls .collection-item {
+    margin: 4px 0 9px;
+}
 .collection-item .control-group .controls {
     width: 300px;
     float:left;
+    margin-left: 0;
 }
+
+.collection-item .control-group:before, .collection-item .control-group:after {
+    display: inline-block;
+    content: none;
+}
+    .form-horizontal .collection-item .control-group {
+        display: inline;
+    }
 
 .form-actions {
     float: left;
