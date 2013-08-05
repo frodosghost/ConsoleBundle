@@ -13,16 +13,39 @@ class LoadAuthenticatedAdminUserData extends AbstractFixture implements OrderedF
     public function load(ObjectManager $manager)
     {
         $user = new User();
-        $user->setUsername('admin');
-        $user->setEmail('admin@test.com');
+        $user->setUsername('super');
+        $user->setEmail('super@test.com');
         $user->setPlainPassword('test');
         $user->addRole('ROLE_SUPER_ADMIN');
         $user->setEnabled(true);
+        $user->setConfirmationToken('token123');
 
         $manager->persist($user);
-        $manager->flush();
+        $this->addReference('user-super', $user);
 
-        $this->addReference('admin-user', $user);
+        $user = new User();
+        $user->setUsername('admin');
+        $user->setEmail('admin@test.com');
+        $user->setPlainPassword('test');
+        $user->addRole('ROLE_ADMIN');
+        $user->setEnabled(true);
+        $user->setConfirmationToken('token1');
+
+        $manager->persist($user);
+        $this->addReference('user-admin', $user);
+
+        $user = new User();
+        $user->setUsername('user');
+        $user->setEmail('user@test.com');
+        $user->setPlainPassword('test');
+        $user->addRole('ROLE_USER');
+        $user->setEnabled(true);
+        $user->setConfirmationToken('token-user');
+
+        $manager->persist($user);
+        $this->addReference('user-admin', $user);
+
+        $manager->flush();
     }
 
     /**
