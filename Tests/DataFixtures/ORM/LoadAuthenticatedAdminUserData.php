@@ -43,7 +43,7 @@ class LoadAuthenticatedAdminUserData extends AbstractFixture implements OrderedF
         $user->setConfirmationToken('token-user');
 
         $manager->persist($user);
-        $this->addReference('user-admin', $user);
+        $this->addReference('user-user', $user);
 
         $manager->flush();
     }
