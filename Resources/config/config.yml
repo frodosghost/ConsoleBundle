@@ -47,6 +47,11 @@ services:
         tags:
             - { name: form.type, alias: preview_file }
 
+    form.type.image_type_extension:
+        class: Manhattan\Bundle\ConsoleBundle\Form\Extension\ImageTypeExtension
+        tags:
+            - { name: form.type_extension, alias: file }
+
     form.type.publish_state:
         class: Manhattan\Bundle\ConsoleBundle\Form\Type\PublishStateType
         arguments:
