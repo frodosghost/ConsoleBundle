@@ -10,6 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
+    const ROLE_DEFAULT = 'ROLE_USER';
+
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+
+    const ROLE_SUPER_ADMIN = 'ROLE_SUPER';
+
     /**
      * @var integer
      */

@@ -22,7 +22,7 @@ class ConsoleController extends Controller
     /**
      * @Route("", name="console_index")
      * @Method({"GET"})
-     * @Secure(roles="ROLE_ADMIN")
+     * @Secure(roles="ROLE_USER")
      */
     public function indexAction()
     {
