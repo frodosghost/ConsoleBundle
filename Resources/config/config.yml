@@ -52,13 +52,6 @@ services:
         tags:
             - { name: form.type_extension, alias: file }
 
-    form.type.publish_state:
-        class: Manhattan\Bundle\ConsoleBundle\Form\Type\PublishStateType
-        arguments:
-            - "%console.publish.states%"
-        tags:
-            - { name: form.type, alias: publish_state }
-
     manhattan.console.navbar:
         class: %manhattan.console.navbar.generic%
         arguments:
