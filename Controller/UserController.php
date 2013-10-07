@@ -11,7 +11,6 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JMS\SecurityExtraBundle\Annotation\Secure;
 
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
@@ -30,11 +29,14 @@ class UserController extends Controller
     /**
      * @Route("/users", name="console_users")
      * @Method({"GET"})
-     * @Secure(roles="ROLE_SUPER_ADMIN")
      * @Template()
      */
     public function listAction()
     {
+        if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            throw new AccessDeniedException();
+        }
+
         $user_manager = $this->get('fos_user.user_manager');
 
         return array(
@@ -45,11 +47,14 @@ class UserController extends Controller
     /**
      * @Route("/users/new", name="console_users_new")
      * @Method({"GET"})
-     * @Secure(roles="ROLE_SUPER_ADMIN")
      * @Template()
      */
     public function newAction()
     {
+        if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            throw new AccessDeniedException();
+        }
+
         $user = new User();
 
         $createForm = $this->createForm(new UserType(), $user);
@@ -63,11 +68,14 @@ class UserController extends Controller
     /**
      * @Route("/users/create", name="console_users_create")
      * @Method({"POST"})
-     * @Secure(roles="ROLE_SUPER_ADMIN")
      * @Template("ManhattanConsoleBundle:User:new.html.twig")
      */
     public function createAction(Request $request)
     {
+        if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            throw new AccessDeniedException();
+        }
+
         $user = new User();
         $user_manager = $this->get('fos_user.user_manager');
 
@@ -97,11 +105,14 @@ class UserController extends Controller
     /**
      * @Route("/users/{id}/edit", name="console_users_edit")
      * @Method({"GET"})
-     * @Secure(roles="ROLE_SUPER_ADMIN")
      * @Template()
      */
     public function editAction($id)
     {
+        if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            throw new AccessDeniedException();
+        }
+
         $user_manager = $this->get('fos_user.user_manager');
 
         $user = $user_manager->findUserBy(array('id' => $id));
@@ -123,11 +134,14 @@ class UserController extends Controller
     /**
      * @Route("/users/{id}/update", name="console_users_update")
      * @Method({"POST"})
-     * @Secure(roles="ROLE_SUPER_ADMIN")
      * @Template("ManhattanConsoleBundle:Console:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
+        if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            throw new AccessDeniedException();
+        }
+
         $user_manager = $this->get('fos_user.user_manager');
 
         $user = $user_manager->findUserBy(array('id' => $id));
@@ -155,7 +169,7 @@ class UserController extends Controller
 
     /**
      * New Users can create their passwords
-     * 
+     *
      * @Route("/users/welcome/{token}", name="console_users_password_set")
      * @Method({"GET", "POST"})
      * @Template()
@@ -221,6 +235,10 @@ class UserController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            throw new AccessDeniedException();
+        }
+
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
@@ -249,7 +267,7 @@ class UserController extends Controller
 
     /**
      * Configures User and inital email to send when User added
-     * 
+     *
      * @param  User $user
      */
     private function sendinitialemailAction($user)
