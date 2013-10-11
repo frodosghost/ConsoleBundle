@@ -11,66 +11,6 @@ mopa_bootstrap:
             widget_add_btn:
                 icon: plus-sign
 
-parameters:
-    manhattan.console.navbar.generic: Mopa\Bundle\BootstrapBundle\Navbar\GenericNavbar
-
-services:
-    manhattan.console.menu_builder:
-        class: Manhattan\Bundle\ConsoleBundle\Navbar\MenuBuilder
-        arguments: ["@knp_menu.factory", "@event_dispatcher", "@security.context"]
-
-    manhattan.console.menu:
-        class: Knp\Menu\MenuItem
-        factory_service: manhattan.console.menu_builder
-        factory_method: createMainMenu
-        arguments: ["@request"]
-        scope: request
-        tags:
-            - { name: knp_menu.menu, alias: mainmenu }
-
-    manhattan.console.rightmenu:
-        class: Knp\Menu\MenuItem
-        factory_service: manhattan.console.menu_builder
-        factory_method: createRightSideMenu
-        arguments: ["@request"]
-        scope: request
-        tags:
-            - { name: knp_menu.menu, alias: rightmenu }
-
-    form.type.telephone:
-        class: Manhattan\Bundle\ConsoleBundle\Form\Type\TelephoneType
-        tags:
-            - { name: form.type, alias: telephone }
-
-    form.type.preview_file:
-        class: Manhattan\Bundle\ConsoleBundle\Form\Type\PreviewFileType
-        tags:
-            - { name: form.type, alias: preview_file }
-
-    form.type.image_type_extension:
-        class: Manhattan\Bundle\ConsoleBundle\Form\Extension\ImageTypeExtension
-        tags:
-            - { name: form.type_extension, alias: file }
-
-    manhattan.console.navbar:
-        class: %manhattan.console.navbar.generic%
-        arguments:
-            - { leftmenu: @manhattan.console.menu=, rightmenu: @manhattan.console.rightmenu= }
-            - {  }
-            - { title: %console.navigation.title%, titleRoute: %console.navigation.link%, fixedTop: true, isFluid: false }
-        tags:
-            - { name: mopa_bootstrap.navbar, alias: consoleNavbar }
-
-# JMS Security
-jms_security_extra:
-    secure_all_services: false
-
-jms_di_extra:
-    locations:
-        all_bundles: false
-        bundles: [ConsoleBundle]
-        directories: ["%kernel.root_dir%/../src"]
-
 # FOS UserBundle
 fos_user:
     db_driver: orm
