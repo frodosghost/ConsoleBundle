@@ -21,6 +21,8 @@ ConsoleBundle is application setup for ease of starting new project in Symfony2.
             return array(
                 // ...
                 new Manhattan\Bundle\ConsoleBundle\ManhattanConsoleBundle(),
+                new Ornj\Bundle\OrnjMarkdownBundle\OrnjMarkdownBundle(),
+                new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
                 new FOS\UserBundle\FOSUserBundle(),
                 // ...
             );
@@ -36,4 +38,3 @@ ConsoleBundle is application setup for ease of starting new project in Symfony2.
         - { resource: '@ManhattanConsoleBundle/Resources/config/security.yml' }
         - { resource: security.yml }
         - { resource: '@ManhattanConsoleBundle/Resources/config/config.yml' }
-        - { resource: '@ManhattanConsoleBundle/Resources/config/tinymce.yml' }

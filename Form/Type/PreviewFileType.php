@@ -25,12 +25,12 @@ class PreviewFileType extends AbstractType
         $preview = null;
 
         // Check if we have the Path available for the preview image
-        if (is_object($view->getParent()->vars['value'])) {
-            if (method_exists($view->getParent()->vars['value'], 'getWebPath')) {
-                $preview = $view->getParent()->vars['value']->getWebPath();
+        if (is_object($view->parent->vars['value'])) {
+            if (method_exists($view->parent->vars['value'], 'getWebPath')) {
+                $preview = $view->parent->vars['value']->getWebPath();
             }
         }
-        
+
         $view->vars = array_replace($view->vars, array(
             'type'  => 'file',
             'value' => '',

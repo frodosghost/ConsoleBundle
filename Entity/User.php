@@ -2,7 +2,7 @@
 
 namespace Manhattan\Bundle\ConsoleBundle\Entity;
 
-use FOS\UserBundle\Entity\User as BaseUser;
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,6 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
+    const ROLE_DEFAULT = 'ROLE_USER';
+
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+
+    const ROLE_SUPER_ADMIN = 'ROLE_SUPER';
+
     /**
      * @var integer
      */
@@ -34,7 +40,7 @@ class User extends BaseUser
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -50,14 +56,14 @@ class User extends BaseUser
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->created_at = $createdAt;
-    
+
         return $this;
     }
 
     /**
      * Get created_at
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -73,14 +79,14 @@ class User extends BaseUser
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updated_at = $updatedAt;
-    
+
         return $this;
     }
 
     /**
      * Get updated_at
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {

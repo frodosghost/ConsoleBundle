@@ -17,9 +17,10 @@
     "target-dir": "Manhattan/Bundle/ConsoleBundle",
     "require": {
         "php": ">=5.3.2",
-        "symfony/framework-bundle": "2.*",
+        "symfony/framework-bundle": ">=2.2",
         "friendsofsymfony/user-bundle": "dev-master",
-        "stfalcon/tinymce-bundle": "dev-master"
+        "knplabs/knp-markdown-bundle": "1.2.*@dev",
+        "ornj/markdown-bundle": "dev-master"
     }
 }
 
