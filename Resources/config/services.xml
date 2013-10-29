@@ -4,17 +4,56 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <parameters>
-        <parameter key="manhattan_console.example.class">Manhattan\ConsoleBundle\Example</parameter>
+        <parameter key="manhattan.console.navbar.generic">Mopa\Bundle\BootstrapBundle\Navbar\GenericNavbar</parameter>
+        <parameter key="console.dashboard.menu_builder.class">Manhattan\Bundle\ConsoleBundle\Navbar\MenuBuilder</parameter>
+        <parameter key="form.type.telephone.class">Manhattan\Bundle\ConsoleBundle\Form\Type\TelephoneType</parameter>
+        <parameter key="form.type.preview_file.class">Manhattan\Bundle\ConsoleBundle\Form\Type\PreviewFileType</parameter>
+        <parameter key="form.type.image_type_extension.class">Manhattan\Bundle\ConsoleBundle\Form\Extension\ImageTypeExtension</parameter>
     </parameters>
 
     <services>
-        <service id="manhattan_console.example" class="%manhattan_console.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="manhattan.console.menu_builder" class="%console.dashboard.menu_builder.class%">
+            <argument type="service" id="knp_menu.factory" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="security.context" />
+        </service>
+
+        <service id="manhattan.console.menu" class="Knp\Menu\MenuItem" factory-service="manhattan.console.menu_builder" factory-method="createMainMenu" scope="request">
+            <argument type="service" id="request" />
+            <tag name="knp_menu.menu" alias="mainmenu" />
+        </service>
+
+        <service id="manhattan.console.rightmenu" class="Knp\Menu\MenuItem" factory-service="manhattan.console.menu_builder" factory-method="createRightSideMenu" scope="request">
+            <argument type="service" id="request" />
+            <tag name="knp_menu.menu" alias="rightmenu" />
+        </service>
+
+        <service id="form.type.telephone" class="%form.type.telephone.class%">
+            <tag name="form.type" alias="telephone" />
+        </service>
+
+        <service id="form.type.preview_file" class="%form.type.preview_file.class%">
+            <tag name="form.type" alias="preview_file" />
+        </service>
+
+        <service id="form.type.image_type_extension" class="%form.type.image_type_extension.class%">
+            <tag name="form.type_extension" alias="file" />
+        </service>
+
+        <service id="manhattan.console.navbar" class="%manhattan.console.navbar.generic%">
+            <argument type="collection">
+                <argument type="service" key="leftmenu" id="manhattan.console.menu" strict="false" />
+                <argument type="service" key="rightmenu" id="manhattan.console.rightmenu"  strict="false" />
+            </argument>
+            <argument type="collection"></argument>
+            <argument type="collection">
+                <argument key="title">%console.navigation.title%</argument>
+                <argument key="titleRoute">%console.navigation.link%</argument>
+                <argument key="fixedTop">true</argument>
+                <argument key="isFluid">true</argument>
+            </argument>
+            <tag name="mopa_bootstrap.navbar" alias="consoleNavbar" />
         </service>
     </services>
-    -->
 </container>

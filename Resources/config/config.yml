@@ -1,53 +1,15 @@
 # Bootstrap Bundle
 mopa_bootstrap:
     navbar: ~
-    form: ~
-
-parameters:
-    manhattan.console.navbar.generic: Mopa\Bundle\BootstrapBundle\Navbar\GenericNavbar
-
-services:
-    manhattan.console.menu_builder:
-        class: Manhattan\Bundle\ConsoleBundle\Navbar\MenuBuilder
-        arguments: ["@knp_menu.factory", "@event_dispatcher", "@security.context"]
-
-    manhattan.console.menu:
-        class: Knp\Menu\MenuItem
-        factory_service: manhattan.console.menu_builder
-        factory_method: createMainMenu
-        arguments: ["@request"]
-        scope: request
-        tags:
-            - { name: knp_menu.menu, alias: mainmenu }
-
-    manhattan.console.rightmenu:
-        class: Knp\Menu\MenuItem
-        factory_service: manhattan.console.menu_builder
-        factory_method: createRightSideMenu
-        arguments: ["@request"]
-        scope: request
-        tags:
-            - { name: knp_menu.menu, alias: rightmenu }
-
-    form.type.telephone:
-        class: Manhattan\Bundle\ConsoleBundle\Form\Type\TelephoneType
-        tags:
-            - { name: form.type, alias: telephone }
-
-    form.type.preview_file:
-        class: Manhattan\Bundle\ConsoleBundle\Form\Type\PreviewFileType
-        tags:
-            - { name: form.type, alias: preview_file }
-
-# JMS Security
-jms_security_extra:
-    secure_all_services: false
-
-jms_di_extra:
-    locations:
-        all_bundles: false
-        bundles: [ConsoleBundle]
-        directories: ["%kernel.root_dir%/../src"]
+    form:
+        show_legend: false
+        show_child_legend: false
+        collection:
+            widget_remove_btn:
+                icon: trash
+                icon_color: white
+            widget_add_btn:
+                icon: plus-sign
 
 # FOS UserBundle
 fos_user:
