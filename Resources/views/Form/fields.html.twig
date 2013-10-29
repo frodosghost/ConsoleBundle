@@ -5,7 +5,9 @@
 
 {% block preview_file_widget %}
     {% spaceless %}
-        <div class="preview"><img src="{{ asset(preview) | imagine_filter('thumb') }}" /></div>
+        <div class="preview">
+            {% if preview %}<img src="{{ asset(preview) | imagine_filter('thumb') }}" />{% endif %}
+        </div>
         {{ block('form_widget_simple') }}
     {% endspaceless %}
 {% endblock %}
@@ -16,3 +18,14 @@
     {{ block('form_widget_simple') }}
 {% endspaceless %}
 {% endblock telephone_widget %}
+
+{% block file_widget %}
+    {% spaceless %}
+    {{ block('form_widget') }}
+    {% if image_url is defined and image_url is not null %}
+        <div class="preview">
+            <img src="{{ asset(image_url) | imagine_filter('thumb') }}" />
+        </div>
+    {% endif %}
+    {% endspaceless %}
+{% endblock %}
