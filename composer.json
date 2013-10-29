@@ -20,6 +20,12 @@
         "symfony/framework-bundle": "2.*",
         "friendsofsymfony/user-bundle": "dev-master",
         "stfalcon/tinymce-bundle": "dev-master"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-tinymce": "2.0.x-dev",
+            "dev-master": "2.0.x-dev"
+        }
     }
 }
 
