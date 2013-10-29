@@ -31,9 +31,6 @@ class ManhattanConsoleExtension extends Extension implements PrependExtensionInt
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
-
-        $yamlLoader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $yamlLoader->load('tinymce.yml');
     }
 
     /**

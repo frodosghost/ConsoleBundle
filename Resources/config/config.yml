@@ -54,3 +54,6 @@ fos_user:
     db_driver: orm
     firewall_name: secured_area
     user_class: Manhattan\Bundle\ConsoleBundle\Entity\User
+
+imports:
+    - { resource: "@ManhattanConsoleBundle/Resources/config/tinymce.yml" }
