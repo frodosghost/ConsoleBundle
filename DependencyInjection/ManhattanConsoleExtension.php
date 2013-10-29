@@ -61,6 +61,12 @@ class ManhattanConsoleExtension extends Extension implements PrependExtensionInt
                 }
             }
         }
+
+        // Once Manhattan Console is registered include the additional configuration files
+        if (isset($bundles['ManhattanConsoleBundle'])) {
+            $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+            $loader->load('config.yml');
+        }
     }
 
 }
