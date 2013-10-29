@@ -21,5 +21,10 @@
         "friendsofsymfony/user-bundle": "dev-master",
         "knplabs/knp-markdown-bundle": "1.2.*@dev",
         "ornj/markdown-bundle": "dev-master"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
     }
 }
