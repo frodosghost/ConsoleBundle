@@ -44,7 +44,7 @@ div.manage a.btn.manage {
     padding: 0 10px;
 }
 
-.main-display { 
+.main-display {
     max-width: 1170px;
     margin: 0 auto;
 }
@@ -82,10 +82,22 @@ div.manage a.btn.manage {
     .control-group ul.documents li { margin-bottom: 5px }
 
 /*  ----------
+    :: Manage Images
+    ---------- */
+.image-list .document.well {
+    display: inline-block;
+    width: 100%;
+}
+
+/*  ----------
     :: Preview Images
     ---------- */
+div.controls input[type="file"] {
+    margin-left: 20px;
+}
 .control-group .preview {
-    padding-bottom: 10px;
+    margin-left: 170px;
+    padding: 10px;
 }
 
 .entity-left.control-group .controls { margin-left: 0 }
@@ -137,6 +149,77 @@ div.manage a.btn.manage {
     float: left;
     width: 75%;
 }
+
+/*  ----------
+    :: Controls :: Collection
+    ---------- */
+.controls .collection-item {
+    margin: 4px 0 9px;
+}
+.collection-item .control-group .controls {
+    width: 300px;
+    float:left;
+    margin-left: 0;
+}
+
+.collection-item .control-group:before, .collection-item .control-group:after {
+    display: inline-block;
+    content: none;
+}
+    .form-horizontal .collection-item .control-group {
+        display: inline;
+    }
+
+ .control-group .controls label.checkbox {
+    display: inline-block;
+    float: left;
+    min-height: 20px;
+    padding-left: 40px;
+ }
+
+.form-actions {
+    float: left;
+    border: 0 none;
+    width: 100%;
+}
+    .form-horizontal .form-actions,
+    .form-actions { padding: 20px 10px !important }
+    .form-actions form {
+        margin-bottom: 0;
+    }
+    .form-actions.last {
+        text-align: right;
+    }
+
+/*  ----------
+    :: Controls :: Field Layout
+    ---------- */
+.form-horizontal .controls.second-level {
+    border: 1px solid #E3E3E3;
+    float: left;
+    margin-left: 0;
+    padding: 20px 0 0;
+    width: 100%;
+}
+
+.second-level.control-group label { display: none }
+.second-level.control-group .controls label {
+    display: inline;
+}
+.form-horizontal .second-level.control-group .controls { margin-left: 0 }
+
+
+/*  ----------
+    :: Controls :: Field Errors
+    ---------- */
+.control-group.error .help- {
+    color: #B94A48;
+    display: inline-block;
+    float: left;
+    width: 100%;
+    padding-top: 5px;
+}
+
 
 /*  ----------
     :: Nested Tree
@@ -206,13 +289,12 @@ div.remember-me input {
 
     .navbar .nav .menu-dropdown li.active > a, .navbar .nav .menu-dropdown li.active > a:hover {
         color: #366DDC;
-        font-weight: bold; 
+        font-weight: bold;
     }
     .navbar .nav .menu-dropdown li.active > a:hover { text-decoration: underline }
     .menu-dropdown li:hover { background: #E4E4E4 }
 
-    .navbar .nav li.dropdown.active > .dropdown-toggle
-    {
+    .navbar .nav li.dropdown.active > .dropdown-toggle {
         background: #EDEDED;
         border-left: 1px solid #BBBBBB;
         border-right: 1px solid #BBBBBB;
@@ -220,7 +302,7 @@ div.remember-me input {
     .navbar .nav li.dropdown.active:hover { background: #E4E4E4 !important }
     .navbar .nav li.dropdown.active > .dropdown-toggle:hover { color: #333342; border-bottom: none; }
 
-    .menu-dropdown li a.main { 
+    .menu-dropdown li a.main {
         font-weight: bold;
         padding: 0.5em 1.0em;
     }

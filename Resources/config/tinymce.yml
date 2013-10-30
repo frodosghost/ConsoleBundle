@@ -1,6 +1,6 @@
 stfalcon_tinymce:
     include_jquery: false
-    selector: ".tinymce" # with leading dot for a class or hash tag for ID of the textarea
+    selector: ".tinymce"
     theme:
         simple: ~
         advanced:
