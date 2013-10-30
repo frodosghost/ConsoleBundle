@@ -6,15 +6,15 @@ stfalcon_tinymce:
         # Advanced theme with almost all enabled plugins
         body:
             plugins:
-                - "advlist autolink lists link image charmap print hr anchor pagebreak"
+                - "autolink lists link image charmap print hr anchor pagebreak"
                 - "searchreplace wordcount visualblocks visualchars code fullscreen"
                 - "insertdatetime media nonbreaking save table contextmenu directionality"
                 - "template paste textcolor"
             menubar: false
-            toolbar1: "undo redo | styleselect | bold italic | bullist numlist outdent indent"
-            toolbar2: "media | forecolor backcolor | alignleft aligncenter alignright alignjustify | link image"
+            toolbar1: "undo redo | styleselect | bold italic | bullist numlist outdent indent | code"
+            toolbar2: "forecolor backcolor | alignleft aligncenter alignright alignjustify | link image"
             image_advtab: true
         excerpt:
-             plugins: ["bbcode, code, link, preview"]
+             plugins: ["code, link, preview"]
              menubar: false
              toolbar1: "bold,italic,underline,undo,redo,removeformat,cleanup,code"
