@@ -8,7 +8,7 @@
         {
             "name": "James Rickard",
             "email": "james@frodosghost.com",
-            "homepage": "http://www.frodosghost.com"
+            "homepage": "http://frodosghost.com"
         }
     ],
     "autoload": {
