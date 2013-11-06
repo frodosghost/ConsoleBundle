@@ -31,9 +31,6 @@ class ManhattanConsoleExtension extends Extension implements PrependExtensionInt
         $container->setParameter('console.navigation.title', $config['navigation']['title']);
         $container->setParameter('console.navigation.link', $config['navigation']['link']);
 
-        // Publish States
-        $container->setParameter('console.publish.states', $config['publish_states']);
-
         // Navigation Bar Configuration Values
         $container->setParameter('console.navigation.title', $config['navigation']['title']);
         $container->setParameter('console.navigation.link', $config['navigation']['link']);
