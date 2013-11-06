@@ -34,6 +34,10 @@ class ManhattanConsoleExtension extends Extension implements PrependExtensionInt
         // Publish States
         $container->setParameter('console.publish.states', $config['publish_states']);
 
+        // Navigation Bar Configuration Values
+        $container->setParameter('console.navigation.title', $config['navigation']['title']);
+        $container->setParameter('console.navigation.link', $config['navigation']['link']);
+
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
     }
@@ -51,8 +55,7 @@ class ManhattanConsoleExtension extends Extension implements PrependExtensionInt
         if (isset($bundles['TwigBundle'])) {
 
             $config = array('form' => array('resources' => array (
-                'ManhattanConsoleBundle:Form:fields.html.twig',
-                'OrnjMarkdownBundle:Form:fields.html.twig'
+                'ManhattanConsoleBundle:Form:fields.html.twig'
             )));
 
             foreach ($container->getExtensions() as $name => $extension) {
@@ -68,6 +71,8 @@ class ManhattanConsoleExtension extends Extension implements PrependExtensionInt
         if (isset($bundles['ManhattanConsoleBundle'])) {
             $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
             $loader->load('config.yml');
+
+            $loader->load('tinymce.yml');
         }
     }
 

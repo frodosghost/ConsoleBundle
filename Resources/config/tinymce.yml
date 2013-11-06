@@ -1,0 +1,20 @@
+stfalcon_tinymce:
+    include_jquery: false
+    selector: ".tinymce"
+    theme:
+        simple: ~
+        # Advanced theme with almost all enabled plugins
+        body:
+            plugins:
+                - "autolink lists link image charmap print hr anchor pagebreak"
+                - "searchreplace wordcount visualblocks visualchars code fullscreen"
+                - "insertdatetime media nonbreaking save table contextmenu directionality"
+                - "template paste textcolor"
+            menubar: false
+            toolbar1: "undo redo | styleselect | bold italic | bullist numlist outdent indent | code"
+            toolbar2: "forecolor backcolor | alignleft aligncenter alignright alignjustify | link image"
+            image_advtab: true
+        excerpt:
+             plugins: ["code, link, preview"]
+             menubar: false
+             toolbar1: "bold,italic,underline,undo,redo,removeformat,cleanup,code"
