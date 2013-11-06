@@ -37,4 +37,3 @@ ConsoleBundle is application setup for ease of starting new project in Symfony2.
 
         - { resource: '@ManhattanConsoleBundle/Resources/config/security.yml' }
         - { resource: security.yml }
-        - { resource: '@ManhattanConsoleBundle/Resources/config/config.yml' }
