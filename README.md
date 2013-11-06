@@ -21,8 +21,7 @@ ConsoleBundle is application setup for ease of starting new project in Symfony2.
             return array(
                 // ...
                 new Manhattan\Bundle\ConsoleBundle\ManhattanConsoleBundle(),
-                new Ornj\Bundle\OrnjMarkdownBundle\OrnjMarkdownBundle(),
-                new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
+                new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
                 new FOS\UserBundle\FOSUserBundle(),
                 // ...
             );
