@@ -13,6 +13,11 @@ mopa_bootstrap:
 
 # FOS UserBundle
 fos_user:
-    db_driver: orm
-    firewall_name: secured_area
-    user_class: Manhattan\Bundle\ConsoleBundle\Entity\User
+    db_driver:      orm
+    firewall_name:  secured_area
+    user_class:     Manhattan\Bundle\ConsoleBundle\Entity\User
+    service:
+        mailer:     fos_user.mailer.twig_swift
+    from_email:
+        address:        %console.users.from%
+        sender_name:    %console.users.console_name%
