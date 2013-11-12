@@ -17,6 +17,8 @@
     "target-dir": "Manhattan/Bundle/ConsoleBundle",
     "require": {
         "php": ">=5.3.2",
+        "mopa/bootstrap-bundle": "2.3.*@dev",
+        "twbs/bootstrap": "v2.3.2",
         "symfony/framework-bundle": ">=2.2",
         "friendsofsymfony/user-bundle": "dev-master",
         "knplabs/knp-markdown-bundle": "1.2.*@dev",
