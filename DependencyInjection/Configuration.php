@@ -69,15 +69,6 @@ class Configuration implements ConfigurationInterface
                             ->end()
                     ->end()
                 ->end()
-                ->arrayNode('publish_states')
-                    ->prototype('array')->end()
-                    ->defaultValue(array(
-                        1 => 'Draft',
-                        2 => 'Publish',
-                        4 => 'Archived'
-                    ))
-                    ->end()
-                ->end()
             ->end();
 
         return $treeBuilder;
