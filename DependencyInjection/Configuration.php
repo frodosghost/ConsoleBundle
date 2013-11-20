@@ -22,6 +22,10 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('domain')
+                    ->defaultValue('')
+                    ->info('Sets the domain. For example "domain.com" or "domain.dev".')
+                    ->end()
                 ->arrayNode('users')
                     ->addDefaultsIfNotSet()
                     ->children()
