@@ -10,6 +10,7 @@
         <parameter key="form.type.telephone.class">Manhattan\Bundle\ConsoleBundle\Form\Type\TelephoneType</parameter>
         <parameter key="form.type.preview_file.class">Manhattan\Bundle\ConsoleBundle\Form\Type\PreviewFileType</parameter>
         <parameter key="form.type.image_type_extension.class">Manhattan\Bundle\ConsoleBundle\Form\Extension\ImageTypeExtension</parameter>
+        <parameter key="manhattan.console.subdomain_request_matcher.class">Manhattan\Bundle\ConsoleBundle\Security\ConsoleSubDomainRequestMatcher</parameter>
     </parameters>
 
     <services>
@@ -55,5 +56,8 @@
             </argument>
             <tag name="mopa_bootstrap.navbar" alias="consoleNavbar" />
         </service>
+
+        <service id="manhattan.console.subdomain_request_matcher" class="%manhattan.console.subdomain_request_matcher.class%"></service>
+
     </services>
 </container>
