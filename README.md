@@ -1,7 +1,7 @@
 # Manhattan Console Bundle
 
 ## What
-ConsoleBundle is application setup for ease of starting new project in Symfony2. It intergrates the [MopaBootstrapBundle](https://github.com/phiamo/MopaBootstrapBundle) and [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle) is used as a basis for a client control system for the administration backend for websites.
+ConsoleBundle is application setup for ease of starting new project in Symfony2.
 
 ## How
 1. Add this bundle to the composer file:
@@ -21,6 +21,10 @@ ConsoleBundle is application setup for ease of starting new project in Symfony2.
             return array(
                 // ...
                 new Manhattan\Bundle\ConsoleBundle\ManhattanConsoleBundle(),
+                new Ornj\Bundle\MarkdownBundle\OrnjMarkdownBundle(),
+                new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+                new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
+                new Knp\Bundle\MenuBundle\KnpMenuBundle(),
                 new FOS\UserBundle\FOSUserBundle(),
                 // ...
             );

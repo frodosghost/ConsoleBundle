@@ -1,16 +1,3 @@
-# Bootstrap Bundle
-mopa_bootstrap:
-    navbar: ~
-    form:
-        show_legend: false
-        show_child_legend: false
-        collection:
-            widget_remove_btn:
-                icon: trash
-                icon_color: white
-            widget_add_btn:
-                icon: plus-sign
-
 # FOS UserBundle
 fos_user:
     db_driver:      orm
