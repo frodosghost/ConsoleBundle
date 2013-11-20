@@ -8,11 +8,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-use Symfony\Component\Security\Core\SecurityContext;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
@@ -21,16 +16,11 @@ use FOS\UserBundle\Event\FilterUserResponseEvent;
 use Manhattan\Bundle\ConsoleBundle\Entity\User;
 use Manhattan\Bundle\ConsoleBundle\Form\UserType;
 
-/**
- * @Route("/console")
- */
 class UserController extends Controller
 {
 
     /**
-     * @Route("/users", name="console_users")
-     * @Method({"GET"})
-     * @Template()
+     * Lists Users
      */
     public function listAction()
     {
@@ -40,15 +30,13 @@ class UserController extends Controller
 
         $user_manager = $this->get('fos_user.user_manager');
 
-        return array(
+        return $this->render('ManhattanConsoleBundle:User:list.html.twig', array(
             'entities' => $user_manager->findUsers()
-        );
+        ));
     }
 
     /**
-     * @Route("/users/new", name="console_users_new")
-     * @Method({"GET"})
-     * @Template()
+     * Displays New User Page
      */
     public function newAction()
     {
@@ -60,16 +48,14 @@ class UserController extends Controller
 
         $createForm = $this->createForm(new UserType(), $user);
 
-        return array(
+        return $this->render('ManhattanConsoleBundle:User:new.html.twig', array(
             'user' => $user,
             'form' => $createForm->createView()
-        );
+        ));
     }
 
     /**
-     * @Route("/users/create", name="console_users_create")
-     * @Method({"POST"})
-     * @Template("ManhattanConsoleBundle:User:new.html.twig")
+     * Creates New User
      */
     public function createAction(Request $request)
     {
@@ -96,17 +82,15 @@ class UserController extends Controller
             return $this->redirect($this->generateUrl('console_users'));
         }
 
-        return array(
+        return $this->render('ManhattanConsoleBundle:User:new.html.twig', array(
             'user' => $user,
             'form' => $createForm->createView()
-        );
+        ));
     }
 
 
     /**
-     * @Route("/users/{id}/edit", name="console_users_edit")
-     * @Method({"GET"})
-     * @Template()
+     * Displays Edit Form
      */
     public function editAction($id)
     {
@@ -125,17 +109,15 @@ class UserController extends Controller
         $editForm = $this->createForm(new UserType(), $user);
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('ManhattanConsoleBundle:User:edit.html.twig', array(
             'entity'      => $user,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**
-     * @Route("/users/{id}/update", name="console_users_update")
-     * @Method({"POST"})
-     * @Template("ManhattanConsoleBundle:Console:edit.html.twig")
+     * Updated User
      */
     public function updateAction(Request $request, $id)
     {
@@ -161,19 +143,15 @@ class UserController extends Controller
             return $this->redirect($this->generateUrl('console_users_edit', array('id' => $id)));
         }
 
-        return array(
+        return $this->render('ManhattanConsoleBundle:User:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**
      * New Users can create their passwords
-     *
-     * @Route("/users/welcome/{token}", name="console_users_password_set")
-     * @Method({"GET", "POST"})
-     * @Template()
      */
     public function passwordsetAction(Request $request, $token)
     {
@@ -222,17 +200,14 @@ class UserController extends Controller
             }
         }
 
-        return array(
+        return $this->render('ManhattanConsoleBundle:User:passwordset.html.twig', array(
             'token' => $token,
             'form'  => $form->createView(),
-        );
+        ));
     }
 
     /**
      * Deletes a User.
-     *
-     * @Route("/users/{id}", name="console_user_delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {

@@ -7,21 +7,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-use Symfony\Component\Security\Core\SecurityContext;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
 use Manhattan\Bundle\ConsoleBundle\Form\UserType;
-/**
- * @Route("/console")
- */
+
+
 class ConsoleController extends Controller
 {
 
     /**
-     * @Route("", name="console_index")
-     * @Method({"GET"})
+     * Display index
      */
     public function indexAction()
     {
