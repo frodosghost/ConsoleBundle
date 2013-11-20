@@ -5,7 +5,6 @@ use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Security\Core\SecurityContextInterface;
-use Mopa\Bundle\BootstrapBundle\Navbar\AbstractNavbarMenuBuilder;
 
 use Manhattan\Bundle\ConsoleBundle\Event\MenuEvents;
 use Manhattan\Bundle\ConsoleBundle\Event\ConfigureMenuEvent;
@@ -14,7 +13,7 @@ use Manhattan\Bundle\ConsoleBundle\Event\ConfigureMenuEvent;
  * Manhattan Console Navigation Bar Menu Builder
  *
  */
-class MenuBuilder extends AbstractNavbarMenuBuilder
+class MenuBuilder
 {
     /**
      * @var Knp\Menu\FactoryInterface
@@ -50,8 +49,6 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
      */
     public function __construct(FactoryInterface $factory, EventDispatcher $event_dispatcher, SecurityContextInterface $security_context)
     {
-        parent::__construct($factory);
-
         $this->factory = $factory;
         $this->event_dispatcher = $event_dispatcher;
         $this->security_context = $security_context;
@@ -100,7 +97,7 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
     public function createRightSideMenu(Request $request)
     {
         $menu = $this->factory->createItem('root');
-        $menu->setChildrenAttribute('class', 'nav pull-right');
+        $menu->setChildrenAttribute('class', 'nav right');
 
         if ($this->is_super_admin) {
             $users = $menu->addChild('Users', array('route'=>'console_users'))
