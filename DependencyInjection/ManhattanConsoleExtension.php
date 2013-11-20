@@ -25,13 +25,16 @@ class ManhattanConsoleExtension extends Extension implements PrependExtensionInt
 
         $container->setParameter('domain', $config['domain']);
         $container->setParameter('console.users', $config['users']);
+        $container->setParameter('console.users.from', $config['users']['from']);
+        $container->setParameter('console.users.console_name', $config['users']['console_name']);
 
         // Navigation Bar Configuration Values
         $container->setParameter('console.navigation.title', $config['navigation']['title']);
         $container->setParameter('console.navigation.link', $config['navigation']['link']);
 
-        // Publish States
-        $container->setParameter('console.publish.states', $config['publish_states']);
+        // Navigation Bar Configuration Values
+        $container->setParameter('console.navigation.title', $config['navigation']['title']);
+        $container->setParameter('console.navigation.link', $config['navigation']['link']);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
