@@ -30,7 +30,7 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
 
     {% block head_script %}
-        {# Overwrite this block to add your own js here, to get them generated into final files #}
+        {# Overwrite this block to add your own js here #}
     {% endblock head_script %}
 
     <title>{% block title %}Manhattan Management Console{% endblock title %}</title>
@@ -43,7 +43,7 @@
 <body>
 {% endblock body_tag %}
 
-    <div class="{% block container_class %}container{% endblock container_class %}">
+    <div class="{% block container_class %}container pure-g-r{% endblock container_class %}">
         {% block navigationbar %}
             {{ knp_menu_render('mainmenu') }}
             {{ knp_menu_render('usermenu') }}

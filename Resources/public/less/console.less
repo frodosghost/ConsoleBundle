@@ -10,5 +10,119 @@
 /* --------------------------------------------------
    Table of Contents
 -----------------------------------------------------
-
+    :: Reset
+    :: Fonts
+    :: Login
 */
+
+/* =============================================================================
+   Reset
+   ========================================================================== */
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 auto;
+    line-height: 1.7em;
+    color: @heavyGrey;
+    background: @lightGrey;
+}
+
+.l-box {
+    padding: 1.3em;
+}
+
+/* =============================================================================
+   Fonts
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: @serifFontFamily;
+    font-weight: 700;
+}
+
+/* =============================================================================
+   Forms
+   ========================================================================== */
+
+.pure-form input[type="text"],
+.pure-form input[type="password"],
+.pure-form input[type="email"],
+.pure-form input[type="url"],
+.pure-form input[type="date"],
+.pure-form input[type="month"],
+.pure-form input[type="time"],
+.pure-form input[type="datetime"],
+.pure-form input[type="datetime-local"],
+.pure-form input[type="week"],
+.pure-form input[type="number"],
+.pure-form input[type="search"],
+.pure-form input[type="tel"],
+.pure-form input[type="color"],
+.pure-form select,
+.pure-form textarea {
+    width: 100%;
+    padding: @baseSpacing/2;
+}
+
+div.alert {
+    border: 1px solid @alertRed;
+    margin-bottom: 20px;
+    padding: 20px;
+    color: @alertRed;
+    .bgfade(@alertRed, 0.1);
+}
+
+/* =============================================================================
+   Login
+   ========================================================================== */
+
+div.login {
+    background-color: @white;
+    border: 1px solid @midGrey;
+    margin: 0 auto;
+    margin-top: 100px;
+    width: 320px;
+    font-family: @serifFontFamily;
+    font-weight: 400;
+}
+
+div.login header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+    div.login header h2 {
+        color: @midGrey;
+    }
+
+div.login .pure-control-group {
+    margin-bottom: @baseSpacing;
+}
+
+div.login .pure-button {
+    float: right;
+}
+
+    div.login a.forgotten {
+        color: @darkGrey;
+        font-size: 0.85em;
+        text-decoration: none;
+    }
+        div.login a.forgotten:hover {
+            text-decoration: underline;
+            color: @aquaBlue;
+        }
+
+div.login footer {
+    background-color: @lightGrey;
+    border-top: 1px solid @midGrey;
+    color: @midGrey;
+    font-family: @sansFontFamily;
+    font-size: 0.8em;
+    padding: @paddingLarge;
+    text-align: center;
+}
