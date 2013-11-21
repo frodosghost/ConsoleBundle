@@ -10,6 +10,7 @@
         <parameter key="form.type.preview_file.class">Manhattan\Bundle\ConsoleBundle\Form\Type\PreviewFileType</parameter>
         <parameter key="form.type.image_type_extension.class">Manhattan\Bundle\ConsoleBundle\Form\Extension\ImageTypeExtension</parameter>
         <parameter key="manhattan.console.subdomain_request_matcher.class">Manhattan\Bundle\ConsoleBundle\Security\ConsoleSubDomainRequestMatcher</parameter>
+        <parameter key="manhattan.console.console_twig.class">Manhattan\Bundle\ConsoleBundle\Twig\ConsoleTwigExtension</parameter>
     </parameters>
 
     <services>
@@ -27,6 +28,17 @@
         <service id="manhattan.console.rightmenu" class="Knp\Menu\MenuItem" factory-service="manhattan.console.menu_builder" factory-method="createRightSideMenu" scope="request">
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="usermenu" />
+        </service>
+
+        <!-- Console Twig Configuration -->
+        <service id="manhattan.console.twig.extension" class="%manhattan.console.console_twig.class%">
+            <argument type="service" id="twig" />
+            <argument type="collection">
+                <argument key="title">%console.navigation.title%</argument>
+                <argument key="route">%console.navigation.link%</argument>
+            </argument>
+            <argument>ManhattanConsoleBundle:Twig:shared.html.twig</argument>
+            <tag name="twig.extension" />
         </service>
 
         <service id="form.type.telephone" class="%form.type.telephone.class%">
