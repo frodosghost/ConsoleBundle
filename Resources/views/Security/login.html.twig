@@ -15,7 +15,7 @@
                 <div class="alert alert-error">{{ error|trans({}, 'FOSUserBundle') }}</div>
             {% endif %}
 
-            <form action="{{ path("fos_user_security_check") }}" class="pure-form" method="post" id="login">
+            <form action="{{ path("fos_user_security_check") }}" class="pure-form" method="post" id="login" novalidate>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
                 <div class="pure-control-group">
                     <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}" />
@@ -36,7 +36,6 @@
                 </div>
         </form>
         </div>
-
 
         <footer class="login-footer">
             Copyright © 2011-{{ "now"|date("Y") }} Antelope Studios

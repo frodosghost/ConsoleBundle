@@ -12,6 +12,7 @@
 -----------------------------------------------------
     :: Reset
     :: Fonts
+    :: Alerts
     :: Login
 */
 
@@ -69,13 +70,27 @@ h1, h2, h3, h4, h5, h6 {
     padding: @baseSpacing/2;
 }
 
+.pure-control-group {
+    display: inline-block;
+    width: 100%;
+}
+
+/* =============================================================================
+   Alerts
+   ========================================================================== */
+
 div.alert {
-    border: 1px solid @alertRed;
+    border: 1px solid @midGrey;
     margin-bottom: 20px;
     padding: 20px;
-    color: @alertRed;
-    .bgfade(@alertRed, 0.1);
+    color: @midGrey;
+    .bgfade(@midGrey, 0.1);
 }
+    div.alert.error {
+        border-color: @alertRed;
+        color: @alertRed;
+        .bgfade(@alertRed, 0.1);
+    }
 
 /* =============================================================================
    Login
