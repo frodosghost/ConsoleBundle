@@ -1,7 +1,34 @@
-<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal well" novalidate>
-    {{ form_widget(form) }}
-    <div class="form-actions">
-        <a href="{{ path('fos_user_profile_show') }}" class="btn">Back to Profile</a>
-        <input type="submit" class="btn btn-primary" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+{% extends "ManhattanConsoleBundle:Console:template.html.twig" %}
+
+{% block title %}Console: Profile | Edit Profile{% endblock title %}
+{% block template_title %}Console: Edit Profile{% endblock template_title %}
+{% block breadcrumbs %}<li><a href="{{ path('console_index') }}">Console</a></li><li class="current"><a href="{{ path('fos_user_profile_show') }}">Edit Profile</a></li>{% endblock breadcrumbs %}
+
+{% block template_console %}
+
+<div class="pure-g-r">
+    <div class="pure-u-3-4">
+
+        <div class="l-box">
+
+            <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="pure-form pure-form-stacked" novalidate>
+
+                {{ form_widget(form) }}
+
+                <div class="form-actions">
+                    <a href="{{ path('fos_user_profile_show') }}" class="pure-button">Back to Profile</a>
+                    <input type="submit" class="pure-button pure-button-primary" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+                </div>
+            </form>
+        </div>
+
     </div>
-</form>
+
+    <div class="pure-u-1-4">
+        <div class="l-box">
+
+        </div>
+    </div>
+</div>
+
+{% endblock template_console %}
