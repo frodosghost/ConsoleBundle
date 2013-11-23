@@ -16,6 +16,7 @@
     :: Alerts
     :: Navigation
     :: Main
+    :: Breadcrumbs
     :: Login
     :: Footer
 */
@@ -61,6 +62,31 @@ header {
 
 footer {
     background-color: @lightGrey;
+}
+
+.pure-button-success,
+.pure-button-error,
+.pure-button-warning,
+.pure-button-secondary {
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.pure-button-success {
+    background: rgb(28, 184, 65); /* this is a green */
+}
+
+.pure-button-error {
+    background: rgb(202, 60, 60); /* this is a maroon */
+}
+
+.pure-button-warning {
+    background: rgb(223, 117, 20); /* this is an orange */
+}
+
+.pure-button-secondary {
+    background: rgb(66, 184, 221); /* this is a light blue */
 }
 
 /* =============================================================================
@@ -209,8 +235,80 @@ li.pure-menu-open ul.pure-menu-children {
    ========================================================================== */
 
 #main {
-    padding: @baseSpacing;
     width: 100%;
+}
+
+#internal header {
+    padding: @paddingLarge;
+    background: @white;
+    border-bottom: 1px solid @midGrey;
+    text-align: left;
+}
+    #internal header h1 {
+        font-family: @sansFontFamily;
+        color: @midGrey;
+    }
+
+#internal table {
+    margin: 0 auto;
+}
+
+#internal table a {
+    color: @heavyGrey;
+}
+
+.pure-table .title {
+    width: 65%;
+}
+
+/* =============================================================================
+   Breadcrumbs
+   ========================================================================== */
+
+.breadcrumbs ul {
+    padding: 0;
+    margin: 0;
+}
+
+.breadcrumbs ul:before,
+.breadcrumbs ul:after {
+    content: " ";
+    display: table;
+}
+.breadcrumbs ul:after {
+    clear: both;
+}
+.breadcrumbs ul li {
+    height: 34px;
+    line-height: 34px;
+    float: left;
+    padding-right: 10px;
+    display: block;
+}
+    .breadcrumbs ul li:after {
+        content: " / ";
+        color: @midGrey;
+    }
+    .breadcrumbs ul li:last-child:after {
+        content: " ";
+    }
+.breadcrumbs ul li span,
+.breadcrumbs ul li a {
+    font-family: @sansFontFamily;
+    font-weight: 400;
+    font-size: 14px;
+    border: 3px solid transparent;
+    border-width: 3px 0;
+    display: inline-block;
+    padding: 0 8px;
+    color: @midGrey;
+    text-decoration: none;
+}
+.breadcrumbs ul li.current a {
+    color: @darkGrey;
+}
+.breadcrumbs ul li a:hover {
+    border-bottom-color: #00B4FF;
 }
 
 /* =============================================================================

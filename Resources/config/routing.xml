@@ -12,7 +12,7 @@
 
     <import resource="@FOSUserBundle/Resources/config/routing/security.xml" host="console.%domain%" />
     <import resource="@FOSUserBundle/Resources/config/routing/profile.xml" prefix="/profile" host="console.%domain%" />
-    <route id="fos_user_profile_show" pattern="/profile">
+    <route id="fos_user_profile_show" pattern="/profile" host="console.%domain%">
         <default key="_controller">FOSUserBundle:Profile:show</default>
         <requirement key="_method">GET</requirement>
     </route>
