@@ -38,11 +38,13 @@
         </div>
 
         <footer class="login-footer">
-            Copyright © 2011-{{ "now"|date("Y") }} Antelope Studios
+            Maintained by Antelope Studios, under MIT Licence.
         </footer>
     </div>
 </div>
 {% endblock fos_user_content %}
 
+{% block content_class %}pure-u-1{% endblock content_class %}
 {% block navigationbar %}{% endblock navigationbar %}
+{% block container_id %}{% endblock container_id %}
 {% block footer %}{% endblock footer %}
