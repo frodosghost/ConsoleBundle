@@ -30,8 +30,9 @@
 {% endblock %}
 
 {% block form_row %}
+{% set attr = attr|merge({'class': attr.class|default('') ~ (errors|length > 0 ? ' error' : '') }) %}
 {% spaceless %}
-    <div class="pure-control-group">
+    <div class="pure-control-group{% if errors|length > 0 %} error{% endif %}">
         {{ form_label(form) }}
         {{ form_errors(form) }}
         {{ form_widget(form) }}
@@ -87,3 +88,15 @@
     </div>
 {% endspaceless %}
 {% endblock choice_widget_expanded %}
+
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+    <ul class="errors">
+        {% for error in errors %}
+            <li>{{ error.message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}

@@ -4,7 +4,7 @@
    @author Antelope Studios
    ========================================================================== */
 
-@import "fonts.less";
+/* @import "fonts.less";*/
 @import "variables.less";
 @import "mixins.less";
 
@@ -19,6 +19,8 @@
     :: Alerts
     :: Navigation
     :: Main
+    :: Documents
+    :: Nested Tree
     :: Breadcrumbs
     :: Login
     :: Footer
@@ -40,6 +42,11 @@ body {
     color: @heavyGrey;
     background: @lightGrey;
 }
+body,
+.pure-g [class *= "pure-u"],
+.pure-g-r [class *= "pure-u"] {
+    font-family: @sansFontFamily;
+}
 
 .l-box {
     padding: 1.3em;
@@ -50,7 +57,7 @@ body {
    ========================================================================== */
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: @serifFontFamily;
+    font-family: @sansFontFamilyLight;
     font-weight: 700;
 }
 
@@ -133,6 +140,7 @@ footer {
 }
 
 .pure-control-group {
+    position: relative;
     display: inline-block;
     width: 100%;
     margin: @baseSpacing/2 0;
@@ -152,7 +160,8 @@ footer {
 }
 
 @media only screen and (min-width: 768px) {
-    select.manhattan_publish { width: 40% }
+    select.manhattan_publish,
+    select.short { width: 40% }
 }
 
 /* Form Actions
@@ -185,10 +194,29 @@ div.alert {
     .bgfade(@midGrey, 0.1);
 }
     div.alert.error {
-        border-color: @alertRed;
-        color: @alertRed;
-        .bgfade(@alertRed, 0.1);
+        border-color: @red;
+        color: @red;
+        .bgfade(@red, 0.1);
     }
+
+ul.errors {
+    position: absolute;
+    list-style: none;
+    color: @red;
+    padding: 0;
+    margin: 0;
+    top: 5px;
+    right: 0;
+}
+
+
+.pure-control-group.error label {
+    color: @red
+}
+.pure-control-group.error input {
+    border-color: @red;
+}
+
 
 /* =============================================================================
    Navigation
@@ -319,6 +347,45 @@ li.pure-menu-open ul.pure-menu-children {
 .pure-table td.update .pure-button {
     width: 100%;
 }
+
+/* =============================================================================
+   Documents
+   ========================================================================== */
+
+ul.documents {
+    list-style: none;
+    padding: 0;
+}
+
+/* =============================================================================
+   Nested Tree
+   ========================================================================== */
+
+ul.nested-tree {
+    list-style: none;
+    margin: 0 25px 10px;
+    padding: 0;
+}
+ul.nested-tree a { font-weight: bold }
+ul.nested-tree ul a { font-weight: normal }
+ul.nested-tree li {
+    border-top: 1px solid #DDDDDD;
+    padding: 10px 0;
+    text-align: left;
+    vertical-align: top;
+}
+
+ul.nested-tree ul {
+    margin: 0 0 10px 25px;
+    padding: 10px 0;
+}
+ul.nested-tree li .pure-button {
+    float: right;
+    text-align: center;
+}
+    ul.nested-tree li .pure-button i {
+        margin-right: 15px;
+    }
 
 /* =============================================================================
    Breadcrumbs
