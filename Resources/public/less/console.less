@@ -12,8 +12,12 @@
 -----------------------------------------------------
     :: Reset
     :: Fonts
+    :: Shared
     :: Alerts
+    :: Navigation
+    :: Main
     :: Login
+    :: Footer
 */
 
 /* =============================================================================
@@ -44,6 +48,19 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: @serifFontFamily;
     font-weight: 700;
+}
+
+/* =============================================================================
+   Shared
+   ========================================================================== */
+header {
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 700;
+}
+
+footer {
+    background-color: @lightGrey;
 }
 
 /* =============================================================================
@@ -93,6 +110,110 @@ div.alert {
     }
 
 /* =============================================================================
+   Navigation
+   ========================================================================== */
+
+#layout {
+    padding-left:225px; /* "left col (nav)" width */
+    position: relative;
+}
+
+#navigation,
+div#main-body {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
+#navigation {
+    width: 225px;
+    background: @darkBlue;
+    text-align: center;
+    padding: 2em 0;
+    margin-left:-225px; /* "left col (nav)" width */
+}
+
+#navigation header {
+    padding: @paddingMini;
+}
+    #navigation header a {
+        display: inline-block;
+        background: @lightBlue;
+        color: @white;
+        padding: @paddingMini;
+        text-decoration: none;
+        .rounded(5px);
+    }
+        #navigation header a:hover {
+            background-color: @aquaBlue;
+        }
+
+#navigation .pure-menu {
+    background: transparent;
+    border: none;
+    text-align: left;
+}
+    #navigation .pure-menu a {
+        border-left: 5px solid @darkBlue;
+        color: rgb(75, 113, 151);
+        text-transform: uppercase;
+        font-family: @sansFontFamily;
+        font-weight: 700;
+    }
+    #navigation .pure-menu ul ul a {
+        color: @white;
+        text-transform: capitalize;
+        font-size: 0.9em;
+        font-weight: 400;
+    }
+    #navigation .pure-menu a:hover,
+    #navigation .pure-menu a:focus {
+        background: @blueFocus;
+        border-color: @blueFocus;
+    }
+        #navigation .pure-menu ul ul a:hover {
+            border-color: @blueFocus;
+            border-left: 5px solid @lightBlue;
+        }
+        #navigation .pure-menu ul.yellow a:hover { border-left: 5px solid @yellow !important }
+        #navigation .pure-menu ul.purple a:hover { border-left: 5px solid @purple !important }
+        #navigation .pure-menu ul.orange a:hover { border-left: 5px solid @orange !important }
+        #navigation .pure-menu ul.green a:hover { border-left: 5px solid @green !important }
+        #navigation .pure-menu ul.red a:hover { border-left: 5px solid @red !important }
+
+    #navigation .pure-menu-heading {
+        border-bottom: none;
+    }
+    #navigation ul ul a {
+        padding-left: @baseSpacing;
+    }
+    #navigation .nav-menu-button {
+        display: none;
+    }
+
+.pure-menu.pure-menu-open ul,
+li.pure-menu-open ul.pure-menu-children {
+    visibility: visible;
+    position: relative;
+    left: 0 !important;
+    top: 0 !important;
+}
+.pure-menu.pure-menu-open {
+    background-color: @darkBlue;
+}
+#user-menu { margin-top: @baseSpacing }
+
+/* =============================================================================
+   Main
+   ========================================================================== */
+
+#main {
+    padding: @baseSpacing;
+    width: 100%;
+}
+
+/* =============================================================================
    Login
    ========================================================================== */
 
@@ -107,10 +228,6 @@ div.login {
     font-weight: 400;
 }
 
-div.login header {
-    margin-bottom: 30px;
-    text-align: center;
-}
     div.login header h2 {
         color: @midGrey;
     }
@@ -134,11 +251,29 @@ div.login .pure-button {
         }
 
 div.login footer {
-    background-color: @lightGrey;
     border-top: 1px solid @midGrey;
+    padding: @paddingLarge;
+}
+
+/* =============================================================================
+   Footer
+   ========================================================================== */
+
+footer div {
+    border-top: 1px solid @midGrey;
+}
+
+footer,
+footer a {
+    background-color: @lightGrey;
     color: @midGrey;
     font-family: @sansFontFamily;
-    font-size: 0.8em;
-    padding: @paddingLarge;
+    font-size: 0.7em;
     text-align: center;
 }
+footer a {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1em;
+}
+    footer a:hover { text-decoration: underline }

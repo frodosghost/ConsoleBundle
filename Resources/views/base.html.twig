@@ -43,22 +43,50 @@
 <body>
 {% endblock body_tag %}
 
-    <div class="{% block container_class %}container pure-g-r{% endblock container_class %}">
+    <div class="{% block container_class %}container pure-g-r{% endblock container_class %}"{% block container_id %} id="layout"{% endblock container_id %}>
         {% block navigationbar %}
-            {{ knp_menu_render('mainmenu') }}
-            {{ knp_menu_render('usermenu') }}
+        <div class="pure-u-1-5" id="navigation">
+            <a href="#" class="nav-menu-button">Menu</a>
+            {{ topHeader() }}
+            <nav class="pure-menu pure-menu-open" id="main-menu">
+                <div class="nav-inner">
+                {{ knp_menu_render('mainmenu') }}
+                </div>
+            </nav>
+            <nav class="pure-menu pure-menu-open" id="user-menu">
+                {{ knp_menu_render('usermenu') }}
+            </nav>
+        </div>
         {% endblock navigationbar %}
 
+        <div class="{% block content_class %}pure-u-4-5{% endblock content_class %}" id="main">
         {% block content %}
             {{ block('fos_user_content') }}
         {% endblock %}
 
-        <footer>
-            {% block footer %}
-            <p>&copy; <a href="http://www.frodosghost.com" target="_blank">Manhattan Management Console</a></p>
-            {% endblock footer %}
-        </footer>
+            <footer>
+                {% block footer %}
+                <div>
+                    <p>Manhattan Console. Maintained by <a href="http://antelopestudios.com.au">Antelope Studios</a> under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</p>
+                </div>
+                {% endblock footer %}
+            </footer>
+        </div>
     </div>
+
+{% block foot_script %}
+    {# To only use a subset or add more js overwrite and copy paste this block
+    To speed up page loads save a copy of jQuery in your project and override this block to include the correct path
+    Otherwise the regeneration is done on every load in dev more with use_controller: true
+     #}
+
+    {% javascripts
+        'http://yui.yahooapis.com/3.13.0/build/yui/yui-min.js'
+        '@ManhattanConsoleBundle/Resources/public/js/yui/mainmenu.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock foot_script %}
 
 </body>
 </html>

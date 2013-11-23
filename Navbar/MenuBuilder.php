@@ -84,8 +84,10 @@ class MenuBuilder
     public function createMainMenu(Request $request)
     {
         $menu = $this->getFactory()->createItem('root');
-        //$menu->setCurrentUri($request->getRequestUri());
-        $menu->setChildrenAttribute('class', 'nav');
+        //$menu->setCurrentUri($this->container->get('request')->getRequestUri());
+        $menu->setChildrenAttributes(array(
+            'id' => 'nav-menu'
+        ));
 
         if ($this->is_logged_in) {
             $this->getEventDispatcher()->dispatch(MenuEvents::CONFIGURE, new ConfigureMenuEvent($this->getFactory(), $menu, $this->getSecurityContext()));
@@ -97,12 +99,11 @@ class MenuBuilder
     public function createRightSideMenu(Request $request)
     {
         $menu = $this->factory->createItem('root');
-        $menu->setChildrenAttribute('class', 'nav right');
+        $menu->setChildrenAttribute('class', 'pure-menu pure-menu-open');
 
         if ($this->is_super_admin) {
             $users = $menu->addChild('Users', array('route'=>'console_users'))
                 ->setLinkattribute('class', 'dropdown-toggle')
-                ->setLinkattribute('data-toggle', 'dropdown')
                 ->setAttribute('class', 'dropdown')
                 ->setChildrenAttribute('class', 'menu-dropdown');
 
@@ -114,17 +115,13 @@ class MenuBuilder
         if ($this->is_logged_in) {
 
             $profile = $menu->addChild('Profile', array('route'=>'fos_user_profile_show'))
-                ->setLinkattribute('class', 'dropdown-toggle')
-                ->setLinkattribute('data-toggle', 'dropdown')
-                ->setAttribute('class', 'dropdown')
-                ->setChildrenAttribute('class', 'menu-dropdown');
+                ->setLabelAttribute('class', 'pure-menu-heading')
+                ->setChildrenAttribute('class', 'pure-menu-children red');
 
-            $profile->addChild('Edit Profile', array('route' => 'fos_user_profile_edit'))
-                ->setLinkattribute('class', 'main');
+            $profile->addChild('Edit Profile', array('route' => 'fos_user_profile_edit'));
             $profile->addChild('Change Password', array('route' => 'fos_user_change_password'));
 
-            $profile->addChild('Logout', array('route' => 'fos_user_security_logout'))
-                ->setLinkattribute('class', 'main');
+            $profile->addChild('Logout', array('route' => 'fos_user_security_logout'));
         } else {
             $menu->addChild('Login', array('route' => 'fos_user_security_login'));
         }
