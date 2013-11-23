@@ -103,12 +103,10 @@ class MenuBuilder
 
         if ($this->is_super_admin) {
             $users = $menu->addChild('Users', array('route'=>'console_users'))
-                ->setLinkattribute('class', 'dropdown-toggle')
-                ->setAttribute('class', 'dropdown')
-                ->setChildrenAttribute('class', 'menu-dropdown');
+                ->setLabelAttribute('class', 'pure-menu-heading')
+                ->setChildrenAttribute('class', 'pure-menu-children red');
 
-            $users->addChild('List Users', array('route' => 'console_users'))
-                ->setLinkattribute('class', 'main');
+            $users->addChild('List Users', array('route' => 'console_users'));
             $users->addChild('Add User', array('route' => 'console_users_new'));
         }
 
