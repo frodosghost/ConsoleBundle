@@ -13,6 +13,8 @@
     :: Reset
     :: Fonts
     :: Shared
+    :: Forms
+        :: Form Actions
     :: Alerts
     :: Navigation
     :: Main
@@ -116,6 +118,36 @@ footer {
 .pure-control-group {
     display: inline-block;
     width: 100%;
+    margin: @baseSpacing/2 0;
+    padding-bottom: @baseSpacing;
+}
+
+.pure-form label {
+    font-weight: 700;
+}
+.pure-radio input {
+    margin-right: @baseSpacing
+}
+.pure-form p.muted {
+    color: @midGrey;
+    font-size: 0.8em;
+    padding-left: @baseSpacing;
+}
+
+@media only screen and (min-width: 768px) {
+    select.manhattan_publish { width: 40% }
+}
+
+/* Form Actions
+   ----------- */
+div.form-actions {
+    border-top: 1px solid @midGrey;
+    padding: @paddingLarge;
+    margin-top: @baseSpacing;
+}
+.actions-delete {
+    display: inline;
+    float: right;
 }
 
 /* =============================================================================
