@@ -69,6 +69,9 @@ header {
     text-align: center;
     font-weight: 700;
 }
+    header a {
+        text-decoration: none;
+    }
 
 footer {
     background-color: @lightGrey;
@@ -266,7 +269,7 @@ div#main-body {
 }
     #navigation .pure-menu a {
         border-left: 5px solid @darkBlue;
-        color: rgb(75, 113, 151);
+        color: @blueHeader;
         text-transform: uppercase;
         font-family: @sansFontFamily;
         font-weight: 700;
@@ -294,6 +297,7 @@ div#main-body {
 
     #navigation .pure-menu-heading {
         border-bottom: none;
+        color: @blueHeader;
     }
     #navigation ul ul a {
         padding-left: @baseSpacing;
@@ -442,7 +446,8 @@ ul.nested-tree li .pure-button {
    Login
    ========================================================================== */
 
-div.login {
+div.login,
+div.setpassword {
     background-color: @white;
     border: 1px solid @midGrey;
     margin: 0 auto;
@@ -453,15 +458,21 @@ div.login {
     font-weight: 400;
 }
 
-    div.login header h2 {
+    div.login header h2,
+    div.setpassword header h2 {
         color: @midGrey;
     }
+
+div.setpassword .l-box {
+    padding-top: 0;
+}
 
 div.login .pure-control-group {
     margin-bottom: @baseSpacing;
 }
 
-div.login .pure-button {
+div.login .pure-button,
+div.setpassword .pure-button {
     float: right;
 }
 
@@ -475,7 +486,8 @@ div.login .pure-button {
             color: @aquaBlue;
         }
 
-div.login footer {
+div.login footer,
+div.setpassword footer {
     border-top: 1px solid @midGrey;
     padding: @paddingLarge;
 }

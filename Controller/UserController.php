@@ -188,7 +188,7 @@ class UserController extends Controller
                 $userManager->updateUser($user);
 
                 if (null === $response = $event->getResponse()) {
-                    $this->get('session')->setFlash('fos_user_success', 'You password has been set. Welcome to The Console.');
+                    $this->get('session')->getFlashBag()->add('fos_user_success', 'You password has been set. Welcome to The Console.');
 
                     $url = $this->container->get('router')->generate('fos_user_profile_show');
                     $response = new RedirectResponse($url);
@@ -260,7 +260,8 @@ class UserController extends Controller
         $context = array(
             'user' => $user,
             'url'  => $url,
-            'console_name' => $emails['console_name']
+            'console_name' => $emails['console_name'],
+            'console_url' => $this->get('router')->generate('console_index', array(), true)
         );
 
         $message = \Swift_Message::newInstance()

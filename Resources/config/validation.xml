@@ -22,10 +22,6 @@
             <constraint name="NotBlank">
                 <option name="message">Please provide an email address</option>
             </constraint>
-            <constraint name="Email">
-                <option name="message">The email "{{ value }}" is not a valid email.</option>
-                <option name="checkMX">true</option>
-            </constraint>
         </property>
         <property name="roles">
             <constraint name="NotBlank">
