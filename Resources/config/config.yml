@@ -8,3 +8,9 @@ fos_user:
     from_email:
         address:        %console.users.from%
         sender_name:    %console.users.console_name%
+
+# Set Defaults for the Bundle's Configuration
+manhattan_console:
+    user_roles:
+        - { role: ROLE_ADMIN, name: User }
+        - { role: ROLE_SUPER_ADMIN, name: Administrator }

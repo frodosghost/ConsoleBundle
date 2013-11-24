@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('domain')
+                    ->isRequired()->cannotBeEmpty()
                     ->defaultValue('')
                     ->info('Sets the domain. For example "domain.com" or "domain.dev".')
                     ->end()
@@ -71,6 +72,14 @@ class Configuration implements ConfigurationInterface
                             ->defaultValue('console_index')
                             ->info('Link as set in the main navigation header')
                             ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('user_roles')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('role')->end()
+                            ->scalarNode('name')->end()
+                        ->end()
                     ->end()
                 ->end()
             ->end();

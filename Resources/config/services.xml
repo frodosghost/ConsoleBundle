@@ -11,6 +11,7 @@
         <parameter key="form.type.image_type_extension.class">Manhattan\Bundle\ConsoleBundle\Form\Extension\ImageTypeExtension</parameter>
         <parameter key="manhattan.console.subdomain_request_matcher.class">Manhattan\Bundle\ConsoleBundle\Security\ConsoleSubDomainRequestMatcher</parameter>
         <parameter key="manhattan.console.console_twig.class">Manhattan\Bundle\ConsoleBundle\Twig\ConsoleTwigExtension</parameter>
+        <parameter key="manhattan.console.user_roles.type.class">Manhattan\Bundle\ConsoleBundle\Form\Type\UserRolesType</parameter>
     </parameters>
 
     <services>
@@ -51,6 +52,11 @@
 
         <service id="form.type.image_type_extension" class="%form.type.image_type_extension.class%">
             <tag name="form.type_extension" alias="file" />
+        </service>
+
+        <service id="manhattan.console.user_roles.type" class="%manhattan.console.user_roles.type.class%">
+            <argument>%manhattan.console.user.roles%</argument>
+            <tag name="form.type" alias="user_roles" />
         </service>
 
         <service id="manhattan.console.subdomain_request_matcher" class="%manhattan.console.subdomain_request_matcher.class%"></service>

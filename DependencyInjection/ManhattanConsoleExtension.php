@@ -32,12 +32,29 @@ class ManhattanConsoleExtension extends Extension implements PrependExtensionInt
         $container->setParameter('console.navigation.title', $config['navigation']['title']);
         $container->setParameter('console.navigation.link', $config['navigation']['link']);
 
-        // Navigation Bar Configuration Values
-        $container->setParameter('console.navigation.title', $config['navigation']['title']);
-        $container->setParameter('console.navigation.link', $config['navigation']['link']);
+        // User Roles
+        $this->remapUserRoles($config['user_roles'], $container);
+
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+    }
+
+    /**
+     * Remaps parsed array for default into Choices field
+     *
+     * @param  array            $config
+     * @param  ContainerBuilder $container
+     */
+    protected function remapUserRoles(array $config, ContainerBuilder $container)
+    {
+        $userRoles = array();
+
+        foreach ($config as $role) {
+            $userRoles[$role['role']] = $role['name'];
+        }
+
+        $container->setParameter('manhattan.console.user.roles', $userRoles);
     }
 
     /**
