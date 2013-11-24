@@ -1,7 +1,7 @@
 # Manhattan Console Bundle
 
 ## What
-ConsoleBundle is application setup for ease of starting new project in Symfony2.
+ConsoleBundle is application setup for ease of starting new project in Symfony2. The v3.0 branch has removed a dependency on the [MopaBootstrapBundle](https://github.com/phiamo/MopaBootstrapBundle) and is instead relying on a [PureCSS](http://purecss.io/) template that is being updated.
 
 ## How
 1. Add this bundle to the composer file:
@@ -9,7 +9,7 @@ ConsoleBundle is application setup for ease of starting new project in Symfony2.
         {
             "require": {
                 ...
-                "manhattan/console-bundle": "dev-master"
+                "manhattan/console-bundle": "3.0.*@dev"
             }
         }
 
