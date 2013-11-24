@@ -25,13 +25,9 @@ class UserType extends AbstractType
                     1 => 'Enabled'
                 )
             ))
-            ->add('roles', 'choice', array(
+            ->add('roles', 'user_roles', array(
                 'expanded' => true,
-                'multiple' => true,
-                'choices' => array(
-                    'ROLE_ADMIN' => 'User',
-                    'ROLE_SUPER_ADMIN' => 'Administrator'
-                )
+                'multiple' => true
             ))
         ;
     }
