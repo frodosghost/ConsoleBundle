@@ -1,0 +1,30 @@
+{% extends 'ManhattanConsoleBundle::layout.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Manhattan Console: Password Requested{% endblock %}
+
+{% block fos_user_content %}
+<div class="pure-u-1">
+    <div class="login">
+
+        <header class="login-header">
+            <h2>Password Requested</h2>
+        </header>
+
+        <div class="l-box">
+            <p>{{ 'resetting.check_email'|trans({'%email%': email}) }}</p>
+        </div>
+
+        <footer class="login-footer">
+            Maintained by Antelope Studios, under MIT Licence.
+        </footer>
+
+    </div>
+</div>
+
+{% endblock fos_user_content %}
+
+{% block content_class %}pure-u-1{% endblock content_class %}
+{% block navigationbar %}{% endblock navigationbar %}
+{% block container_id %}{% endblock container_id %}
+{% block footer %}{% endblock footer %}
