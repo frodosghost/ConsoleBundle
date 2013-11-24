@@ -269,7 +269,8 @@ div#main-body {
 }
     #navigation .pure-menu a {
         border-left: 5px solid @darkBlue;
-        color: @blueHeader;
+        color: @white;
+        background: @blueFocus;
         text-transform: uppercase;
         font-family: @sansFontFamily;
         font-weight: 700;
@@ -279,15 +280,18 @@ div#main-body {
         text-transform: capitalize;
         font-size: 0.9em;
         font-weight: 400;
+        background-color: transparent;
     }
     #navigation .pure-menu a:hover,
     #navigation .pure-menu a:focus {
         background: @blueFocus;
         border-color: @blueFocus;
+        color: @darkBlue;
     }
         #navigation .pure-menu ul ul a:hover {
             border-color: @blueFocus;
             border-left: 5px solid @lightBlue;
+            color: @white;
         }
         #navigation .pure-menu ul.yellow a:hover { border-left: 5px solid @yellow !important }
         #navigation .pure-menu ul.purple a:hover { border-left: 5px solid @purple !important }
@@ -297,7 +301,8 @@ div#main-body {
 
     #navigation .pure-menu-heading {
         border-bottom: none;
-        color: @blueHeader;
+        color: @white;
+        background: @blueFocus;
     }
     #navigation ul ul a {
         padding-left: @baseSpacing;
