@@ -35,7 +35,7 @@
     </route>
 
     <route id="console_user_delete" pattern="/users/{id}">
-        <default key="_controller">ManhattanConsoleBundle:User:update</default>
+        <default key="_controller">ManhattanConsoleBundle:User:delete</default>
         <requirement key="_method">DELETE</requirement>
     </route>
 
