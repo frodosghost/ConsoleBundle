@@ -144,7 +144,7 @@ class UserController extends Controller
         }
 
         return $this->render('ManhattanConsoleBundle:User:edit.html.twig', array(
-            'entity'      => $user,
+            'entity'      => $users,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
