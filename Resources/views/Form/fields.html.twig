@@ -36,6 +36,7 @@
         {{ form_label(form) }}
         {{ form_errors(form) }}
         {{ form_widget(form) }}
+        {% if help_block %}<div class="help"><p><strong>Assist: </strong>{{ help_block }}</p></div>{% endif %}
     </div>
 {% endspaceless %}
 {% endblock form_row %}
