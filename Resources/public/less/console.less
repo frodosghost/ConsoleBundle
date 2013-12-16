@@ -190,6 +190,27 @@ footer {
 @media only screen and (min-width: 768px) {
     select.manhattan_publish,
     select.short { width: 40% }
+
+    .pure-form .datetime div {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .pure-form .datetime .date select {
+        width: 30%;
+    }
+    .pure-form .datetime .time select {
+        width: 40%;
+    }
+    .pure-form .datetime .time span {
+        display: block;
+        float: left;
+        padding: 10px 15px 10px 0;
+    }
+    .pure-form .datetime select {
+        float: left;
+        margin-right: @baseSpacing;
+    }
 }
 
 /* Form Actions
