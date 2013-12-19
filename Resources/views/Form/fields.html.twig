@@ -103,11 +103,12 @@
 {% endblock form_errors %}
 
 {% block datetime_widget %}
+{% set attr = attr|merge({'class': (attr.class|default('') ~ ' datetime')|trim}) %}
 {% spaceless %}
     {% if widget == 'single_text' %}
         {{ block('form_widget_simple') }}
     {% else %}
-        <div {{ block('widget_container_attributes') }} class="datetime">
+        <div {{ block('widget_container_attributes') }}>
             {{ form_errors(form.date) }}
             {{ form_errors(form.time) }}
             {{ form_widget(form.date) }}
@@ -118,11 +119,12 @@
 {% endblock datetime_widget %}
 
 {% block date_widget %}
+{% set attr = attr|merge({'class': (attr.class|default('') ~ ' date')|trim}) %}
 {% spaceless %}
     {% if widget == 'single_text' %}
         {{ block('form_widget_simple') }}
     {% else %}
-        <div {{ block('widget_container_attributes') }} class="date">
+        <div {{ block('widget_container_attributes') }}>
             {{ date_pattern|replace({
                 '{{ year }}':  form_widget(form.year),
                 '{{ month }}': form_widget(form.month),
@@ -134,15 +136,33 @@
 {% endblock date_widget %}
 
 {% block time_widget %}
+{% set attr = attr|merge({'class': (attr.class|default('') ~ ' time')|trim}) %}
 {% spaceless %}
     {% if widget == 'single_text' %}
         {{ block('form_widget_simple') }}
     {% else %}
         {% set vars = widget == 'text' ? { 'attr': { 'size': 1 }} : {} %}
-        <div {{ block('widget_container_attributes') }} class="time">
+        <div {{ block('widget_container_attributes') }}>
             {{ form_widget(form.hour, vars) }}{% if with_minutes %}<span>:</span>{{ form_widget(form.minute, vars) }}{% endif %}{% if with_seconds %}span{{ form_widget(form.second, vars) }}{% endif %}
         </div>
     {% endif %}
 {% endspaceless %}
 {% endblock time_widget %}
+
+{% block month_select_widget %}
+{% set attr = attr|merge({'class': (attr.class|default('') ~ ' date')|trim}) %}
+{% spaceless %}
+    {% if widget == 'single_text' %}
+        {{ block('form_widget_simple') }}
+    {% else %}
+        <div {{ block('widget_container_attributes') }}>
+            {{ date_pattern|replace({
+                '{{ year }}':  form_widget(form.year),
+                '{{ month }}': form_widget(form.month),
+                '{{ day }}': form_widget(form.day)
+            })|raw }}
+        </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock month_select_widget %}
 
