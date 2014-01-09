@@ -20,6 +20,7 @@
     :: Navigation
     :: Main
     :: Documents
+    :: Templates: Show
     :: Nested Tree
     :: Breadcrumbs
     :: Login
@@ -85,27 +86,35 @@ footer {
 }
 
 .pure-button-success,
+.pure-button.success,
 .pure-button-error,
+.pure-button.error,
 .pure-button-warning,
-.pure-button-secondary {
+.pure-button.warning,
+.pure-button-secondary,
+.pure-button.secondary {
     color: white !important;
     border-radius: 4px;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
-.pure-button-success {
+.pure-button-success,
+.pure-button.success {
     background: rgb(28, 184, 65); /* this is a green */
 }
 
-.pure-button-error {
+.pure-button-error,
+.pure-button.error {
     background: rgb(202, 60, 60); /* this is a maroon */
 }
 
-.pure-button-warning {
+.pure-button-warning,
+.pure-button.warning {
     background: rgb(223, 117, 20); /* this is an orange */
 }
 
-.pure-button-secondary {
+.pure-button-secondary,
+.pure-button.secondary {
     background: rgb(66, 184, 221); /* this is a light blue */
 }
 
@@ -459,6 +468,18 @@ li.pure-menu-open ul.pure-menu-children {
 ul.documents {
     list-style: none;
     padding: 0;
+}
+
+/* =============================================================================
+   Templates: Show
+   ========================================================================== */
+
+ul.show.actions {
+    list-style: none;
+    padding: 0;
+}
+ul.show.actions li {
+    padding: @baseSpacing/2 0;
 }
 
 /* =============================================================================
