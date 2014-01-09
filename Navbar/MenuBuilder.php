@@ -1,4 +1,14 @@
 <?php
+
+/*
+ * This file is part of the Manhattan Console Bundle
+ *
+ * (c) James Rickard <james@frodosghost.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Manhattan\Bundle\ConsoleBundle\Navbar;
 
 use Knp\Menu\FactoryInterface;
@@ -11,7 +21,6 @@ use Manhattan\Bundle\ConsoleBundle\Event\ConfigureMenuEvent;
 
 /**
  * Manhattan Console Navigation Bar Menu Builder
- *
  */
 class MenuBuilder
 {
