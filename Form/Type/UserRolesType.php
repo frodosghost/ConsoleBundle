@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Manhattan Public Bundle
+ * This file is part of the Manhattan Console Bundle
  *
  * (c) James Rickard <james@frodosghost.com>
  *
@@ -9,16 +9,15 @@
  * file that was distributed with this source code.
  */
 
-/*
- * This is the field display type that builds User Roles to display
- * on the creation page for a User.
- */
-
 namespace Manhattan\Bundle\ConsoleBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/*
+ * This is the field display type that builds User Roles to display
+ * on the creation page for a User.
+ */
 class UserRolesType extends AbstractType
 {
     /**

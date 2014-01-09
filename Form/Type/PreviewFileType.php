@@ -1,7 +1,12 @@
 <?php
+
 /*
- * This is the field display type that shows the associated
- * Asset image with a preview.
+ * This file is part of the Manhattan Console Bundle
+ *
+ * (c) James Rickard <james@frodosghost.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Manhattan\Bundle\ConsoleBundle\Form\Type;
@@ -15,6 +20,10 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Manhattan\Bundle\ConsoleBundle\Form\DataTransformer\FileTransformer;
 
+/*
+ * This is the field display type that shows the associated
+ * Asset image with a preview.
+ */
 class PreviewFileType extends AbstractType
 {
 	/**
