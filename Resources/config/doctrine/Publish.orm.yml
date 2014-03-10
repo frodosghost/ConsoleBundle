@@ -1,0 +1,34 @@
+Manhattan\Bundle\ConsoleBundle\Entity\Publish:
+    type:  mappedSuperclass
+
+    fields:
+        createdAt:
+            type: datetime
+            column: created_at
+        updatedAt:
+            type: datetime
+            column: updated_at
+
+    manyToOne:
+        updatedBy:
+            targetEntity: Manhattan\Bundle\ConsoleBundle\Entity\User
+            joinColumn:
+                name: updated_by
+                referencedColumnName: id
+                nullable: true
+                onDelete: SET NULL
+                onUpdate: CASCADE
+                cascade:
+                    - persist
+                    - merge
+        createdBy:
+            targetEntity: Manhattan\Bundle\ConsoleBundle\Entity\User
+            joinColumn:
+                name: created_by
+                referencedColumnName: id
+                nullable: true
+                onDelete: SET NULL
+                onUpdate: CASCADE
+                cascade:
+                    - persist
+                    - merge
