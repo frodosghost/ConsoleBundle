@@ -13,9 +13,15 @@
         <parameter key="manhattan.console.subdomain_request_matcher.class">Manhattan\Bundle\ConsoleBundle\Security\ConsoleSubDomainRequestMatcher</parameter>
         <parameter key="manhattan.console.console_twig.class">Manhattan\Bundle\ConsoleBundle\Twig\ConsoleTwigExtension</parameter>
         <parameter key="manhattan.console.user_roles.type.class">Manhattan\Bundle\ConsoleBundle\Form\Type\UserRolesType</parameter>
+        <parameter key="manhattan.console.persist.subscriber.class">Manhattan\Bundle\ConsoleBundle\EventListener\ObjectPersistSubscriber</parameter>
     </parameters>
 
     <services>
+        <service id="manhattan.console.persist.subscriber" class="%manhattan.console.persist.subscriber.class%">
+            <argument type="service" id="service_container" />
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+
         <service id="manhattan.console.menu_builder" class="%console.dashboard.menu_builder.class%">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />
