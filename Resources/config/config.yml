@@ -2,7 +2,7 @@
 fos_user:
     db_driver:      orm
     firewall_name:  secured_area
-    user_class:     Manhattan\Bundle\ConsoleBundle\Entity\User
+    user_class:     %console.users.user_class%
     service:
         mailer:     fos_user.mailer.twig_swift
     from_email:
