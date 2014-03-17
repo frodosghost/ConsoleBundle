@@ -49,6 +49,28 @@
             <tag name="twig.extension" />
         </service>
 
+        <service id="manhattan.console.mailer.twig_swift" class="Manhattan\Bundle\ConsoleBundle\Mailer\TwigSwiftMailer">
+            <argument type="service" id="mailer" />
+            <argument type="service" id="router" />
+            <argument type="service" id="twig" />
+            <argument type="collection">
+                <argument key="template" type="collection">
+                    <argument key="confirmation">ManhattanConsoleBundle:Registration:email.txt.twig</argument>
+                    <argument key="resetting">%fos_user.resetting.email.template%</argument>
+                </argument>
+                <argument key="from_email" type="collection">
+                    <argument key="confirmation">%console.users.from%</argument>
+                    <argument key="resetting">%console.users.from%</argument>
+                </argument>
+                <argument key="subject" type="collection">
+                    <argument key="confirmation">%console.users.subject%</argument>
+                    <argument key="resetting">%console.users.subject%</argument>
+                </argument>
+                <argument key="console_name">%console.users.console_name%</argument>
+                <argument key="domain">%domain%</argument>
+            </argument>
+        </service>
+
         <service id="form.type.telephone" class="%form.type.telephone.class%">
             <tag name="form.type" alias="telephone" />
         </service>

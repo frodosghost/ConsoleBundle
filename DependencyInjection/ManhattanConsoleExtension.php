@@ -35,8 +35,9 @@ class ManhattanConsoleExtension extends Extension implements PrependExtensionInt
         $container->setParameter('domain', $config['domain']);
         $container->setParameter('console.users', $config['users']);
         $container->setParameter('console.users.from', $config['users']['from']);
-        $container->setParameter('console.users.console_name', $config['users']['console_name']);
+        $container->setParameter('console.users.subject', $config['users']['subject']);
         $container->setParameter('console.users.user_class', $config['users']['user_class']);
+        $container->setParameter('console.users.console_name', $config['users']['console_name']);
 
         // Navigation Bar Configuration Values
         $container->setParameter('console.navigation.title', $config['navigation']['title']);
