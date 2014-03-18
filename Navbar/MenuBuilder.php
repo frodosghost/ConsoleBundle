@@ -17,6 +17,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 use Manhattan\Bundle\ConsoleBundle\Event\MenuEvents;
+use Manhattan\Bundle\ConsoleBundle\Site\SiteManager;
 use Manhattan\Bundle\ConsoleBundle\Event\ConfigureMenuEvent;
 
 /**
@@ -40,6 +41,11 @@ class MenuBuilder
     private $security_context;
 
     /**
+     * @var Manhattan\Bundle\ConsoleBundle\Site\SiteManager
+     */
+    private $siteManager;
+
+    /**
      * @var Boolean
      */
     private $is_logged_in = false;
@@ -56,11 +62,12 @@ class MenuBuilder
      * @param Symfony\Component\EventDispatcher\EventDispatcher $event_dispatcher
      * @param Symfony\Component\Security\Core\SecurityContextInterface $security_context
      */
-    public function __construct(FactoryInterface $factory, EventDispatcher $event_dispatcher, SecurityContextInterface $security_context)
+    public function __construct(FactoryInterface $factory, EventDispatcher $event_dispatcher, SecurityContextInterface $security_context, SiteManager $siteManager)
     {
         $this->factory = $factory;
         $this->event_dispatcher = $event_dispatcher;
         $this->security_context = $security_context;
+        $this->siteManager = $siteManager;
 
         $this->is_logged_in = $this->security_context->isGranted('IS_AUTHENTICATED_FULLY');
         $this->is_super_admin = $this->security_context->isGranted('ROLE_SUPER_ADMIN');
@@ -90,6 +97,14 @@ class MenuBuilder
         return $this->security_context;
     }
 
+    /**
+     * @return Manhattan\Bundle\ConsoleBundle\Site\SiteManager
+     */
+    public function getSiteManager()
+    {
+        return $this->siteManager;
+    }
+
     public function createMainMenu(Request $request)
     {
         $menu = $this->getFactory()->createItem('root');
@@ -99,7 +114,12 @@ class MenuBuilder
         ));
 
         if ($this->is_logged_in) {
-            $this->getEventDispatcher()->dispatch(MenuEvents::CONFIGURE, new ConfigureMenuEvent($this->getFactory(), $menu, $this->getSecurityContext()));
+            $this->getEventDispatcher()->dispatch(MenuEvents::CONFIGURE, new ConfigureMenuEvent(
+                $this->getFactory(),
+                $menu,
+                $this->getSecurityContext(),
+                $this->getSiteManager()
+            ));
         }
 
         return $menu;
@@ -111,26 +131,26 @@ class MenuBuilder
         $menu->setChildrenAttribute('class', 'pure-menu pure-menu-open');
 
         if ($this->is_super_admin) {
-            $users = $menu->addChild('Users', array('route'=>'console_users'))
+            $users = $menu->addChild('Users', array('route'=>'console_users', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())))
                 ->setLabelAttribute('class', 'pure-menu-heading')
                 ->setChildrenAttribute('class', 'pure-menu-children red');
 
-            $users->addChild('List Users', array('route' => 'console_users'));
-            $users->addChild('Add User', array('route' => 'console_users_new'));
+            $users->addChild('List Users', array('route' => 'console_users', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
+            $users->addChild('Add User', array('route' => 'console_users_new', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
         }
 
         if ($this->is_logged_in) {
 
-            $profile = $menu->addChild('Profile', array('route'=>'fos_user_profile_show'))
+            $profile = $menu->addChild('Profile', array('route'=>'fos_user_profile_show', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())))
                 ->setLabelAttribute('class', 'pure-menu-heading')
                 ->setChildrenAttribute('class', 'pure-menu-children red');
 
-            $profile->addChild('Edit Profile', array('route' => 'fos_user_profile_edit'));
-            $profile->addChild('Change Password', array('route' => 'fos_user_change_password'));
+            $profile->addChild('Edit Profile', array('route' => 'fos_user_profile_edit', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
+            $profile->addChild('Change Password', array('route' => 'fos_user_change_password', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
 
-            $profile->addChild('Logout', array('route' => 'fos_user_security_logout'));
+            $profile->addChild('Logout', array('route' => 'fos_user_security_logout', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
         } else {
-            $menu->addChild('Login', array('route' => 'fos_user_security_login'));
+            $menu->addChild('Login', array('route' => 'fos_user_security_login', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
         }
 
         return $menu;

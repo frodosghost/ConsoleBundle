@@ -12,12 +12,34 @@
 namespace Manhattan\Bundle\ConsoleBundle\Security;
 
 use Symfony\Component\HttpFoundation\RequestMatcherInterface;
+use Manhattan\Bundle\ConsoleBundle\Site\SiteManager;
 use Symfony\Component\HttpFoundation\Request;
 
 class ConsoleSubDomainRequestMatcher implements RequestMatcherInterface
 {
+    /**
+     * @var Manhattan\Bundle\ConsoleBundle\Site\SiteManager
+     */
+    private $siteManager;
+
+    /**
+     * @var string
+     */
+    private $domain;
+
+    public function __construct(SiteManager $siteManager, $domain)
+    {
+        $this->siteManager = $siteManager;
+        $this->domain = $domain;
+    }
+
     public function matches(Request $request)
     {
-        return preg_match('/^(console)./', $request->server->get('HTTP_HOST'));
+        if (preg_match('/^(console)./', $request->server->get('HTTP_HOST'))) {
+            $this->siteManager->setSubdomain('console');
+            return true;
+        }
+
+        return false;
     }
 }

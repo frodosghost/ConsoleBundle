@@ -14,6 +14,7 @@ namespace Manhattan\Bundle\ConsoleBundle\Event;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\Event;
+use Manhattan\Bundle\ConsoleBundle\Site\SiteManager;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class ConfigureMenuEvent extends Event
@@ -29,20 +30,27 @@ class ConfigureMenuEvent extends Event
     private $menu;
 
     /**
-     * @param Knp\Menu\ItemInterface $security_context
+     * @param Knp\Menu\ItemInterface $securityContext
      */
-    private $security_context;
+    private $securityContext;
 
     /**
-     * @param Knp\Menu\FactoryInterface $factory
-     * @param Knp\Menu\ItemInterface $menu
-     * @param Symfony\Component\Security\Core\SecurityContextInterface $security_context
+     * @var Manhattan\Bundle\ConsoleBundle\Site\SiteManager
      */
-    public function __construct(FactoryInterface $factory, ItemInterface $menu, SecurityContextInterface $security_context)
+    private $siteManager;
+
+    /**
+     * @param FactoryInterface         $factory
+     * @param ItemInterface            $menu
+     * @param SecurityContextInterface $securityContext
+     * @param SiteManager              $siteManager
+     */
+    public function __construct(FactoryInterface $factory, ItemInterface $menu, SecurityContextInterface $securityContext, SiteManager $siteManager)
     {
         $this->factory = $factory;
         $this->menu = $menu;
-        $this->security_context = $security_context;
+        $this->securityContext = $securityContext;
+        $this->siteManager = $siteManager;
     }
 
      /**
@@ -66,6 +74,14 @@ class ConfigureMenuEvent extends Event
      */
     public function getSecurityContext()
     {
-        return $this->security_context;
+        return $this->securityContext;
+    }
+
+    /**
+     * @return Manhattan\Bundle\ConsoleBundle\Site\SiteManager
+     */
+    public function getSiteManager()
+    {
+        return $this->siteManager;
     }
 }
