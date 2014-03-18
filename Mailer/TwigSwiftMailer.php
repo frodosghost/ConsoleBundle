@@ -35,7 +35,8 @@ class TwigSwiftMailer extends BaseTwigSwiftMailer
         $url = $this->router->generate('console_users_password_set', array(
             'token' => $user->getConfirmationToken()
         ), true);
-        $consoleIndex = $this->router->generate('console_index', array(), true);
+        $indexUrl = $this->parameters['console_link'];
+        $consoleIndex = $this->router->generate($indexUrl, array(), true);
 
         $context = array(
             'user' => $user,

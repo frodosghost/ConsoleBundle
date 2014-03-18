@@ -35,9 +35,15 @@ class ManhattanConsoleExtension extends Extension implements PrependExtensionInt
         $container->setParameter('domain', $config['domain']);
         $container->setParameter('console.users', $config['users']);
         $container->setParameter('console.users.from', $config['users']['from']);
-        $container->setParameter('console.users.subject', $config['users']['subject']);
+
         $container->setParameter('console.users.user_class', $config['users']['user_class']);
         $container->setParameter('console.users.console_name', $config['users']['console_name']);
+
+        $container->setParameter('console.email.registration.subject', $config['email']['registration']['subject']);
+        $container->setParameter('console.email.registration.template', $config['email']['registration']['template']);
+
+        $container->setParameter('console.email.resetting.subject', $config['email']['resetting']['subject']);
+        $container->setParameter('console.email.resetting.template', $config['email']['resetting']['template']);
 
         // Navigation Bar Configuration Values
         $container->setParameter('console.navigation.title', $config['navigation']['title']);
@@ -45,7 +51,6 @@ class ManhattanConsoleExtension extends Extension implements PrependExtensionInt
 
         // User Roles
         $this->remapUserRoles($config['user_roles'], $container);
-
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');

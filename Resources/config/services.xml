@@ -55,18 +55,19 @@
             <argument type="service" id="twig" />
             <argument type="collection">
                 <argument key="template" type="collection">
-                    <argument key="confirmation">ManhattanConsoleBundle:Registration:email.txt.twig</argument>
-                    <argument key="resetting">%fos_user.resetting.email.template%</argument>
+                    <argument key="confirmation">%console.email.registration.template%</argument>
+                    <argument key="resetting">%console.email.resetting.template%</argument>
                 </argument>
                 <argument key="from_email" type="collection">
                     <argument key="confirmation">%console.users.from%</argument>
                     <argument key="resetting">%console.users.from%</argument>
                 </argument>
                 <argument key="subject" type="collection">
-                    <argument key="confirmation">%console.users.subject%</argument>
-                    <argument key="resetting">%console.users.subject%</argument>
+                    <argument key="confirmation">%console.email.registration.subject%</argument>
+                    <argument key="resetting">%console.email.resetting.subject%</argument>
                 </argument>
                 <argument key="console_name">%console.users.console_name%</argument>
+                <argument key="console_link">%console.navigation.link%</argument>
                 <argument key="domain">%domain%</argument>
             </argument>
         </service>
