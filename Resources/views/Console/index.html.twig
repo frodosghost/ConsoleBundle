@@ -2,7 +2,7 @@
 
 {% block title %}Manhattan Console{% endblock title %}
 {% block template_title %}Manhattan Console{% endblock template_title %}
-{% block breadcrumbs %}<li class="current"><a href="{{ path('console_index') }}">Console</a></li>{% endblock breadcrumbs %}
+{% block breadcrumbs %}<li class="current"><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li>{% endblock breadcrumbs %}
 
 {% block template_console %}
 

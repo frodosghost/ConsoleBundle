@@ -1,7 +1,7 @@
-<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal well" novalidate>
+<form action="{{ path('fos_user_registration_register', { 'subdomain': subdomain }) }}" {{ form_enctype(form) }} method="POST" class="form-horizontal well" novalidate>
     {{ form_widget(form) }}
     <div class="form-actions">
-        <a href="{{ path('console_users') }}" class="btn">Back to the list</a>
+        <a href="{{ path('console_users', { 'subdomain': subdomain }) }}" class="btn">Back to the list</a>
         <input type="submit" class="btn btn-primary" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
     </div>
 </form>

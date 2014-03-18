@@ -2,7 +2,7 @@
 
 {% block title %}Console: Profile | Edit User{% endblock title %}
 {% block template_title %}Console: Edit User{% endblock template_title %}
-{% block breadcrumbs %}<li><a href="{{ path('console_index') }}">Console</a></li><li><a href="{{ path('console_users') }}">Users</a></li><li><a href="{{ path('console_users_edit', { 'id': entity.id }) }}">Edit User</a></li>{% endblock breadcrumbs %}
+{% block breadcrumbs %}<li><a href="{{ path('console_index' { 'subdomain': subdomain }) }}">Console</a></li><li><a href="{{ path('console_users' { 'subdomain': subdomain }) }}">Users</a></li><li><a href="{{ path('console_users_edit', { 'subdomain': subdomain, 'id': entity.id }) }}">Edit User</a></li>{% endblock breadcrumbs %}
 
 {% block template_console %}
 
@@ -11,15 +11,15 @@
 
         <div class="l-box">
 
-            <form action="{{ path('console_users_update', { 'id': entity.id }) }}" class="pure-form pure-form-stacked" method="post" {{ form_enctype(edit_form) }} novalidate>
+            <form action="{{ path('console_users_update', { 'subdomain': subdomain, 'id': entity.id }) }}" class="pure-form pure-form-stacked" method="post" {{ form_enctype(edit_form) }} novalidate>
 
                 {{ form_widget(edit_form) }}
 
                 <div class="form-actions">
-                    <a href="{{ path('console_users') }}" class="pure-button">Back to the list</a>
+                    <a href="{{ path('console_users', { 'subdomain': subdomain }) }}" class="pure-button">Back to the list</a>
                     <input type="submit" class="pure-button pure-button-primary" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
             </form>
-                    <form action="{{ path('console_user_delete', { 'id': entity.id }) }}" class="actions-delete" method="post">
+                    <form action="{{ path('console_user_delete', { 'subdomain': subdomain, 'id': entity.id }) }}" class="actions-delete" method="post">
                         <input type="hidden" name="_method" value="DELETE" />
                         {{ form_row(delete_form.id) }}
                         {{ form_rest(delete_form) }}

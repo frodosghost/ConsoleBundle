@@ -2,7 +2,7 @@
 
 {% block title %}Console: Profile | View Profile{% endblock title %}
 {% block template_title %}Console: View Profile{% endblock template_title %}
-{% block breadcrumbs %}<li><a href="{{ path('console_index') }}">Console</a></li><li class="current"><a href="{{ path('fos_user_profile_show') }}">View Profile</a></li>{% endblock breadcrumbs %}
+{% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li class="current"><a href="{{ path('fos_user_profile_show', { 'subdomain': subdomain }) }}">View Profile</a></li>{% endblock breadcrumbs %}
 
 {% block template_console %}
 
@@ -25,8 +25,8 @@
             </table>
 
             <div class="form-actions">
-                <a href="{{ path('fos_user_profile_edit') }}" class="pure-button pure-button-secondary">Edit Profile</a>
-                <a href="{{ path('fos_user_change_password') }}" class="pure-button pure-button-secondary">Change Password</a>
+                <a href="{{ path('fos_user_profile_edit', { 'subdomain': subdomain }) }}" class="pure-button pure-button-secondary">Edit Profile</a>
+                <a href="{{ path('fos_user_change_password', { 'subdomain': subdomain }) }}" class="pure-button pure-button-secondary">Change Password</a>
             </div>
         </div>
 

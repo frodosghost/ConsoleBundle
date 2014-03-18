@@ -17,7 +17,7 @@
                 <div class="alert error">{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</div>
             {% endif %}
 
-            <form action="{{ path('fos_user_resetting_send_email') }}" class="pure-form" method="post" novalidate>
+            <form action="{{ path('fos_user_resetting_send_email', { 'subdomain': subdomain }) }}" class="pure-form" method="post" novalidate>
 
                 <div class="pure-control-group">
                     <input type="text" id="username" name="username" required="required" placeholder="{{ 'resetting.request.username'|trans({}, 'FOSUserBundle') }}" />
