@@ -45,7 +45,10 @@
             <argument type="service" id="twig" />
             <argument type="collection">
                 <argument key="title">%console.navigation.title%</argument>
-                <argument key="route">%console.navigation.link%</argument>
+                <argument key="route" type="collection">
+                    <argument key="link">%console.navigation.link%</argument>
+                    <argument key="parameters">%console.navigation.link.parameters%</argument>
+                </argument>
             </argument>
             <argument>ManhattanConsoleBundle:Twig:shared.html.twig</argument>
             <tag name="twig.extension" />

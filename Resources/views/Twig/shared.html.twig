@@ -1,7 +1,7 @@
 {% block topHeader %}
 {% spaceless %}
 <header>
-    <a href="{{ path(navigation.route) }}"><h2>{{ navigation.title }}</h2></a>
+    <a href="{{ path(navigation.route.link, navigation.route.parameters) }}"><h2>{{ navigation.title }}</h2></a>
 </header>
 {% endspaceless %}
 {% endblock %}
