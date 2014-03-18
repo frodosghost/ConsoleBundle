@@ -85,7 +85,13 @@ class UserController extends Controller
             $user->setPlainPassword($temp_password);
             $user_manager->createUser($user);
 
-            $this->sendinitialemailAction($user);
+            if (null === $user->getConfirmationToken()) {
+                /** @var $tokenGenerator \FOS\UserBundle\Util\TokenGeneratorInterface */
+                $tokenGenerator = $this->container->get('fos_user.util.token_generator');
+                $user->setConfirmationToken($tokenGenerator->generateToken());
+            }
+
+            $this->get('manhattan.console.mailer.twig_swift')->sendCreateUserEmailMessage($user);
             $user_manager->updateUser($user);
 
             return $this->redirect($this->generateUrl('console_users'));
