@@ -24,13 +24,6 @@
     <services>
         <service id="manhattan.console.site" class="%manhattan.console.site.class%"></service>
 
-        <!--service id="manhattan.console.subdomain.listener" class="%manhattan.console.subdomain.listener.class%">
-            <argument type="service" id="manhattan.console.site" />
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument>%domain%</argument>
-            <tag name="kernel.event_listener" method="onKernelRequest" event="kernel.request" />
-        </service-->
-
         <service id="fos_user.listener.resetting" class="Manhattan\Bundle\ConsoleBundle\EventListener\ResettingListener">
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="router" />
