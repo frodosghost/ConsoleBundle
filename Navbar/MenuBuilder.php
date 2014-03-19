@@ -108,7 +108,6 @@ class MenuBuilder
     public function createMainMenu(Request $request)
     {
         $menu = $this->getFactory()->createItem('root');
-        //$menu->setCurrentUri($this->container->get('request')->getRequestUri());
         $menu->setChildrenAttributes(array(
             'id' => 'nav-menu'
         ));
