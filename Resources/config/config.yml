@@ -2,12 +2,8 @@
 fos_user:
     db_driver:      orm
     firewall_name:  secured_area
-    user_class:     %console.users.user_class%
     service:
         mailer:     fos_user.mailer.twig_swift
-    from_email:
-        address:        %console.users.from%
-        sender_name:    %console.users.console_name%
 
 # Set Defaults for the Bundle's Configuration
 manhattan_console:

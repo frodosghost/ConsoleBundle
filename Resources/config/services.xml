@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="manhattan.console.site.class">Manhattan\Bundle\ConsoleBundle\Site\SiteManager</parameter>
+        <parameter key="manhattan.console.subdomain.listener.class">Manhattan\Bundle\ConsoleBundle\EventListener\SubdomainListener</parameter>
         <parameter key="console.dashboard.menu_builder.class">Manhattan\Bundle\ConsoleBundle\Navbar\MenuBuilder</parameter>
         <parameter key="form.type.telephone.class">Manhattan\Bundle\ConsoleBundle\Form\Type\TelephoneType</parameter>
         <parameter key="form.type.preview_file.class">Manhattan\Bundle\ConsoleBundle\Form\Type\PreviewFileType</parameter>
@@ -22,6 +23,20 @@
 
     <services>
         <service id="manhattan.console.site" class="%manhattan.console.site.class%"></service>
+
+        <!--service id="manhattan.console.subdomain.listener" class="%manhattan.console.subdomain.listener.class%">
+            <argument type="service" id="manhattan.console.site" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%domain%</argument>
+            <tag name="kernel.event_listener" method="onKernelRequest" event="kernel.request" />
+        </service-->
+
+        <service id="fos_user.listener.resetting" class="Manhattan\Bundle\ConsoleBundle\EventListener\ResettingListener">
+            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="router" />
+            <argument type="service" id="manhattan.console.site" />
+            <argument>%fos_user.resetting.token_ttl%</argument>
+        </service>
 
         <service id="manhattan.console.persist.subscriber" class="%manhattan.console.persist.subscriber.class%">
             <argument type="service" id="service_container" />
