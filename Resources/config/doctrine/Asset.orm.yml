@@ -1,0 +1,29 @@
+Manhattan\Bundle\ConsoleBundle\Entity\Asset:
+    type:  mappedSuperclass
+
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        mime_type:
+            type: string
+            length: 255
+        filename:
+            type: string
+            length: 255
+
+    lifecycleCallbacks:
+        prePersist:
+            - preUpload
+        preUpdate:
+            - preUpdateAsset
+        postPersist:
+            - upload
+        postUpdate:
+            - replace
+        preRemove:
+            - storeFilenameForRemove
+        postRemove:
+            - removeUpload
