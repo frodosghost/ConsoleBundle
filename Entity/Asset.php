@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 
 /**
- * CargoNetwork\AdBundle\Entity\Asset
+ * Manhattan\Bundle\ConsoleBundle\Entity\Asset
  */
 abstract class Asset extends Publish
 {
