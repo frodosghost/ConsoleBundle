@@ -12,7 +12,6 @@
 namespace Manhattan\Bundle\ConsoleBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * User
@@ -103,7 +102,7 @@ class User extends BaseUser
     }
 
     /**
-     * @ORM\PrePersist
+     * PrePersist
      */
     public function onCreate()
     {
@@ -112,7 +111,7 @@ class User extends BaseUser
     }
 
     /**
-     * @ORM\PreUpdate
+     * PreUpdate
      */
     public function onUpdate()
     {

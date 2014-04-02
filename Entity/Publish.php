@@ -11,7 +11,7 @@
 
 namespace Manhattan\Bundle\ConsoleBundle\Entity;
 
-use Manhattan\Bundle\ConsoleBundle\Entity\User;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * Manhattan\Bundle\ConsoleBundle\Publish
@@ -47,7 +47,7 @@ abstract class Publish
      * @param  Manhattan\Bundle\ConsoleBundle\Entity\User $createdBy
      * @return Publish
      */
-    public function setCreatedBy(User $createdBy)
+    public function setCreatedBy(BaseUser $createdBy)
     {
         $this->createdBy = $createdBy;
 
@@ -92,7 +92,7 @@ abstract class Publish
      * @param  Manhattan\Bundle\ConsoleBundle\Entity\User $updatedBy
      * @return Publish
      */
-    public function setUpdatedBy(User $updatedBy)
+    public function setUpdatedBy(BaseUser $updatedBy)
     {
         $this->updatedBy = $updatedBy;
 
