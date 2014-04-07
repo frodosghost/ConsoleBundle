@@ -26,6 +26,11 @@ use Manhattan\Bundle\ConsoleBundle\Event\ConfigureMenuEvent;
 class MenuBuilder
 {
     /**
+     * @var Symfony\Component\HttpFoundation\Request
+     */
+    private $request;
+
+    /**
      * @var Knp\Menu\FactoryInterface
      */
     protected $factory;
@@ -62,8 +67,9 @@ class MenuBuilder
      * @param Symfony\Component\EventDispatcher\EventDispatcher $event_dispatcher
      * @param Symfony\Component\Security\Core\SecurityContextInterface $security_context
      */
-    public function __construct(FactoryInterface $factory, EventDispatcher $event_dispatcher, SecurityContextInterface $security_context, SiteManager $siteManager)
+    public function __construct(Request $request, FactoryInterface $factory, EventDispatcher $event_dispatcher, SecurityContextInterface $security_context, SiteManager $siteManager)
     {
+        $this->request = $request;
         $this->factory = $factory;
         $this->event_dispatcher = $event_dispatcher;
         $this->security_context = $security_context;
@@ -98,6 +104,14 @@ class MenuBuilder
     }
 
     /**
+     * @return Symfony\Bundle\FrameworkBundle\Routing\Router
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    /**
      * @return Manhattan\Bundle\ConsoleBundle\Site\SiteManager
      */
     public function getSiteManager()
@@ -114,6 +128,7 @@ class MenuBuilder
 
         if ($this->is_logged_in) {
             $this->getEventDispatcher()->dispatch(MenuEvents::CONFIGURE, new ConfigureMenuEvent(
+                $this->getRequest(),
                 $this->getFactory(),
                 $menu,
                 $this->getSecurityContext(),

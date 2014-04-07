@@ -14,18 +14,24 @@ namespace Manhattan\Bundle\ConsoleBundle\Event;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\HttpFoundation\Request;
 use Manhattan\Bundle\ConsoleBundle\Site\SiteManager;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class ConfigureMenuEvent extends Event
 {
     /**
+     * @var Symfony\Component\HttpFoundation\Request
+     */
+    private $request;
+
+    /**
      * @param Knp\Menu\FactoryInterface $factory
      */
     private $factory;
 
     /**
-     * @param Knp\Menu\ItemInterface $menu
+     * @param Knp\Menu\ItemInterface
      */
     private $menu;
 
@@ -40,13 +46,15 @@ class ConfigureMenuEvent extends Event
     private $siteManager;
 
     /**
+     * @param Request                  $request
      * @param FactoryInterface         $factory
      * @param ItemInterface            $menu
      * @param SecurityContextInterface $securityContext
      * @param SiteManager              $siteManager
      */
-    public function __construct(FactoryInterface $factory, ItemInterface $menu, SecurityContextInterface $securityContext, SiteManager $siteManager)
+    public function __construct(Request $request, FactoryInterface $factory, ItemInterface $menu, SecurityContextInterface $securityContext, SiteManager $siteManager)
     {
+        $this->request = $request;
         $this->factory = $factory;
         $this->menu = $menu;
         $this->securityContext = $securityContext;
@@ -75,6 +83,14 @@ class ConfigureMenuEvent extends Event
     public function getSecurityContext()
     {
         return $this->securityContext;
+    }
+
+    /**
+     * @return Symfony\Bundle\FrameworkBundle\Routing\Router
+     */
+    public function getRequest()
+    {
+        return $this->request;
     }
 
     /**
