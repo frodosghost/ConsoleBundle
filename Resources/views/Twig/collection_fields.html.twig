@@ -1,0 +1,70 @@
+{% block collection_widget %}
+{% spaceless %}
+    <div class="collection">
+        {% if prototype is defined %}
+            {% set attr = attr|merge({'data-prototype': block('collection_item_widget') }) %}
+        {% endif %}
+        <div {{ block('widget_container_attributes') }}>
+            {{ form_errors(form) }}
+            <div class="fields-list" data-row-count="{{ form | length }}">
+            {% for rows in form %}
+                <div class="item">
+                    <div class="order">
+                        <div class="sequence">
+                            <a href="javascript:void()" class="pure-button up">Up</a>
+                            <a href="javascript:void()" class="pure-button down">Down</a>
+                        </div>&nbsp;
+                    </div>
+                    <div class="fields">
+                        {% set fieldNum = 1 %}
+                        {% for row in rows %}
+                            <div class="field field{{ fieldNum }}">
+                                {{ form_label(row) }}
+                                {{ form_widget(row, { 'attr': { 'class': 'input' }}) }}
+                            </div>
+                            {% set fieldNum = fieldNum + 1 %}
+                        {% endfor %}
+                    </div>
+                    <div class="controls">
+                        {#<a class="add pure-button" title="Add" href="javascript:void()"><span>Add</span></a>#}
+                        <a class="remove pure-button" title="Remove" href="javascript:void()"><span>Remove</span></a>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+            <div class="holding-bay fields-list"></div>
+            {{ form_rest(form) }}
+        </div>
+        <div class="main controls">
+            <a class="add pure-button" title="Add" href="javascript:void()"><span>Add</span></a>
+        </div>
+    </div>
+{% endspaceless %}
+{% endblock collection_widget %}
+
+{% block collection_item_widget %}
+{% spaceless %}
+    <div class="item">
+        <div class="order">
+            <div class="sequence">
+                <a href="javascript:void()" class="pure-button up">Up</a>
+                <a href="javascript:void()" class="pure-button down">Down</a>
+            </div>&nbsp;
+        </div>
+        <div class="fields">
+            {% set fieldNum = 1 %}
+            {% for row in prototype %}
+                <div class="field field{{ fieldNum }}">
+                {{ form_label(row) }}
+                {{ form_widget(row, { 'attr': { 'class': 'input' }}) }}
+                </div>
+                {% set fieldNum = fieldNum + 1 %}
+            {% endfor %}
+        </div>
+        <div class="controls">
+            {#<a class="add pure-button" title="Add" href="javascript:void()"><span>Add</span></a>#}
+            <a class="remove pure-button" title="Remove" href="javascript:void()"><span>Remove</span></a>
+        </div>
+    </div>
+{% endspaceless %}
+{% endblock collection_item_widget %}
