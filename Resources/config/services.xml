@@ -18,6 +18,8 @@
         <parameter key="manhattan.console.user_roles.type.class">Manhattan\Bundle\ConsoleBundle\Form\Type\UserRolesType</parameter>
         <parameter key="manhattan.console.persist.subscriber.class">Manhattan\Bundle\ConsoleBundle\EventListener\ObjectPersistSubscriber</parameter>
 
+        <parameter key="manhattan.console.type.suggest.class">Manhattan\Bundle\ConsoleBundle\Form\Type\SuggestType</parameter>
+
         <parameter key="manhattan.console.twig.swift_mailer.class">Manhattan\Bundle\ConsoleBundle\Mailer\TwigSwiftMailer</parameter>
     </parameters>
 
@@ -111,6 +113,12 @@
 
         <service id="form.type.help_type.extension" class="%form.type.help_type.extension.class%">
             <tag name="form.type_extension" alias="form" />
+        </service>
+
+        <service id="manhattan.console.type.suggest" class="%manhattan.console.type.suggest.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="form.type_guesser.doctrine" />
+            <tag name="form.type" alias="suggest_type" />
         </service>
 
         <service id="manhattan.console.user_roles.type" class="%manhattan.console.user_roles.type.class%">
