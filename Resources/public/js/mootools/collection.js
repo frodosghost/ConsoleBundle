@@ -477,7 +477,7 @@ CollectionItem = new Class({
             delete_button: new Element('a', {
                 'class': 'pure-button small delete',
                 href:  'javascript:void()',
-                html:  'Confirm Removal',
+                html:  'Delete',
                 events: {
                     'click': function(event){
                         event.stop();
