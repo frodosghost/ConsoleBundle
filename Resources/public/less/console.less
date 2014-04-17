@@ -16,6 +16,7 @@
     :: Shared
     :: Forms
         :: Form Actions
+        :: Collection Widget
     :: Alerts
     :: Navigation
     :: Main
@@ -274,6 +275,87 @@ div.help p {
     .pure-form .preview img {
         display: inline-block;
     }
+
+/* =============================================================================
+   Collection Widget
+   ========================================================================== */
+
+.collection,
+.collection .field {
+    width: 100%;
+    float: left;
+}
+
+.collection .fields-list .order {
+    width: 10%;
+    float: left;
+}
+    .collection .order .sequence {
+        margin-top: @baseSpacing/4;
+        text-align:center;
+        display: none;
+    }
+    .collection .order .sequence a {
+        margin-bottom: @baseSpacing/4;
+        padding: @baseSpacing/10 0;
+        width: 80%;
+    }
+
+.collection .fields-list .fields {
+    width: 70%;
+    float: left;
+}
+
+.collection .fields-list .controls {
+    width: 20%;
+    float: left;
+    margin-top: 0;
+}
+    .collection .fields-list .controls p {
+        text-align: center;
+        display: inline-block;
+        margin: 0;
+    }
+.collection .fields-list .controls a {
+    display: inline-block;
+    float: left;
+    margin: 3px 3px 3px 0;
+    padding: 0.5em 1em;
+    width: 70%;
+}
+
+.collection .item {
+    border-bottom: 1px solid @midGrey;
+    padding-bottom: @baseSpacing/4;
+}
+
+.collection .item .controls {
+    text-align: right;
+    margin-top: @baseSpacing/4;
+}
+    .collection .item .controls a {
+        margin-left: @baseSpacing/4;
+    }
+
+@media only screen and (min-width: 767px) {
+    .collection .fields-list .controls p {
+        margin: 0;
+        padding: 0 0.8em;
+    }
+
+    .details-collection .field1 {
+        width: 30%;
+        vertical-align: middle;
+        display: table-cell;
+    }
+    .details-collection .field2 {
+        margin-left: 10px;
+        width: 68%;
+    }
+    .collection .fields-list .controls a {
+        width: auto;
+    }
+}
 
 /* =============================================================================
    Alerts
