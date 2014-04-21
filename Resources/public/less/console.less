@@ -285,6 +285,7 @@ div.help p {
 .collection .field {
     width: 100%;
     float: left;
+    position: relative;
 }
 
 .collection .fields-list .order {
@@ -399,10 +400,14 @@ ul.errors li {
     padding-bottom: @baseSpacing/2;
 }
 
-.pure-control-group.error label {
+.pure-control-group.error label,
+.field.error label {
     color: @red
 }
-.pure-control-group.error input {
+.pure-control-group.error input,
+.pure-control-group.error select,
+.field.error input,
+.field.error select {
     border-color: @red;
 }
 
