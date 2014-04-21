@@ -32,7 +32,7 @@
 {% block form_row %}
 {% set attr = attr|merge({'class': attr.class|default('') ~ (errors|length > 0 ? ' error' : '') }) %}
 {% spaceless %}
-    <div class="pure-control-group{% if errors|length > 0 %} error{% endif %}">
+    <div class="pure-control-group{% if errors|length > 0 %} error{% endif %}{% if attr.class %} {{ attr.class }}{% endif %}">
         {{ form_label(form) }}
         {{ form_errors(form) }}
         {{ form_widget(form) }}
