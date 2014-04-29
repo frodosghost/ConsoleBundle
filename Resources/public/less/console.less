@@ -22,7 +22,9 @@
     :: Main
     :: Documents
     :: Templates: Show
-    :: Nested Tree
+    :: Lists
+        :: Nested Tree
+        :: Definition Lists
     :: Breadcrumbs
     :: Login
     :: Footer
@@ -389,6 +391,9 @@ ul.errors {
     top: 5px;
     right: 0;
 }
+    .l-box ul.errors {
+        width: auto;
+    }
 
 .pure-control-group ul.errors {
     position: absolute;
@@ -577,8 +582,11 @@ ul.show.actions li {
 }
 
 /* =============================================================================
-   Nested Tree
+   Lists
    ========================================================================== */
+
+/* Nested Tree
+   ----------- */
 
 ul.nested-tree {
     list-style: none;
@@ -605,6 +613,32 @@ ul.nested-tree li .pure-button {
     ul.nested-tree li .pure-button i {
         margin-right: 15px;
     }
+
+/* Definition Lists
+   ----------- */
+dl dt {
+    font-weight: bold;
+}
+
+/* Inline Definition Lists
+   ----------- */
+
+dl.inline {
+    display: inline-block;
+}
+
+dl.inline dt {
+    clear: left;
+    float: left;
+    overflow: hidden;
+    text-align: right;
+    white-space: nowrap;
+}
+
+dl.inline dd {
+    float: left;
+}
+
 
 /* =============================================================================
    Breadcrumbs
