@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class ResettingListener implements EventSubscriberInterface
+class FOSUserListener implements EventSubscriberInterface
 {
     private $router;
     private $tokenTtl;
@@ -36,7 +36,8 @@ class ResettingListener implements EventSubscriberInterface
     {
         return array(
             FOSUserEvents::RESETTING_RESET_INITIALIZE => 'onResettingResetInitialize',
-            FOSUserEvents::RESETTING_RESET_SUCCESS => 'onResettingResetSuccess'
+            FOSUserEvents::RESETTING_RESET_SUCCESS => 'onResettingResetSuccess',
+            FOSUserEvents::CHANGE_PASSWORD_SUCCESS => 'onChangePasswordSuccess',
         );
     }
 
@@ -57,5 +58,17 @@ class ResettingListener implements EventSubscriberInterface
         $user->setConfirmationToken(null);
         $user->setPasswordRequestedAt(null);
         $user->setEnabled(true);
+    }
+
+    /**
+     * Used on redirect when called in ChangePasswordController
+     *
+     * @param  FormEvent $event
+     */
+    public function onChangePasswordSuccess(FormEvent $event)
+    {
+        $event->setResponse(new RedirectResponse($this->router->generate('fos_user_profile_show', array(
+            'subdomain' => $this->siteManager->getSubdomain()
+        ))));
     }
 }

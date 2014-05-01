@@ -26,7 +26,7 @@
     <services>
         <service id="manhattan.console.site" class="%manhattan.console.site.class%"></service>
 
-        <service id="fos_user.listener.resetting" class="Manhattan\Bundle\ConsoleBundle\EventListener\ResettingListener">
+        <service id="fos_user.listener.events" class="Manhattan\Bundle\ConsoleBundle\EventListener\FOSUserListener">
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="router" />
             <argument type="service" id="manhattan.console.site" />
