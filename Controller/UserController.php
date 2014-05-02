@@ -204,8 +204,11 @@ class UserController extends Controller
 
                 if (null === $response = $event->getResponse()) {
                     $this->get('session')->getFlashBag()->add('fos_user_success', 'You password has been set. Welcome to The Console.');
+                    $siteManager = $this->get('manhattan.console.site');
 
-                    $url = $this->container->get('router')->generate('fos_user_profile_show');
+                    $url = $this->container->get('router')->generate('fos_user_profile_show', array(
+                        'subdomain' => $this->siteManager->getSubdomain()
+                    ));
                     $response = new RedirectResponse($url);
                 }
 
