@@ -17,6 +17,7 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 use Manhattan\Bundle\ConsoleBundle\Site\SiteManager;
 use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class ConfigureMenuEvent extends Event
 {
@@ -99,5 +100,21 @@ class ConfigureMenuEvent extends Event
     public function getSiteManager()
     {
         return $this->siteManager;
+    }
+
+    /**
+     * Lazy Loading of security context.
+     * Returns TokenInterface
+     *
+     * @link(Circular Reference when injecting Security Context, http://stackoverflow.com/a/8713339/174148)
+     * @return TokenInterface
+     */
+    public function getSecurityToken()
+    {
+        if ($this->getSecurityContext()->getToken() instanceof TokenInterface) {
+            return $this->getSecurityContext()->getToken();
+        }
+
+        return null;
     }
 }
