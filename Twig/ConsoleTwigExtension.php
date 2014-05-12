@@ -60,6 +60,13 @@ class ConsoleTwigExtension extends \Twig_Extension
         );
     }
 
+    public function getFilters()
+    {
+        return array(
+            new \Twig_SimpleFilter('slugify', array($this, 'slugify')),
+        );
+    }
+
     /**
      * Builds and returns Twig Template
      */
@@ -86,6 +93,22 @@ class ConsoleTwigExtension extends \Twig_Extension
         ));
 
         return $html;
+    }
+
+    /**
+     * Slugifies string passed
+     *
+     * @param  string $string    String to make into a slug
+     * @param  string $separator Separator replace spaces
+     * @return string
+     */
+    public function slugify($string, $separator = '-')
+    {
+        $string = strtolower($string);
+        $string = preg_replace('/([^a-z0-9]|-)+/', $separator, $string);
+        $string = strtolower($string);
+
+        return trim($string, $separator);
     }
 
     /**
