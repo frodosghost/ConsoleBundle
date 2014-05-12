@@ -10,6 +10,7 @@
         <parameter key="console.dashboard.menu_builder.class">Manhattan\Bundle\ConsoleBundle\Navbar\MenuBuilder</parameter>
         <parameter key="form.type.telephone.class">Manhattan\Bundle\ConsoleBundle\Form\Type\TelephoneType</parameter>
         <parameter key="form.type.preview_file.class">Manhattan\Bundle\ConsoleBundle\Form\Type\PreviewFileType</parameter>
+        <parameter key="form.type.single_collection.class">Manhattan\Bundle\ConsoleBundle\Form\Type\SingleCollectionType</parameter>
         <parameter key="form.type.image_type_extension.class">Manhattan\Bundle\ConsoleBundle\Form\Extension\ImageTypeExtension</parameter>
         <parameter key="form.type.help_type.extension.class">Manhattan\Bundle\ConsoleBundle\Form\Extension\HelpFormTypeExtension</parameter>
         <parameter key="manhattan.console.subdomain_request_matcher.class">Manhattan\Bundle\ConsoleBundle\Security\ConsoleSubDomainRequestMatcher</parameter>
@@ -105,6 +106,10 @@
 
         <service id="form.type.preview_file" class="%form.type.preview_file.class%">
             <tag name="form.type" alias="preview_file" />
+        </service>
+
+        <service id="form.type.single_collection" class="%form.type.single_collection.class%">
+            <tag name="form.type" alias="single_collection" />
         </service>
 
         <service id="form.type.image_type_extension" class="%form.type.image_type_extension.class%">

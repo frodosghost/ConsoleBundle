@@ -102,6 +102,16 @@
 {% endspaceless %}
 {% endblock form_errors %}
 
+{% block single_collection_widget %}
+{% spaceless %}
+    {% if prototype is defined %}
+    <div {{ block('widget_container_attributes') }}>
+        {{ form_row(prototype) }}
+    </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock single_collection_widget %}
+
 {% block datetime_widget %}
 {% set attr = attr|merge({'class': (attr.class|default('') ~ ' datetime')|trim}) %}
 {% spaceless %}
