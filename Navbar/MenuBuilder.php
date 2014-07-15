@@ -13,7 +13,7 @@ namespace Manhattan\Bundle\ConsoleBundle\Navbar;
 
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 use Manhattan\Bundle\ConsoleBundle\Event\MenuEvents;
@@ -36,14 +36,14 @@ class MenuBuilder
     protected $factory;
 
     /**
-     * @var Symfony\Component\EventDispatcher\EventDispatcher
+     * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
      */
-    private $event_dispatcher;
+    private $eventDispatcher;
 
     /**
-     * @var Symfony\Component\Security\Core\SecurityContextInterface
+     * @var \Symfony\Component\Security\Core\SecurityContextInterface
      */
-    private $security_context;
+    private $securityContext;
 
     /**
      * @var Manhattan\Bundle\ConsoleBundle\Site\SiteManager
@@ -64,19 +64,19 @@ class MenuBuilder
      * Constructor
      *
      * @param Knp\Menu\FactoryInterface $factory
-     * @param Symfony\Component\EventDispatcher\EventDispatcher $event_dispatcher
-     * @param Symfony\Component\Security\Core\SecurityContextInterface $security_context
+     * @param Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param Symfony\Component\Security\Core\SecurityContextInterface $securityContext
      */
-    public function __construct(Request $request, FactoryInterface $factory, EventDispatcher $event_dispatcher, SecurityContextInterface $security_context, SiteManager $siteManager)
+    public function __construct(Request $request, FactoryInterface $factory, EventDispatcherInterface $eventDispatcher, SecurityContextInterface $securityContext, SiteManager $siteManager)
     {
         $this->request = $request;
         $this->factory = $factory;
-        $this->event_dispatcher = $event_dispatcher;
-        $this->security_context = $security_context;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->securityContext = $securityContext;
         $this->siteManager = $siteManager;
 
-        $this->is_logged_in = $this->security_context->isGranted('IS_AUTHENTICATED_FULLY');
-        $this->is_super_admin = $this->security_context->isGranted('ROLE_SUPER_ADMIN');
+        $this->is_logged_in = $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY');
+        $this->is_super_admin = $this->securityContext->isGranted('ROLE_SUPER_ADMIN');
     }
 
     /**
@@ -92,7 +92,7 @@ class MenuBuilder
      */
     public function getEventDispatcher()
     {
-        return $this->event_dispatcher;
+        return $this->eventDispatcher;
     }
 
     /**
@@ -100,7 +100,7 @@ class MenuBuilder
      */
     public function getSecurityContext()
     {
-        return $this->security_context;
+        return $this->securityContext;
     }
 
     /**
