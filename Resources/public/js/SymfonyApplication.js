@@ -12,7 +12,7 @@ var symfony = (function() {
     var SymfonyApplication = function (options) {
         this.options     = options;
         this._parameters = {
-            base_url: null // Required: (String) Base URL used by Symfony Application
+            base_url: '' // Required: (String) Base URL used by Symfony Application
         };
     }
 
