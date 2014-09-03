@@ -183,7 +183,7 @@ class MenuBuilder
                 'route' => 'fos_user_change_password',
                 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())
             ));
-            // /$this->addDivider($profile);
+            $profile->addChild('divider_1', array('divider' => true));
             $profile->addChild('Logout', array(
                 'route' => 'fos_user_security_logout',
                 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())
