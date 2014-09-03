@@ -12,6 +12,8 @@
 namespace Manhattan\Bundle\ConsoleBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\Common\Collections\ArrayCollection;
+use Manhattan\Bundle\ConsoleBundle\Entity\User\SocialAccount;
 
 /**
  * User
@@ -40,6 +42,11 @@ class User extends BaseUser
     private $lastName;
 
     /**
+     * @var Manhattan\Bundle\ConsoleBundle\Entity\User\SocialAccount
+     */
+    private $socialAccounts;
+
+    /**
      * @var \DateTime
      */
     private $created_at;
@@ -49,11 +56,16 @@ class User extends BaseUser
      */
     private $updated_at;
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         parent::__construct();
+
+        $this->socialAccounts = new ArrayCollection();
     }
+
 
     /**
      * Get id
@@ -109,6 +121,39 @@ class User extends BaseUser
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    /**
+     * Add socialAccounts
+     *
+     * @param \Manhattan\Bundle\ConsoleBundle\Entity\User\SocialAccount $socialAccounts
+     * @return Company
+     */
+    public function addSocialAccount(SocialAccount $socialAccount)
+    {
+        $this->socialAccounts[] = $socialAccount;
+
+        return $this;
+    }
+
+    /**
+     * Remove socialAccounts
+     *
+     * @param \Manhattan\Bundle\ConsoleBundle\Entity\User\SocialAccount $socialAccounts
+     */
+    public function removeSocialAccount(SocialAccount $socialAccount)
+    {
+        $this->socialAccounts->removeElement($socialAccount);
+    }
+
+    /**
+     * Get socialAccounts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSocialAccounts()
+    {
+        return $this->socialAccounts;
     }
 
     /**
