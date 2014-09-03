@@ -1,0 +1,206 @@
+@import "http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600&subset=latin,latin-ext";
+@import "http://fonts.googleapis.com/css?family=Raleway:400,600,700";
+
+@import "variables.less";
+
+/* =============================================================================
+   Override Defaults
+   ========================================================================== */
+html, body {
+  background-color: #eee;
+}
+body {
+    padding-top: 40px; /* 40px to make the container go all the way to the bottom of the navbar */
+    color: #555555;
+    font-family: 'Raleway',sans-serif;
+    font-size: 13px;
+}
+
+input, button, select, textarea {
+    font-family: 'Open Sans',sans-serif;
+}
+form.actions-delete,
+.manage .btn.btn-danger {
+    display: inline-block;
+    margin: 0 0 0 3px;
+    position: relative;
+    float: right;
+}
+form label {
+    font-weight: bold;
+    color: #3f3f3f;
+}
+
+.container {
+  >footer{
+    >p {
+      text-align: center; /* center align it with the container */
+    }
+  }
+  /* The white background content wrapper */
+  .content {
+    background-color: #fff;
+    padding: 20px;
+    margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+    -webkit-border-radius: 0 0 6px 6px;
+       -moz-border-radius: 0 0 6px 6px;
+            border-radius: 0 0 6px 6px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+       -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+            box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  }
+}
+.navbar .btn {
+  border: 0;
+}
+
+
+.page-header h1 span { font-weight: normal }
+
+.records_list table td .btn-mini { margin:0.4em 0 }
+
+/* =============================================================================
+   Login Form
+   ========================================================================== */
+.span4 .header { margin: 20px 0 30px }
+
+div.remember-me {
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+div.remember-me label,
+div.remember-me input {
+    float: left;
+    line-height: 1.5em;
+}
+    div.remember-me label { margin-left: 10px; }
+
+/* =============================================================================
+   Messages
+   ========================================================================== */
+.content { position: relative;}
+#message.alert {
+    position: absolute;
+    right: 25px;
+    top: 0;
+}
+
+.control-group.error th,
+.control-group.error td {
+    color: #b94a48;
+}
+.control-group.warning th {
+    color: #c09853;
+}
+
+/* =============================================================================
+   Form Actions
+   ========================================================================== */
+
+div.actions a {
+    margin-bottom: @baseSpacing/2;
+}
+ul.inline {
+    display: inline-block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+    ul.inline li {
+        display: inline-block;
+        float: left;
+    }
+
+/* =============================================================================
+   Footer
+   ========================================================================== */
+footer {
+    border-top: 1px solid #C6C6C6;
+    margin-top: 45px;
+    padding: 5px 0;
+    font-size: 0.8em;
+}
+    footer p {
+        color: #555555;
+        margin-bottom: 0;
+    }
+
+
+.table {
+    margin: 0;
+    position: relative;
+}
+.table {
+    margin-bottom: 20px;
+    width: 100%;
+}
+table {
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    max-width: 100%;
+}
+
+.table-condensed {
+    font-size: 10pt;
+}
+.table-condensed th, .table-condensed td {
+    padding: 4px 10px;
+}
+.table th, .table td {
+    border-top-color: #F8F8F8;
+}
+
+/* =============================================================================
+   Callouts
+   ========================================================================== */
+
+.bs-callout {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: @white;
+    border-image: none;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px 1px 1px 5px;
+    margin: 20px 0;
+    padding: 20px;
+}
+.bs-callout-danger {
+    border-left-color: @red;
+}
+    .bs-callout-danger h4 {
+        color: @red;
+    }
+
+/* =============================================================================
+   Graphs
+   ========================================================================== */
+
+.morris-hover {
+   position: absolute;
+   z-index: 1000;
+}
+
+.morris-hover.morris-default-style {
+   border-radius: 3px;
+   padding: 6px;
+   color: #333;
+   background: rgba(255, 255, 255, 0.8);
+   border: 1px solid #ddd;
+   font-size: 12px;
+   text-align: center;
+}
+
+.morris-hover.morris-default-style .morris-hover-row-label {
+   font-weight: bold;
+   margin: 0.25em 0;
+}
+
+.morris-hover.morris-default-style .morris-hover-point{
+   white-space: nowrap;
+   margin: 0.1em 0;
+}

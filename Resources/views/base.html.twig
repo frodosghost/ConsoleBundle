@@ -1,3 +1,48 @@
+{% extends 'MopaBootstrapBundle::layout.html.twig' %}
+{% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}
+
+    {% block head_style %}
+{% stylesheets filter='less,cssembed,cssrewrite,?yui_css' output='css/style.default.css'
+    '@ManhattanConsoleBundle/Resources/public/less/bootstrap.less'
+    '@ManhattanConsoleBundle/Resources/public/css/font-awesome.min.css'
+    '@ManhattanConsoleBundle/Resources/public/css/prettify.css'
+    '@ManhattanConsoleBundle/Resources/public/less/dashboard.less'
+%}
+<link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+{% endstylesheets %}
+{% endblock head_style %}
+
+{% block title %}Manhattan Management Console{% endblock title %}
+
+{% block body_tag %}
+<body data-spy="scroll" data-target="#navbar-example">
+{% endblock body_tag %}
+
+{% block navbar %}
+{% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: true, inverse: true, id: 'navbar-example' } %}
+    {% block brand %}
+        <a class="navbar-brand" href="{{ path('console_index') }}">{{ block('title') }}</a>
+    {% endblock %}
+
+    {% block menu %}
+        {{ mopa_bootstrap_menu('mainmenu') }}
+        {{ mopa_bootstrap_menu('usermenu') }}
+    {% endblock %}
+{% endembed %}
+{% endblock navbar %}
+
+{% block headline %}Manhattan Console{% endblock %}
+{% block content %}
+    {{ block('fos_user_content') }}
+{% endblock %}
+
+{% block footer %}
+    <p>&copy; <a href="http://antelopestudios.com.au" target="_blank">Manhattan Console</a> 2013</p>
+{% endblock footer %}
+
+{# '@ErrorApiDashboardBundle/Resources/public/css/air-responsive.css'
+
+
 <!DOCTYPE html>
 
 {% block html_tag %}
@@ -30,10 +75,10 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
 
     {% block head_script %}
-        {# Overwrite this block to add your own js here #}
+
     {% endblock head_script %}
 
-    <title>{% block title %}Manhattan Management Console{% endblock title %}</title>
+
     {% block head_bottom %}
     {% endblock head_bottom %}
 </head>
@@ -78,7 +123,7 @@
     {# To only use a subset or add more js overwrite and copy paste this block
     To speed up page loads save a copy of jQuery in your project and override this block to include the correct path
     Otherwise the regeneration is done on every load in dev more with use_controller: true
-     #}
+
 
     {% javascripts
         '@ManhattanConsoleBundle/Resources/public/js/mootools/mootools-core-1.4.5-full-nocompat.js'
@@ -91,3 +136,4 @@
 
 </body>
 </html>
+#}
