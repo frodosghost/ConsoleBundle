@@ -1,20 +1,25 @@
 {% extends 'ManhattanConsoleBundle::layout.html.twig' %}
 
-{% block content %}
-
-<div id="internal">
-    <header>
-        <div class="breadcrumbs">
-        <ul>{% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li>{% endblock breadcrumbs %}</ul>
-        </div>
-    </header>
-
-    <div class="operation-panel">
-        {% block template_console %}
-        Template Content
-        {% endblock template_console %}
-    </div>
+{% block page_header %}
+<div class="page-header">
+      <h1>{% block headline %}Manhattan Console{% endblock headline %}</h1>
 </div>
+<div class="breadcrumbs">
+    <ol class="breadcrumb">
+        {% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li>{% endblock breadcrumbs %}
+    </ol>
+</div>
+{% endblock page_header %}
 
-
+{% block content %}
+    <div class="col-sm-9">
+        {% block content_content %}
+        <strong>Content Content</strong>
+        {% endblock content_content %}
+    </div>
+    <div class="col-sm-3">
+        {% block content_sidebar %}
+        <h2>Sidebar</h2>
+        {% endblock content_sidebar %}
+    </div>
 {% endblock content %}

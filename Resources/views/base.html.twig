@@ -21,7 +21,7 @@
 {% block navbar %}
 {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: true, inverse: true, id: 'navbar-example' } %}
     {% block brand %}
-        <a class="navbar-brand" href="{{ path('console_index') }}">{{ block('title') }}</a>
+        <a class="navbar-brand" href="{{ path('console_index', { 'subdomain': subdomain }) }}">{{ block('title') }}</a>
     {% endblock %}
 
     {% block menu %}

@@ -1,40 +1,36 @@
 {% extends "ManhattanConsoleBundle:Console:template.html.twig" %}
 
-{% block title %}Console: Profile | Edit User{% endblock title %}
-{% block template_title %}Console: Edit User{% endblock template_title %}
-{% block breadcrumbs %}<li><a href="{{ path('console_index' { 'subdomain': subdomain }) }}">Console</a></li><li><a href="{{ path('console_users' { 'subdomain': subdomain }) }}">Users</a></li><li><a href="{{ path('console_users_edit', { 'subdomain': subdomain, 'id': entity.id }) }}">Edit User</a></li>{% endblock breadcrumbs %}
+{% block headline %}Console: User | Edit User{% endblock headline %}
+{% block title %}Console: Edit User{% endblock title %}
+{% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li><a href="{{ path('console_users', { 'subdomain': subdomain }) }}">Users</a></li><li class="active">Edit User</li>{% endblock breadcrumbs %}
 
-{% block template_console %}
+{% block content_content %}
+    <form action="{{ path('console_users_update', { 'subdomain': subdomain, 'id': entity.id }) }}" {{ form_enctype(edit_form) }} method="POST" role="form" class="form-horizontal" novalidate>
 
-<div class="pure-g-r">
-    <div class="pure-u-3-4">
+        {{ form_widget(edit_form) }}
 
-        <div class="l-box">
-
-            <form action="{{ path('console_users_update', { 'subdomain': subdomain, 'id': entity.id }) }}" class="pure-form pure-form-stacked" method="post" {{ form_enctype(edit_form) }} novalidate>
-
-                {{ form_widget(edit_form) }}
-
-                <div class="form-actions">
-                    <a href="{{ path('console_users', { 'subdomain': subdomain }) }}" class="pure-button">Back to the list</a>
-                    <input type="submit" class="pure-button pure-button-primary" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
-            </form>
-                    <form action="{{ path('console_user_delete', { 'subdomain': subdomain, 'id': entity.id }) }}" class="actions-delete" method="post">
-                        <input type="hidden" name="_method" value="DELETE" />
-                        {{ form_row(delete_form.id) }}
-                        {{ form_rest(delete_form) }}
-                        <button type="submit" class="pure-button pure-button-error">Delete</button>
-                    </form>
-                </div>
+        <div class="form-actions">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" class="btn btn-primary" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+            </div>
         </div>
+    </form>
 
+{% endblock content_content %}
+
+{% block content_sidebar %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Edit User</h3>
     </div>
-
-    <div class="pure-u-1-4">
-        <div class="l-box">
-
-        </div>
+    <div class="panel-body">
+        <p><a href="{{ path('console_users', { 'subdomain': subdomain }) }}" class="btn btn-info">Back to the list</a></p>
+        <form action="{{ path('console_user_delete', { 'subdomain': subdomain, 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_row(delete_form.id) }}
+            {{ form_rest(delete_form) }}
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
     </div>
 </div>
-
-{% endblock template_console %}
+{% endblock content_sidebar %}

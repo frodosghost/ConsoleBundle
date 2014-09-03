@@ -1,42 +1,32 @@
 {% extends "ManhattanConsoleBundle:Console:template.html.twig" %}
 
-{% block title %}Console: Profile | View Profile{% endblock title %}
-{% block template_title %}Console: View Profile{% endblock template_title %}
-{% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li class="current"><a href="{{ path('fos_user_profile_show', { 'subdomain': subdomain }) }}">View Profile</a></li>{% endblock breadcrumbs %}
+{% block headline %}Console: Profile | View Profile{% endblock headline %}
+{% block title %}Console: View Profile{% endblock title %}
+{% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li class="active">View Profile</li>{% endblock breadcrumbs %}
 
-{% block template_console %}
+{% block content_content %}
 
-<div class="pure-g-r">
-    <div class="pure-u-3-4">
 
-        <div class="l-box">
-
-            <table class="pure-table">
-                <tbody>
-                    <tr>
-                        <th>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}</th>
-                        <td>{{ user.username }}</td>
-                    </tr>
-                    <tr>
-                        <th>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</th>
-                        <td>{{ user.email }}</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="form-actions">
-                <a href="{{ path('fos_user_profile_edit', { 'subdomain': subdomain }) }}" class="pure-button pure-button-secondary">Edit Profile</a>
-                <a href="{{ path('fos_user_change_password', { 'subdomain': subdomain }) }}" class="pure-button pure-button-secondary">Change Password</a>
-            </div>
-        </div>
-
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}</th>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-    <div class="pure-u-1-4">
-        <div class="l-box">
-
-        </div>
+    <div class="btn-group">
+        <a href="{{ path('fos_user_profile_edit', { 'subdomain': subdomain }) }}" class="btn btn-info">Edit Profile</a>
+        <a href="{{ path('fos_user_change_password', { 'subdomain': subdomain }) }}" class="btn btn-warning">Change Password</a>
     </div>
-</div>
 
-{% endblock template_console %}
+{% endblock content_content %}
+
+{% block content_sidebar %}{% endblock content_sidebar %}

@@ -14,7 +14,7 @@
             <h4>{{ error|trans({}, 'FOSUserBundle') }}</h4>
         </div>
         {% endif %}
-        <form action="{{ path("fos_user_security_check") }}" class="form-horizontal" method="post" role="form" id="login" novalidate>
+        <form action="{{ path("fos_user_security_check", { 'subdomain': subdomain }) }}" class="form-horizontal" method="post" role="form" id="login" novalidate>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
             <div class="form-group">
@@ -43,7 +43,7 @@
                 <input type="submit" class="btn btn-primary" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
             </div>
         </form>
-        <a href="{{ path('fos_user_resetting_request') }}">Forgotten Password</a>
+        <a href="{{ path('fos_user_resetting_request', { 'subdomain': subdomain }) }}">Forgotten Password</a>
     </div>
 </div>
 {% endblock fos_user_content %}

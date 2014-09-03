@@ -1,34 +1,31 @@
 {% extends "ManhattanConsoleBundle:Console:template.html.twig" %}
 
-{% block title %}Console: Posts | Create New{% endblock title %}
-{% block template_title %}Console: Posts{% endblock template_title %}
-{% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li><a href="{{ path('console_users', { 'subdomain': subdomain }) }}">Users</a></li><li class="current"><a href="{{ path('console_users_new', { 'subdomain': subdomain }) }}">Create New User</a></li>{% endblock breadcrumbs %}
+{% block headline %}Console: User | Create New{% endblock headline %}
+{% block title %}Console: User{% endblock title %}
+{% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li><a href="{{ path('console_users', { 'subdomain': subdomain }) }}">Users</a></li><li class="active">Create New User</li>{% endblock breadcrumbs %}
 
-{% block template_console %}
+{% block content_content %}
+    <form action="{{ path('console_users_create', { 'subdomain': subdomain }) }}" {{ form_enctype(form) }} method="POST" role="form" class="form-horizontal" novalidate>
 
-<div class="pure-g-r">
-    <div class="pure-u-3-4">
+        {{ form_widget(form) }}
 
-        <div class="l-box">
-            <form action="{{ path('console_users_create', { 'subdomain': subdomain }) }}" class="pure-form pure-form-stacked" method="post" {{ form_enctype(form) }} novalidate>
-
-                {{ form_widget(form) }}
-
-                <div class="form-actions">
-                    <a href="{{ path('console_users', { 'subdomain': subdomain }) }}" class="pure-button ">Back to the list</a>
-                    <button type="submit" class="pure-button pure-button-primary">Create</button>
-                </form>
+        <div class="form-actions">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" class="btn btn-primary" value="Create" />
             </div>
         </div>
+    </form>
 
+{% endblock content_content %}
+
+{% block content_sidebar %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Create New User</h3>
     </div>
-
-    <div class="pure-u-1-4">
-        <div class="l-box">
-            <h3>Create New User</h3>
-            <p>Fill out the form and the Console will email the address you enter and invite them to complete the registration.</p>
-        </div>
+    <div class="panel-body">
+        <p>Fill out the form and the Console will email the address you enter and invite them to complete the registration.</p>
+        <a href="{{ path('console_users', { 'subdomain': subdomain }) }}" class="btn btn-info">Back to the list</a>
     </div>
 </div>
-
-{% endblock template_console %}
+{% endblock content_sidebar %}
