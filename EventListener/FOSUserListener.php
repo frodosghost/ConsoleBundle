@@ -38,6 +38,7 @@ class FOSUserListener implements EventSubscriberInterface
             FOSUserEvents::RESETTING_RESET_INITIALIZE => 'onResettingResetInitialize',
             FOSUserEvents::RESETTING_RESET_SUCCESS => 'onResettingResetSuccess',
             FOSUserEvents::CHANGE_PASSWORD_SUCCESS => 'onChangePasswordSuccess',
+            FOSUserEvents::PROFILE_EDIT_SUCCESS => 'onChangePasswordSuccess'
         );
     }
 
