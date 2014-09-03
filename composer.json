@@ -17,8 +17,7 @@
     "target-dir": "Manhattan/Bundle/ConsoleBundle",
     "require": {
         "php": ">=5.3.2",
-        "mopa/bootstrap-bundle": "v3.0.0-beta3",
-        "symfony/framework-bundle": ">=2.3",
+        "mopa/bootstrap-bundle": "3.0.0-beta4",
         "knplabs/knp-paginator-bundle": "~2.3",
         "knplabs/knp-menu-bundle": "~2.0@dev",
         "friendsofsymfony/user-bundle": "dev-master",
