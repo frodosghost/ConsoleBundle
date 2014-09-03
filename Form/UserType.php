@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Manhattan Console Bundle
+ *
+ * (c) James Rickard <james@frodosghost.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Manhattan\Bundle\ConsoleBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -25,13 +34,9 @@ class UserType extends AbstractType
                     1 => 'Enabled'
                 )
             ))
-            ->add('roles', 'choice', array(
+            ->add('roles', 'user_roles', array(
                 'expanded' => true,
-                'multiple' => true,
-                'choices' => array(
-                    'ROLE_ADMIN' => 'User',
-                    'ROLE_SUPER_ADMIN' => 'Administrator'
-                )
+                'multiple' => true
             ))
         ;
     }

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Manhattan Console Bundle
+ *
+ * (c) James Rickard <james@frodosghost.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Manhattan\Bundle\ConsoleBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -7,21 +16,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-use Symfony\Component\Security\Core\SecurityContext;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
 use Manhattan\Bundle\ConsoleBundle\Form\UserType;
-/**
- * @Route("/console")
- */
+
 class ConsoleController extends Controller
 {
 
     /**
-     * @Route("", name="console_index")
-     * @Method({"GET"})
+     * Display index
      */
     public function indexAction()
     {

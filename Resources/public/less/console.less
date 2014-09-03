@@ -1,232 +1,601 @@
-body {
-	padding-top: 60px;
-	background-color: #EDEDED;
-    color: #555555;
+/* =============================================================================
+   Manhattan Management Console
+
+   @author Antelope Studios
+   ========================================================================== */
+
+@import "fonts.less";
+@import "variables.less";
+@import "mixins.less";
+
+/* --------------------------------------------------
+   Table of Contents
+-----------------------------------------------------
+    :: Reset
+    :: Fonts
+    :: Shared
+    :: Forms
+        :: Form Actions
+        :: Collection Widget
+    :: Alerts
+    :: Navigation
+    :: Main
+    :: Documents
+    :: Templates: Show
+    :: Lists
+        :: Nested Tree
+        :: Definition Lists
+    :: Breadcrumbs
+    :: Login
+    :: Footer
+*/
+
+/* =============================================================================
+   Reset
+   ========================================================================== */
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
-form.actions-delete,
-.manage .btn.btn-danger {
-	display: inline-block;
-    margin: 0 0 0 3px;
-    position: relative;
+
+body {
+    margin: 0 auto;
+    line-height: 1.7em;
+    color: @heavyGrey;
+    background: @lightGrey;
+}
+body,
+.pure-g [class *= "pure-u"],
+.pure-g-r [class *= "pure-u"] {
+    font-family: @sansFontFamily;
+}
+
+.l-box {
+    padding: 1.3em;
+}
+
+.right {
     float: right;
 }
-form label {
-	font-weight: bold;
-	color: #3f3f3f;
-}
-
-.page-header h1 span { font-weight: normal }
-
-.records_list table td .btn-mini { margin:0.4em 0 }
-
-/*  ----------
-    :: Manage Images
-    ---------- */
-.manage h1 {
-    font-size: 1.4em;
-    margin-bottom: 10px;
-}
-.manage h1 span {
-    font-weight: normal;
-}
-div.manage { position: relative }
-div.manage a.btn.manage {
-    position: absolute;
-    right: 0;
-}
-
-.image-list {
-    padding: 0 20px;
-}
-.image-list .image {
-    width: auto;
+.left {
     float: left;
-    padding: 0 10px;
 }
 
-.main-display {
-    max-width: 1170px;
-    margin: 0 auto;
+/* =============================================================================
+   Fonts
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: @sansFontFamilyLight;
+    font-weight: 700;
 }
 
-.records_list.table.table-striped tbody {
-    background: #FCFCFC;
+/* =============================================================================
+   Shared
+   ========================================================================== */
+header {
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 700;
+}
+    header a {
+        text-decoration: none;
+    }
+
+footer {
+    background-color: @lightGrey;
 }
 
-.separate-entity.entity-left {
-    border-top: 1px solid #E5E5E5;
-    padding: 10px 0;
+.pure-button,
+.pure-button-success,
+.pure-button-error,
+.pure-button-warning,
+.pure-button-secondary {
+    color: white !important;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
-/*  ----------
-    :: Manage Documents
-    ---------- */
-.document.well {
-    padding: 5px 15px;
+
+.pure-button-success,
+.pure-button.success,
+.pure-button.add {
+    background: rgb(28, 184, 65); /* this is a green */
+}
+
+.pure-button-error,
+.pure-button.error,
+.pure-button.delete {
+    background: rgb(202, 60, 60); /* this is a maroon */
+}
+
+.pure-button-warning,
+.pure-button.warning,
+.pure-button.remove {
+    background: rgb(223, 117, 20); /* this is an orange */
+}
+
+.pure-button-secondary,
+.pure-button.secondary,
+.pure-button.return {
+    background: rgb(66, 184, 221); /* this is a light blue */
+}
+
+.pure-button.xsmall {
+    font-size: 70%;
+}
+
+.pure-button.small {
+    font-size: 85%;
+}
+
+.pure-button.large {
+    font-size: 110%;
+}
+
+.pure-button.xlarge {
+    font-size: 125%;
+}
+
+/* =============================================================================
+   Forms
+   ========================================================================== */
+.pure-form { position: relative }
+
+
+.pure-form input[type="text"],
+.pure-form input[type="password"],
+.pure-form input[type="email"],
+.pure-form input[type="url"],
+.pure-form input[type="date"],
+.pure-form input[type="month"],
+.pure-form input[type="time"],
+.pure-form input[type="datetime"],
+.pure-form input[type="datetime-local"],
+.pure-form input[type="week"],
+.pure-form input[type="number"],
+.pure-form input[type="search"],
+.pure-form input[type="tel"],
+.pure-form input[type="color"],
+.pure-form select,
+.pure-form textarea {
+    width: 100%;
+    padding: @baseSpacing/2;
+}
+
+.pure-form input[type="file"] {
+    font-size: 100%;
+    *font-size: 90%; /*IE 6/7 - To reduce IE's oversized button text*/
+    *overflow: visible; /*IE 6/7 - Because of IE's overly large left/right padding on buttons */
+    padding: 0.5em 1.5em 0.5em;
+    color: #444; /* rgba not supported (IE 8) */
+    color: rgba(0, 0, 0, 0.80); /* rgba supported */
+    *color: #444; /* IE 6 & 7 */
+    border: 1px solid #999;  /*IE 6/7/8*/
+    border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+    background-color: #E6E6E6;
+    text-decoration: none;
+    border-radius: 2px;
+    -webkit-font-smoothing: antialiased;
+    /* Transitions */
+    -webkit-transition: 0.1s linear -webkit-box-shadow;
+    -moz-transition: 0.1s linear -moz-box-shadow;
+    -ms-transition: 0.1s linear box-shadow;
+    -o-transition: 0.1s linear box-shadow;
+    transition: 0.1s linear box-shadow;
+    background-color: rgb(204, 204, 204);
+    color: #fff;
+}
+
+.pure-control-group {
     position: relative;
-}
-    .document.well p { margin: 10px 120px 10px 10px }
-
-.document-list .document ul.actions {
-    list-style: none;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-}
-    .document-list .document ul.actions li { display: inline }
-    .document-list .document ul.actions:last-child { margin-right: 5px }
-
-.control-group ul.documents {
-    list-style: none;
-    margin: 0 0 10px;
-}
-    .control-group ul.documents li { margin-bottom: 5px }
-
-/*  ----------
-    :: Manage Images
-    ---------- */
-.image-list .document.well {
     display: inline-block;
     width: 100%;
+    margin: @baseSpacing/2 0;
+    padding-bottom: @baseSpacing;
 }
 
-/*  ----------
-    :: Preview Images
-    ---------- */
-div.controls input[type="file"] {
-    margin-left: 20px;
+.pure-form label {
+    font-weight: 700;
 }
-.control-group .preview {
-    margin-left: 170px;
-    padding: 10px;
+.pure-radio input,
+.pure-checkbox input {
+    margin-right: @baseSpacing
+}
+.pure-form p.muted {
+    color: @midGrey;
+    font-size: 0.8em;
+    padding-left: @baseSpacing;
 }
 
-.entity-left.control-group .controls { margin-left: 0 }
-.entity-left.control-group .controls .controls { margin-left: 160px }
+@media only screen and (min-width: 768px) {
+    select.manhattan_publish,
+    select.short { width: 40% }
 
-.control-group .photo-list .well {
-    display: inline-block;
-    width: 100%;
+    .pure-form .datetime div {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .pure-form div.date select {
+        width: 30%;
+    }
+    .pure-form div.time select {
+        width: 40%;
+    }
+    .pure-form div.time span {
+        display: block;
+        float: left;
+        padding: 10px 15px 10px 0;
+    }
+    .pure-form .datetime select,
+    .pure-form .date select {
+        float: left;
+        margin-right: @baseSpacing;
+    }
+}
+
+/* Form Actions
+   ----------- */
+div.form-actions {
+    border-top: 1px solid @midGrey;
+    padding: @paddingLarge;
+    margin-top: @baseSpacing;
+}
+.actions-delete {
+    display: inline;
+    float: right;
+}
+ul.actions {
+    list-style: none;
+}
+    ul.actions li {
+        display: inline-block;
+    }
+
+/* Form Help
+   ----------- */
+
+div.help {
     padding: 0;
 }
 
-.photo-list .well div {
-    width: 100%;
-    float: left;
-    display: inline-block;
+div.help p {
+    font-size: 0.8em;
+    color: @midGrey;
+    padding: 0 @baseSpacing;
     margin: 0;
 }
 
-.photo-list .well .actions {
-    border-bottom: 1px solid #E3E3E3;
-    background: #E3E3E3;
+/* Form Images
+   ----------- */
+.pure-form .preview {
+    display: inline-block;
+    float: left;
+    padding: 0 @baseSpacing;
+}
+    .pure-form .preview img {
+        display: inline-block;
+    }
+
+/* =============================================================================
+   Collection Widget
+   ========================================================================== */
+
+.collection,
+.collection .field {
+    width: 100%;
+    float: left;
+    position: relative;
 }
 
-.control-group .actions div {
+.collection .fields-list .order {
+    width: 10%;
     float: left;
-    width: auto;
-    padding: 10px;
 }
-.control-group .actions ul {
+    .collection .order .sequence {
+        margin-top: @baseSpacing/4;
+        text-align:center;
+        display: none;
+    }
+    .collection .order .sequence a {
+        margin-bottom: @baseSpacing/4;
+        padding: @baseSpacing/10 0;
+        width: 80%;
+    }
+
+.collection .fields-list .fields {
+    width: 70%;
+    float: left;
+}
+
+.collection .fields-list .controls {
+    width: 20%;
+    float: left;
+    margin-top: 0;
+}
+    .collection .fields-list .controls p {
+        text-align: center;
+        display: inline-block;
+        margin: 0;
+    }
+.collection .fields-list .controls a {
+    display: inline-block;
+    float: left;
+    margin: 3px 3px 3px 0;
+    padding: 0.5em 1em;
+    width: 70%;
+}
+
+.collection .item {
+    border-bottom: 1px solid @midGrey;
+    padding-bottom: @baseSpacing/4;
+}
+
+.collection .item .controls {
+    text-align: right;
+    margin-top: @baseSpacing/4;
+}
+    .collection .item .controls a {
+        margin-left: @baseSpacing/4;
+    }
+
+@media only screen and (min-width: 767px) {
+    .collection .fields-list .controls p {
+        margin: 0;
+        padding: 0 0.8em;
+    }
+
+    .details-collection .field1 {
+        width: 30%;
+        vertical-align: middle;
+        display: table-cell;
+    }
+    .details-collection .field2 {
+        margin-left: 10px;
+        width: 68%;
+    }
+    .collection .fields-list .controls a {
+        width: auto;
+    }
+}
+
+/* =============================================================================
+   Alerts
+   ========================================================================== */
+
+div.alert {
+    border: 1px solid @midGrey;
+    margin-bottom: 20px;
+    padding: 20px;
+    color: @midGrey;
+    .bgfade(@midGrey, 0.1);
+}
+    div.alert.error {
+        border-color: @red;
+        color: @red;
+        .bgfade(@red, 0.1);
+    }
+    div.alert.warning {
+        border-color: @orange;
+        color: @orange;
+        .bgfade(@orange, 0.1);
+    }
+
+ul.errors {
     list-style: none;
-    display: inline-block;
+    color: @red;
+    padding: 0;
     margin: 0;
-    padding: 10px;
-    float: right;
+    top: 5px;
+    right: 0;
 }
-
-.control-group .actions li {
-    display: inline-block;
-    float: left;
-}
-
-.photo-list .well .image img {
-    padding: 10px;
-    float: left;
-    width: 120px;
-}
-.photo-list .well .image p {
-    padding: 10px;
-    float: left;
-    width: 75%;
-}
-
-/*  ----------
-    :: Controls :: Collection
-    ---------- */
-.controls .collection-item {
-    margin: 4px 0 9px;
-}
-.collection-item .control-group .controls {
-    width: 300px;
-    float:left;
-    margin-left: 0;
-}
-
-.collection-item .control-group:before, .collection-item .control-group:after {
-    display: inline-block;
-    content: none;
-}
-    .form-horizontal .collection-item .control-group {
-        display: inline;
+    .l-box ul.errors {
+        width: auto;
     }
 
- .control-group .controls label.checkbox {
+.pure-control-group ul.errors {
+    position: absolute;
+}
+
+ul.errors li {
     display: inline-block;
-    float: left;
-    min-height: 20px;
-    padding-left: 40px;
- }
-
-.form-actions {
-    float: left;
-    border: 0 none;
     width: 100%;
+    padding-bottom: @baseSpacing/2;
 }
-    .form-horizontal .form-actions,
-    .form-actions { padding: 20px 10px !important }
-    .form-actions form {
-        margin-bottom: 0;
+
+.pure-control-group.error label,
+.field.error label {
+    color: @red
+}
+.pure-control-group.error input,
+.pure-control-group.error select,
+.field.error input,
+.field.error select {
+    border-color: @red;
+}
+
+
+/* =============================================================================
+   Navigation
+   ========================================================================== */
+
+#layout {
+    padding-left:225px; /* "left col (nav)" width */
+    position: relative;
+}
+
+#navigation,
+div#main-body {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
+#navigation {
+    width: 225px;
+    background: @darkBlue;
+    text-align: center;
+    padding: 2em 0;
+    margin-left:-225px; /* "left col (nav)" width */
+}
+
+#navigation header {
+    padding: @paddingMini;
+}
+    #navigation header a {
+        display: inline-block;
+        background: @lightBlue;
+        color: @white;
+        padding: @paddingMini;
+        text-decoration: none;
+        .rounded(5px);
     }
-    .form-actions.last {
-        text-align: right;
+        #navigation header a:hover {
+            background-color: @aquaBlue;
+        }
+
+#navigation .pure-menu {
+    background: transparent;
+    border: none;
+    text-align: left;
+}
+    #navigation .pure-menu a {
+        border-left: 5px solid @darkBlue;
+        color: @white;
+        background: @blueFocus;
+        text-transform: uppercase;
+        font-family: @sansFontFamily;
+        font-weight: 700;
+    }
+    #navigation .pure-menu ul ul a {
+        color: @white;
+        text-transform: capitalize;
+        font-size: 0.9em;
+        font-weight: 400;
+        background-color: transparent;
+    }
+    #navigation .pure-menu a:hover,
+    #navigation .pure-menu a:focus {
+        background: @blueFocus;
+        border-color: @blueFocus;
+        color: @darkBlue;
+    }
+        #navigation .pure-menu ul ul a:hover {
+            border-color: @blueFocus;
+            border-left: 5px solid @lightBlue;
+            color: @white;
+        }
+        #navigation .pure-menu ul.yellow a:hover { border-left: 5px solid @yellow !important }
+        #navigation .pure-menu ul.purple a:hover { border-left: 5px solid @purple !important }
+        #navigation .pure-menu ul.orange a:hover { border-left: 5px solid @orange !important }
+        #navigation .pure-menu ul.green a:hover { border-left: 5px solid @green !important }
+        #navigation .pure-menu ul.red a:hover { border-left: 5px solid @red !important }
+
+    #navigation .pure-menu-heading {
+        border-bottom: none;
+        color: @white;
+        background: @blueFocus;
+    }
+    #navigation ul ul a {
+        padding-left: @baseSpacing;
+    }
+    #navigation .nav-menu-button {
+        display: none;
     }
 
-/*  ----------
-    :: Controls :: Field Layout
-    ---------- */
-.form-horizontal .controls.second-level {
-    border: 1px solid #E3E3E3;
-    float: left;
-    margin-left: 0;
-    padding: 20px 0 0;
+.pure-menu.pure-menu-open ul,
+li.pure-menu-open ul.pure-menu-children {
+    visibility: visible;
+    position: relative;
+    left: 0 !important;
+    top: 0 !important;
+}
+.pure-menu.pure-menu-open {
+    background-color: @darkBlue;
+}
+#user-menu {
+    margin-top: @baseSpacing;
+    margin-bottom: @baseSpacing*2;
+}
+
+/* =============================================================================
+   Main
+   ========================================================================== */
+
+#main {
     width: 100%;
 }
 
-.second-level.control-group label { display: none }
-.second-level.control-group .controls label {
-    display: inline;
+#internal header {
+    padding: @paddingLarge;
+    background: @white;
+    border-bottom: 1px solid @midGrey;
+    text-align: left;
 }
-.form-horizontal .second-level.control-group .controls { margin-left: 0 }
+    #internal header h1 {
+        font-family: @sansFontFamily;
+        color: @midGrey;
+    }
 
+#internal .operation-panel {
+    padding: 0 @baseSpacing;
+}
 
-/*  ----------
-    :: Controls :: Field Errors
-    ---------- */
-.control-group.error .help- {
-    color: #B94A48;
-    display: inline-block;
-    float: left;
+#internal table {
+    margin: 0 auto;
+}
+
+#internal table a {
+    color: @heavyGrey;
+}
+
+.pure-table .title {
+    width: 65%;
+}
+
+.pure-table td.update .pure-button {
     width: 100%;
-    padding-top: 5px;
 }
 
+.pure-table.full {
+    width: 100%;
+}
 
-/*  ----------
-    :: Nested Tree
-    ---------- */
+/* =============================================================================
+   Documents
+   ========================================================================== */
+
+ul.documents {
+    list-style: none;
+    padding: 0;
+}
+
+/* =============================================================================
+   Templates: Show
+   ========================================================================== */
+
+ul.show.actions {
+    list-style: none;
+    padding: 0;
+}
+ul.show.actions li {
+    padding: @baseSpacing/2 0;
+}
+
+/* =============================================================================
+   Lists
+   ========================================================================== */
+
+/* Nested Tree
+   ----------- */
+
 ul.nested-tree {
     list-style: none;
     margin: 0 25px 10px;
+    padding: 0;
 }
 ul.nested-tree a { font-weight: bold }
 ul.nested-tree ul a { font-weight: normal }
@@ -241,92 +610,159 @@ ul.nested-tree ul {
     margin: 0 0 10px 25px;
     padding: 10px 0;
 }
-ul.nested-tree li .btn-small{
+ul.nested-tree li .pure-button {
     float: right;
     text-align: center;
-    width: 70px;
 }
-    ul.nested-tree li .btn-small i {
+    ul.nested-tree li .pure-button i {
         margin-right: 15px;
     }
-/*  ----------
-    :: Login Form
-    ---------- */
-.span4 .header { margin: 20px 0 30px }
 
-div.remember-me {
-    width: 100%;
+/* Definition Lists
+   ----------- */
+dl dt {
+    font-weight: bold;
+}
+
+/* Inline Definition Lists
+   ----------- */
+
+dl.inline {
     display: inline-block;
-    margin-bottom: 10px;
 }
-div.remember-me label,
-div.remember-me input {
+
+dl.inline dt {
+    clear: left;
     float: left;
-    line-height: 1.5em;
+    overflow: hidden;
+    text-align: right;
+    white-space: nowrap;
 }
-    div.remember-me label { margin-left: 10px; }
 
-/*  ----------
-    :: NavBar MainMenu Display
-    ---------- */
-.menu-dropdown {
-    margin-left: 0;
-    border: 1px solid #BBBBBB;
-    border-top: none;
-    display: none;
+dl.inline dd {
     float: left;
-    list-style: none outside none;
-    min-width: 120px;
-    position: absolute;
-    z-index: 1000;
-    background: #F3F3F3;
-}
-    .menu-dropdown li a {
-        display: block;
-        padding: 0.5em 1.5em;
-    }
-    .nav .dropdown:hover ul.menu-dropdown { display: inline-block }
-
-    .navbar .nav .menu-dropdown li.active > a, .navbar .nav .menu-dropdown li.active > a:hover {
-        color: #366DDC;
-        font-weight: bold;
-    }
-    .navbar .nav .menu-dropdown li.active > a:hover { text-decoration: underline }
-    .menu-dropdown li:hover { background: #E4E4E4 }
-
-    .navbar .nav li.dropdown.active > .dropdown-toggle {
-        background: #EDEDED;
-        border-left: 1px solid #BBBBBB;
-        border-right: 1px solid #BBBBBB;
-    }
-    .navbar .nav li.dropdown.active:hover { background: #E4E4E4 !important }
-    .navbar .nav li.dropdown.active > .dropdown-toggle:hover { color: #333342; border-bottom: none; }
-
-    .menu-dropdown li a.main {
-        font-weight: bold;
-        padding: 0.5em 1.0em;
-    }
-
-    /*  ----------
-    :: Messages
-    ---------- */
-.content { position: relative;}
-#message.alert {
-    position: absolute;
-    right: 25px;
-    top: 0;
 }
 
-/*  ----------
-    :: Footer
-    ---------- */
-footer {
-    border-top: 1px solid #C6C6C6;
-    margin-top: 45px;
-    padding: 5px 0;
-    font-size: 0.8em;
+
+/* =============================================================================
+   Breadcrumbs
+   ========================================================================== */
+
+.breadcrumbs ul {
+    padding: 0;
+    margin: 0;
 }
-    footer p {
-        color: #555555;
-        margin-bottom: 0;
+
+.breadcrumbs ul:before,
+.breadcrumbs ul:after {
+    content: " ";
+    display: table;
+}
+.breadcrumbs ul:after {
+    clear: both;
+}
+.breadcrumbs ul li {
+    height: 34px;
+    line-height: 34px;
+    float: left;
+    padding-right: 10px;
+    display: block;
+}
+    .breadcrumbs ul li:after {
+        content: " / ";
+        color: @midGrey;
     }
+    .breadcrumbs ul li:last-child:after {
+        content: " ";
+    }
+.breadcrumbs ul li span,
+.breadcrumbs ul li a {
+    font-family: @sansFontFamily;
+    font-weight: 400;
+    font-size: 14px;
+    border: 3px solid transparent;
+    border-width: 3px 0;
+    display: inline-block;
+    padding: 0 8px;
+    color: @midGrey;
+    text-decoration: none;
+}
+.breadcrumbs ul li.current a {
+    color: @darkGrey;
+}
+.breadcrumbs ul li a:hover {
+    border-bottom-color: #00B4FF;
+}
+
+/* =============================================================================
+   Login
+   ========================================================================== */
+
+div.login,
+div.setpassword {
+    background-color: @white;
+    border: 1px solid @midGrey;
+    margin: 0 auto;
+    margin-top: 100px;
+    width: 100%;
+    max-width: 320px;
+    font-family: @serifFontFamily;
+    font-weight: 400;
+}
+
+    div.login header h2,
+    div.setpassword header h2 {
+        color: @midGrey;
+    }
+
+div.setpassword .l-box {
+    padding-top: 0;
+}
+
+div.login .pure-control-group {
+    margin-bottom: @baseSpacing;
+}
+
+div.login .pure-button,
+div.setpassword .pure-button {
+    float: right;
+}
+
+    div.login a.forgotten {
+        color: @darkGrey;
+        font-size: 0.85em;
+        text-decoration: none;
+    }
+        div.login a.forgotten:hover {
+            text-decoration: underline;
+            color: @aquaBlue;
+        }
+
+div.login footer,
+div.setpassword footer {
+    border-top: 1px solid @midGrey;
+    padding: @paddingLarge;
+}
+
+/* =============================================================================
+   Footer
+   ========================================================================== */
+
+footer div {
+    border-top: 1px solid @midGrey;
+}
+
+footer,
+footer a {
+    background-color: @lightGrey;
+    color: @midGrey;
+    font-family: @sansFontFamily;
+    font-size: 0.7em;
+    text-align: center;
+}
+footer a {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1em;
+}
+    footer a:hover { text-decoration: underline }

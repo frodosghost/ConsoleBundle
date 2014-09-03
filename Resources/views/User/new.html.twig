@@ -1,13 +1,34 @@
-{% extends "ManhattanConsoleBundle::layout.html.twig" %}
+{% extends "ManhattanConsoleBundle:Console:template.html.twig" %}
 
-{% block content %}
-<form action="{{ path('console_users_create') }}" class="form-horizontal well" method="post" {{ form_enctype(form) }} novalidate>
-  <fieldset>  
-    {{ form_widget(form) }}
-    <div class="form-actions">
-        <a href="{{ path('console_users') }}" class="btn">Back to the list</a>
-        <button type="submit" class="btn btn-primary">Create</button>
-</form>
+{% block title %}Console: Posts | Create New{% endblock title %}
+{% block template_title %}Console: Posts{% endblock template_title %}
+{% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li><a href="{{ path('console_users', { 'subdomain': subdomain }) }}">Users</a></li><li class="current"><a href="{{ path('console_users_new', { 'subdomain': subdomain }) }}">Create New User</a></li>{% endblock breadcrumbs %}
+
+{% block template_console %}
+
+<div class="pure-g-r">
+    <div class="pure-u-3-4">
+
+        <div class="l-box">
+            <form action="{{ path('console_users_create', { 'subdomain': subdomain }) }}" class="pure-form pure-form-stacked" method="post" {{ form_enctype(form) }} novalidate>
+
+                {{ form_widget(form) }}
+
+                <div class="form-actions">
+                    <a href="{{ path('console_users', { 'subdomain': subdomain }) }}" class="pure-button ">Back to the list</a>
+                    <button type="submit" class="pure-button pure-button-primary">Create</button>
+                </form>
+            </div>
+        </div>
+
     </div>
-</fieldset>
-{% endblock %}
+
+    <div class="pure-u-1-4">
+        <div class="l-box">
+            <h3>Create New User</h3>
+            <p>Fill out the form and the Console will email the address you enter and invite them to complete the registration.</p>
+        </div>
+    </div>
+</div>
+
+{% endblock template_console %}

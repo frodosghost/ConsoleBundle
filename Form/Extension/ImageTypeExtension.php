@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Manhattan Console Bundle
+ *
+ * (c) James Rickard <james@frodosghost.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Manhattan\Bundle\ConsoleBundle\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -51,12 +60,18 @@ class ImageTypeExtension extends AbstractTypeExtension
             if (null !== $parentData) {
                 $accessor = PropertyAccess::createPropertyAccessor();
                 $imageUrl = $accessor->getValue($parentData, $options['image_path']);
+
+                $filename = $accessor->getValue($parentData, 'filename');
             } else {
                  $imageUrl = null;
+                 $filename = null;
             }
 
             // set an "image_url" variable that will be available when rendering this field
             $view->vars['image_url'] = $imageUrl;
+
+            // set an "filename" variable that will be available when rendering this field
+            $view->vars['filename'] = $filename;
         }
     }
 

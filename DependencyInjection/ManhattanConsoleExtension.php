@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Manhattan Console Bundle
+ *
+ * (c) James Rickard <james@frodosghost.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Manhattan\Bundle\ConsoleBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
@@ -23,20 +32,46 @@ class ManhattanConsoleExtension extends Extension implements PrependExtensionInt
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $container->setParameter('domain', $config['domain']);
         $container->setParameter('console.users', $config['users']);
         $container->setParameter('console.users.from', $config['users']['from']);
+
+        $container->setParameter('console.users.user_class', $config['users']['user_class']);
         $container->setParameter('console.users.console_name', $config['users']['console_name']);
 
-        // Navigation Bar Configuration Values
-        $container->setParameter('console.navigation.title', $config['navigation']['title']);
-        $container->setParameter('console.navigation.link', $config['navigation']['link']);
+        $container->setParameter('console.email.registration.subject', $config['email']['registration']['subject']);
+        $container->setParameter('console.email.registration.template', $config['email']['registration']['template']);
+
+        $container->setParameter('console.email.resetting.subject', $config['email']['resetting']['subject']);
+        $container->setParameter('console.email.resetting.template', $config['email']['resetting']['template']);
 
         // Navigation Bar Configuration Values
         $container->setParameter('console.navigation.title', $config['navigation']['title']);
         $container->setParameter('console.navigation.link', $config['navigation']['link']);
+        $container->setParameter('console.navigation.link.parameters', $config['navigation']['link_parameters']);
+
+        // User Roles
+        $this->remapUserRoles($config['user_roles'], $container);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+    }
+
+    /**
+     * Remaps parsed array for default into Choices field
+     *
+     * @param  array            $config
+     * @param  ContainerBuilder $container
+     */
+    protected function remapUserRoles(array $config, ContainerBuilder $container)
+    {
+        $userRoles = array();
+
+        foreach ($config as $role) {
+            $userRoles[$role['role']] = $role['name'];
+        }
+
+        $container->setParameter('manhattan.console.user.roles', $userRoles);
     }
 
     /**

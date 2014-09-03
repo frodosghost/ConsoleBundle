@@ -1,42 +1,48 @@
 {% extends 'ManhattanConsoleBundle::layout.html.twig' %}
 
-{% block page_header %}{% endblock %}
+{% block title %}Manhattan Console: Login{% endblock %}
 
 {% block fos_user_content %}
-<div class="row-fluid">
-    <div class="span12">
-        <div class="span4"></div>
-        <div class="span4">
-            <div class="header">
-                <h1>Login</h1>
-                <p>Please sign in with your <em>username</em> and <em>password</em>.</p>
-            </div>
+<div class="pure-u-1">
+    <div class="login">
 
+        {{ topHeader() }}
+
+        <div class="l-box">
             {% if error %}
                 <div class="alert alert-error">{{ error|trans({}, 'FOSUserBundle') }}</div>
             {% endif %}
-            <form action="{{ path("fos_user_security_check") }}" class="form-stacked well" method="post" id="login">
+
+            <form action="{{ path("fos_user_security_check", { 'subdomain': subdomain }) }}" class="pure-form" method="post" id="login" novalidate>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                <div>
-                    <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                <div class="pure-control-group">
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}" />
                 </div>
 
-                <div>
-                    <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
-                    <input type="password" id="password" name="_password" />
+                <div class="pure-control-group">
+                    <input type="password" id="password" name="_password" placeholder="{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}" />
                 </div>
 
-                <div class="remember-me">
+                <div class="pure-control-group">
                     <input type="checkbox" id="remember_me" name="_remember_me" value="" />
                     <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
                 </div>
 
-                <input type="submit" class="btn primary" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
-            </form>
-            <a href="{{ path('fos_user_resetting_request') }}">Forgotten Password</a>
+                <div class="login-submit pure-control-group">
+                    <a href="{{ path('fos_user_resetting_request', { 'subdomain': subdomain }) }}" class="forgotten">Forgotten Password?</a>
+                    <input type="submit" class="pure-button pure-button-primary" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+                </div>
+        </form>
         </div>
-        <div class="span4"></div>
+
+        <footer class="login-footer">
+            Maintained by Antelope Studios, under MIT Licence.
+        </footer>
     </div>
 </div>
 {% endblock fos_user_content %}
+
+{% block content_class %}pure-u-1{% endblock content_class %}
+{% block navigationbar %}{% endblock navigationbar %}
+{% block container_id %}{% endblock container_id %}
+{% block footer %}{% endblock footer %}

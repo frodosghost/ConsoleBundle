@@ -1,7 +1,12 @@
-{% extends "ManhattanConsoleBundle::layout.html.twig" %}
+{% extends "ManhattanConsoleBundle:Console:template.html.twig" %}
 
-{% block content %}
-<table class="records_list table table-striped">
+{% block template_title %}Console: Users{% endblock template_title %}
+{% block title %}Console: Users{% endblock title %}
+{% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li class="current"><a href="{{ path('console_users', { 'subdomain': subdomain }) }}">Users</a></li>{% endblock breadcrumbs %}
+
+{% block template_console %}
+
+<table class="pure-table pure-table-striped">
     <thead>
         <tr>
             <th class="title">Username</th>
@@ -13,24 +18,27 @@
     </thead>
     <tbody>
     {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('console_users_edit', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
+        <tr{% if loop.index is odd %} class="pure-table-odd"{% endif %}>
+            <td><a href="{{ path('console_users_edit', { 'subdomain': subdomain, 'id': entity.id }) }}">{{ entity.username }}</a></td>
             <td>{{ entity.email }}</td>
             <td>{% spaceless %}
                 {% if entity.enabled %}
-                    <span class="btn-small btn-success">Enabled</span>
+                    <span class="pure-button pure-button-success small">Enabled</span>
                 {% else %}
-                    <span class="btn-small btn-info">Disabled</span>
+                    <span class="pure-button pure-button-warning small">Disabled</span>
                 {% endif %}
             {% endspaceless %}</td>
             <td>{{ entity.lastLogin|date('Y-m-d H:i:s') }}</td>
             <td>
-                <a href="{{ path('console_users_edit', { 'id': entity.id }) }}" class="btn btn-info btn-small">edit</a>
+                <a href="{{ path('console_users_edit', { 'subdomain': subdomain, 'id': entity.id }) }}" class="pure-button pure-button-secondary small">edit</a>
             </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
 
-<a href="{{ path('console_users_new') }}" class="btn primary">Register New User</a>
-{% endblock %}
+<div class="l-box">
+    <a href="{{ path('console_users_new', { 'subdomain': subdomain }) }}" class="pure-button pure-button-primary">Register New User</a>
+</div>
+
+{% endblock template_console %}

@@ -5,18 +5,46 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="manhattan.console.navbar.generic">Mopa\Bundle\BootstrapBundle\Navbar\GenericNavbar</parameter>
+        <parameter key="manhattan.console.site.class">Manhattan\Bundle\ConsoleBundle\Site\SiteManager</parameter>
+        <parameter key="manhattan.console.subdomain.listener.class">Manhattan\Bundle\ConsoleBundle\EventListener\SubdomainListener</parameter>
         <parameter key="console.dashboard.menu_builder.class">Manhattan\Bundle\ConsoleBundle\Navbar\MenuBuilder</parameter>
         <parameter key="form.type.telephone.class">Manhattan\Bundle\ConsoleBundle\Form\Type\TelephoneType</parameter>
         <parameter key="form.type.preview_file.class">Manhattan\Bundle\ConsoleBundle\Form\Type\PreviewFileType</parameter>
+        <parameter key="form.type.single_collection.class">Manhattan\Bundle\ConsoleBundle\Form\Type\SingleCollectionType</parameter>
         <parameter key="form.type.image_type_extension.class">Manhattan\Bundle\ConsoleBundle\Form\Extension\ImageTypeExtension</parameter>
+        <parameter key="form.type.help_type.extension.class">Manhattan\Bundle\ConsoleBundle\Form\Extension\HelpFormTypeExtension</parameter>
+        <parameter key="manhattan.console.subdomain_request_matcher.class">Manhattan\Bundle\ConsoleBundle\Security\ConsoleSubDomainRequestMatcher</parameter>
+        <parameter key="manhattan.console.console_twig.class">Manhattan\Bundle\ConsoleBundle\Twig\ConsoleTwigExtension</parameter>
+        <parameter key="manhattan.console.subdomain.twig.extension.class">Manhattan\Bundle\ConsoleBundle\Twig\ConsoleSubdomainTwigExtension</parameter>
+        <parameter key="manhattan.console.user_roles.type.class">Manhattan\Bundle\ConsoleBundle\Form\Type\UserRolesType</parameter>
+        <parameter key="manhattan.console.persist.subscriber.class">Manhattan\Bundle\ConsoleBundle\EventListener\ObjectPersistSubscriber</parameter>
+
+        <parameter key="manhattan.console.type.suggest.class">Manhattan\Bundle\ConsoleBundle\Form\Type\SuggestType</parameter>
+
+        <parameter key="manhattan.console.twig.swift_mailer.class">Manhattan\Bundle\ConsoleBundle\Mailer\TwigSwiftMailer</parameter>
     </parameters>
 
     <services>
-        <service id="manhattan.console.menu_builder" class="%console.dashboard.menu_builder.class%">
+        <service id="manhattan.console.site" class="%manhattan.console.site.class%"></service>
+
+        <service id="fos_user.listener.events" class="Manhattan\Bundle\ConsoleBundle\EventListener\FOSUserListener">
+            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="router" />
+            <argument type="service" id="manhattan.console.site" />
+            <argument>%fos_user.resetting.token_ttl%</argument>
+        </service>
+
+        <service id="manhattan.console.persist.subscriber" class="%manhattan.console.persist.subscriber.class%">
+            <argument type="service" id="service_container" />
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+
+        <service id="manhattan.console.menu_builder" class="%console.dashboard.menu_builder.class%" scope="request">
+            <argument type="service" id="request" />
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="security.context" />
+            <argument type="service" id="manhattan.console.site" />
         </service>
 
         <service id="manhattan.console.menu" class="Knp\Menu\MenuItem" factory-service="manhattan.console.menu_builder" factory-method="createMainMenu" scope="request">
@@ -26,7 +54,50 @@
 
         <service id="manhattan.console.rightmenu" class="Knp\Menu\MenuItem" factory-service="manhattan.console.menu_builder" factory-method="createRightSideMenu" scope="request">
             <argument type="service" id="request" />
-            <tag name="knp_menu.menu" alias="rightmenu" />
+            <tag name="knp_menu.menu" alias="usermenu" />
+        </service>
+
+        <!-- Console Twig Configuration -->
+        <service id="manhattan.console.twig.extension" class="%manhattan.console.console_twig.class%">
+            <argument type="service" id="twig" />
+            <argument type="collection">
+                <argument key="title">%console.navigation.title%</argument>
+                <argument key="route" type="collection">
+                    <argument key="link">%console.navigation.link%</argument>
+                    <argument key="parameters">%console.navigation.link.parameters%</argument>
+                </argument>
+            </argument>
+            <argument>ManhattanConsoleBundle:Twig:shared.html.twig</argument>
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="manhattan.console.subdomain.twig.extension" class="%manhattan.console.subdomain.twig.extension.class%">
+            <argument type="service" id="manhattan.console.site" />
+            <argument>%domain%</argument>
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="manhattan.console.mailer.twig_swift" class="%manhattan.console.twig.swift_mailer.class%">
+            <argument type="service" id="mailer" />
+            <argument type="service" id="router" />
+            <argument type="service" id="twig" />
+            <argument type="collection">
+                <argument key="template" type="collection">
+                    <argument key="confirmation">%console.email.registration.template%</argument>
+                    <argument key="resetting">%console.email.resetting.template%</argument>
+                </argument>
+                <argument key="from_email" type="collection">
+                    <argument key="confirmation">%console.users.from%</argument>
+                    <argument key="resetting">%console.users.from%</argument>
+                </argument>
+                <argument key="subject" type="collection">
+                    <argument key="confirmation">%console.email.registration.subject%</argument>
+                    <argument key="resetting">%console.email.resetting.subject%</argument>
+                </argument>
+                <argument key="console_name">%console.users.console_name%</argument>
+                <argument key="console_link">%console.navigation.link%</argument>
+                <argument key="domain">%domain%</argument>
+            </argument>
         </service>
 
         <service id="form.type.telephone" class="%form.type.telephone.class%">
@@ -37,24 +108,34 @@
             <tag name="form.type" alias="preview_file" />
         </service>
 
+        <service id="form.type.single_collection" class="%form.type.single_collection.class%">
+            <tag name="form.type" alias="single_collection" />
+        </service>
+
         <service id="form.type.image_type_extension" class="%form.type.image_type_extension.class%">
             <tag name="form.type_extension" alias="file" />
         </service>
 
-        <service id="manhattan.console.navbar" class="%manhattan.console.navbar.generic%">
-            <argument type="collection">
-                <argument type="service" key="leftmenu" id="manhattan.console.menu" strict="false" />
-                <argument type="service" key="rightmenu" id="manhattan.console.rightmenu"  strict="false" />
-            </argument>
-            <argument type="collection"></argument>
-            <argument type="collection">
-                <argument key="title">%console.navigation.title%</argument>
-                <argument key="titleRoute">%console.navigation.link%</argument>
-                <argument key="fixedTop">true</argument>
-                <argument key="isFluid">true</argument>
-            </argument>
-            <tag name="mopa_bootstrap.navbar" alias="consoleNavbar" />
+        <service id="form.type.help_type.extension" class="%form.type.help_type.extension.class%">
+            <tag name="form.type_extension" alias="form" />
         </service>
+
+        <service id="manhattan.console.type.suggest" class="%manhattan.console.type.suggest.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="form.type_guesser.doctrine" />
+            <tag name="form.type" alias="suggest_type" />
+        </service>
+
+        <service id="manhattan.console.user_roles.type" class="%manhattan.console.user_roles.type.class%">
+            <argument>%manhattan.console.user.roles%</argument>
+            <tag name="form.type" alias="user_roles" />
+        </service>
+
+        <service id="manhattan.console.subdomain_request_matcher" class="%manhattan.console.subdomain_request_matcher.class%">
+            <argument type="service" id="manhattan.console.site" />
+            <argument>%domain%</argument>
+        </service>
+
     </services>
 
 </container>

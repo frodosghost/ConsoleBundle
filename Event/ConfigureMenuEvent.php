@@ -1,40 +1,65 @@
 <?php
-// src/Acme/DemoBundle/Menu/MainBuilder.php
+
+/*
+ * This file is part of the Manhattan Console Bundle
+ *
+ * (c) James Rickard <james@frodosghost.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Manhattan\Bundle\ConsoleBundle\Event;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\HttpFoundation\Request;
+use Manhattan\Bundle\ConsoleBundle\Site\SiteManager;
 use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class ConfigureMenuEvent extends Event
 {
+    /**
+     * @var Symfony\Component\HttpFoundation\Request
+     */
+    private $request;
+
     /**
      * @param Knp\Menu\FactoryInterface $factory
      */
     private $factory;
 
     /**
-     * @param Knp\Menu\ItemInterface $menu
+     * @param Knp\Menu\ItemInterface
      */
     private $menu;
 
     /**
-     * @param Knp\Menu\ItemInterface $security_context
+     * @param Knp\Menu\ItemInterface $securityContext
      */
-    private $security_context;
+    private $securityContext;
 
     /**
-     * @param Knp\Menu\FactoryInterface $factory
-     * @param Knp\Menu\ItemInterface $menu
-     * @param Symfony\Component\Security\Core\SecurityContextInterface $security_context
+     * @var Manhattan\Bundle\ConsoleBundle\Site\SiteManager
      */
-    public function __construct(FactoryInterface $factory, ItemInterface $menu, SecurityContextInterface $security_context)
+    private $siteManager;
+
+    /**
+     * @param Request                  $request
+     * @param FactoryInterface         $factory
+     * @param ItemInterface            $menu
+     * @param SecurityContextInterface $securityContext
+     * @param SiteManager              $siteManager
+     */
+    public function __construct(Request $request, FactoryInterface $factory, ItemInterface $menu, SecurityContextInterface $securityContext, SiteManager $siteManager)
     {
+        $this->request = $request;
         $this->factory = $factory;
         $this->menu = $menu;
-        $this->security_context = $security_context;
+        $this->securityContext = $securityContext;
+        $this->siteManager = $siteManager;
     }
 
      /**
@@ -58,6 +83,38 @@ class ConfigureMenuEvent extends Event
      */
     public function getSecurityContext()
     {
-        return $this->security_context;
+        return $this->securityContext;
+    }
+
+    /**
+     * @return Symfony\Bundle\FrameworkBundle\Routing\Router
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    /**
+     * @return Manhattan\Bundle\ConsoleBundle\Site\SiteManager
+     */
+    public function getSiteManager()
+    {
+        return $this->siteManager;
+    }
+
+    /**
+     * Lazy Loading of security context.
+     * Returns TokenInterface
+     *
+     * @link(Circular Reference when injecting Security Context, http://stackoverflow.com/a/8713339/174148)
+     * @return TokenInterface
+     */
+    public function getSecurityToken()
+    {
+        if ($this->getSecurityContext()->getToken() instanceof TokenInterface) {
+            return $this->getSecurityContext()->getToken();
+        }
+
+        return null;
     }
 }

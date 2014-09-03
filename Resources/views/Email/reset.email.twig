@@ -1,0 +1,21 @@
+{# This template is best placed into the bundle that extends the console to send emails, then specified in the configuration #}
+
+{% block subject %}Resetting your password{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+Hello {{ user.username }} !
+
+You can reset your email by accessing {{ confirmationUrl }}
+
+Regards,
+Website Dot Com
+{% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+{% embed "ManhattanConsoleBundle:Email:reset_email.html.twig" %}
+    {% block console_name %}Manhattan Console{% endblock %}
+    {% block console_link %}http://console.website.com{% endblock %}
+{% endembed %}
+{% endblock %}

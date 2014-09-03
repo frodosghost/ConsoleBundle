@@ -1,4 +1,4 @@
-{% extends 'MopaBootstrapBundle::layout.html.twig' %}
+{% extends "ManhattanConsoleBundle::base.html.twig" %}
 
 {% block head_style %}
 {% stylesheets filter='less,cssembed,?yui_css'
@@ -9,20 +9,3 @@
 <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
 {% endstylesheets %}
 {% endblock head_style %}
-
-{% block navbar %}
-    {{ mopa_bootstrap_navbar('consoleNavbar') }}
-{% endblock navbar %}
-
-{% block container_class %}container-fluid main-display{% endblock container_class %}
-
-{% block title %}Manhattan Management Console{% endblock %}
-
-{% block headline %}Manhattan Management Console{% endblock %}
-{% block content %}
-    {{ block('fos_user_content') }}
-{% endblock %}
-
-{% block footer %}
-	<p>&copy; <a href="http://www.frodosghost.com" target="_blank">Manhattan Management Console</a></p>
-{% endblock footer %}

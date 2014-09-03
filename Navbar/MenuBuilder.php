@@ -1,35 +1,54 @@
 <?php
+
+/*
+ * This file is part of the Manhattan Console Bundle
+ *
+ * (c) James Rickard <james@frodosghost.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Manhattan\Bundle\ConsoleBundle\Navbar;
 
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
-use Mopa\Bundle\BootstrapBundle\Navbar\AbstractNavbarMenuBuilder;
 
 use Manhattan\Bundle\ConsoleBundle\Event\MenuEvents;
+use Manhattan\Bundle\ConsoleBundle\Site\SiteManager;
 use Manhattan\Bundle\ConsoleBundle\Event\ConfigureMenuEvent;
 
 /**
  * Manhattan Console Navigation Bar Menu Builder
- *
  */
-class MenuBuilder extends AbstractNavbarMenuBuilder
+class MenuBuilder
 {
+    /**
+     * @var Symfony\Component\HttpFoundation\Request
+     */
+    private $request;
+
     /**
      * @var Knp\Menu\FactoryInterface
      */
     protected $factory;
 
     /**
-     * @var Symfony\Component\EventDispatcher\EventDispatcher
+     * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
      */
-    private $event_dispatcher;
+    private $eventDispatcher;
 
     /**
-     * @var Symfony\Component\Security\Core\SecurityContextInterface
+     * @var \Symfony\Component\Security\Core\SecurityContextInterface
      */
-    private $security_context;
+    private $securityContext;
+
+    /**
+     * @var Manhattan\Bundle\ConsoleBundle\Site\SiteManager
+     */
+    private $siteManager;
 
     /**
      * @var Boolean
@@ -45,19 +64,19 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
      * Constructor
      *
      * @param Knp\Menu\FactoryInterface $factory
-     * @param Symfony\Component\EventDispatcher\EventDispatcher $event_dispatcher
-     * @param Symfony\Component\Security\Core\SecurityContextInterface $security_context
+     * @param Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param Symfony\Component\Security\Core\SecurityContextInterface $securityContext
      */
-    public function __construct(FactoryInterface $factory, EventDispatcher $event_dispatcher, SecurityContextInterface $security_context)
+    public function __construct(Request $request, FactoryInterface $factory, EventDispatcherInterface $eventDispatcher, SecurityContextInterface $securityContext, SiteManager $siteManager)
     {
-        parent::__construct($factory);
-
+        $this->request = $request;
         $this->factory = $factory;
-        $this->event_dispatcher = $event_dispatcher;
-        $this->security_context = $security_context;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->securityContext = $securityContext;
+        $this->siteManager = $siteManager;
 
-        $this->is_logged_in = $this->security_context->isGranted('IS_AUTHENTICATED_FULLY');
-        $this->is_super_admin = $this->security_context->isGranted('ROLE_SUPER_ADMIN');
+        $this->is_logged_in = $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY');
+        $this->is_super_admin = $this->securityContext->isGranted('ROLE_SUPER_ADMIN');
     }
 
     /**
@@ -73,7 +92,7 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
      */
     public function getEventDispatcher()
     {
-        return $this->event_dispatcher;
+        return $this->eventDispatcher;
     }
 
     /**
@@ -81,17 +100,40 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
      */
     public function getSecurityContext()
     {
-        return $this->security_context;
+        return $this->securityContext;
+    }
+
+    /**
+     * @return Symfony\Bundle\FrameworkBundle\Routing\Router
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    /**
+     * @return Manhattan\Bundle\ConsoleBundle\Site\SiteManager
+     */
+    public function getSiteManager()
+    {
+        return $this->siteManager;
     }
 
     public function createMainMenu(Request $request)
     {
         $menu = $this->getFactory()->createItem('root');
-        //$menu->setCurrentUri($request->getRequestUri());
-        $menu->setChildrenAttribute('class', 'nav');
+        $menu->setChildrenAttributes(array(
+            'id' => 'nav-menu'
+        ));
 
         if ($this->is_logged_in) {
-            $this->getEventDispatcher()->dispatch(MenuEvents::CONFIGURE, new ConfigureMenuEvent($this->getFactory(), $menu, $this->getSecurityContext()));
+            $this->getEventDispatcher()->dispatch(MenuEvents::CONFIGURE, new ConfigureMenuEvent(
+                $this->getRequest(),
+                $this->getFactory(),
+                $menu,
+                $this->getSecurityContext(),
+                $this->getSiteManager()
+            ));
         }
 
         return $menu;
@@ -100,36 +142,29 @@ class MenuBuilder extends AbstractNavbarMenuBuilder
     public function createRightSideMenu(Request $request)
     {
         $menu = $this->factory->createItem('root');
-        $menu->setChildrenAttribute('class', 'nav pull-right');
+        $menu->setChildrenAttribute('class', 'pure-menu pure-menu-open');
 
         if ($this->is_super_admin) {
-            $users = $menu->addChild('Users', array('route'=>'console_users'))
-                ->setLinkattribute('class', 'dropdown-toggle')
-                ->setLinkattribute('data-toggle', 'dropdown')
-                ->setAttribute('class', 'dropdown')
-                ->setChildrenAttribute('class', 'menu-dropdown');
+            $users = $menu->addChild('Users', array('route'=>'console_users', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())))
+                ->setLabelAttribute('class', 'pure-menu-heading')
+                ->setChildrenAttribute('class', 'pure-menu-children red');
 
-            $users->addChild('List Users', array('route' => 'console_users'))
-                ->setLinkattribute('class', 'main');
-            $users->addChild('Add User', array('route' => 'console_users_new'));
+            $users->addChild('List Users', array('route' => 'console_users', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
+            $users->addChild('Add User', array('route' => 'console_users_new', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
         }
 
         if ($this->is_logged_in) {
 
-            $profile = $menu->addChild('Profile', array('route'=>'fos_user_profile_show'))
-                ->setLinkattribute('class', 'dropdown-toggle')
-                ->setLinkattribute('data-toggle', 'dropdown')
-                ->setAttribute('class', 'dropdown')
-                ->setChildrenAttribute('class', 'menu-dropdown');
+            $profile = $menu->addChild('Profile', array('route'=>'fos_user_profile_show', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())))
+                ->setLabelAttribute('class', 'pure-menu-heading')
+                ->setChildrenAttribute('class', 'pure-menu-children red');
 
-            $profile->addChild('Edit Profile', array('route' => 'fos_user_profile_edit'))
-                ->setLinkattribute('class', 'main');
-            $profile->addChild('Change Password', array('route' => 'fos_user_change_password'));
+            $profile->addChild('Edit Profile', array('route' => 'fos_user_profile_edit', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
+            $profile->addChild('Change Password', array('route' => 'fos_user_change_password', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
 
-            $profile->addChild('Logout', array('route' => 'fos_user_security_logout'))
-                ->setLinkattribute('class', 'main');
+            $profile->addChild('Logout', array('route' => 'fos_user_security_logout', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
         } else {
-            $menu->addChild('Login', array('route' => 'fos_user_security_login'));
+            $menu->addChild('Login', array('route' => 'fos_user_security_login', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
         }
 
         return $menu;
