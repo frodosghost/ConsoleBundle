@@ -23,6 +23,7 @@
         "knplabs/knp-menu-bundle": "~2.0@dev",
         "friendsofsymfony/user-bundle": "dev-master",
         "knplabs/knp-markdown-bundle": "1.2.*@dev",
+        "stfalcon/tinymce-bundle": "dev-master",
         "ornj/markdown-bundle": "dev-master"
     },
     "extra": {
