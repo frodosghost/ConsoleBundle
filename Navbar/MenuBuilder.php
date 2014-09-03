@@ -121,9 +121,8 @@ class MenuBuilder
 
     public function createMainMenu(Request $request)
     {
-        $menu = $this->getFactory()->createItem('root');
-        $menu->setChildrenAttributes(array(
-            'id' => 'nav-menu'
+        $menu = $this->factory->createItem('root', array(
+            'navbar' => true
         ));
 
         if ($this->is_logged_in) {
@@ -141,30 +140,59 @@ class MenuBuilder
 
     public function createRightSideMenu(Request $request)
     {
-        $menu = $this->factory->createItem('root');
-        $menu->setChildrenAttribute('class', 'pure-menu pure-menu-open');
+        $menu = $this->factory->createItem('root', array(
+            'navbar' => true,
+            'pull-right' => true
+        ));
 
         if ($this->is_super_admin) {
-            $users = $menu->addChild('Users', array('route'=>'console_users', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())))
-                ->setLabelAttribute('class', 'pure-menu-heading')
-                ->setChildrenAttribute('class', 'pure-menu-children red');
+            $users = $menu->addChild('Users', array(
+                'route'=>'console_users',
+                'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain()),
+                'dropdown' => true,
+                'caret' => true
+            ));
 
-            $users->addChild('List Users', array('route' => 'console_users', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
-            $users->addChild('Add User', array('route' => 'console_users_new', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
+            $users->addChild('List Users', array(
+                'route' => 'console_users',
+                'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())
+            ));
+            $users->addChild('Add User', array(
+                'route' => 'console_users_new',
+                'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())
+            ));
         }
 
         if ($this->is_logged_in) {
+            $profile = $menu->addChild('Profile', array(
+                'route'=>'fos_user_profile_show',
+                'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain()),
+                'dropdown' => true,
+                'caret' => true
+            ));
 
-            $profile = $menu->addChild('Profile', array('route'=>'fos_user_profile_show', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())))
-                ->setLabelAttribute('class', 'pure-menu-heading')
-                ->setChildrenAttribute('class', 'pure-menu-children red');
-
-            $profile->addChild('Edit Profile', array('route' => 'fos_user_profile_edit', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
-            $profile->addChild('Change Password', array('route' => 'fos_user_change_password', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
-
-            $profile->addChild('Logout', array('route' => 'fos_user_security_logout', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
+            $profile->addChild('Show Profile', array(
+                'route' => 'fos_user_profile_show',
+                'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())
+            ));
+            $profile->addChild('Edit Profile', array(
+                'route' => 'fos_user_profile_edit',
+                'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())
+            ));
+            $profile->addChild('Change Password', array(
+                'route' => 'fos_user_change_password',
+                'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())
+            ));
+            // /$this->addDivider($profile);
+            $profile->addChild('Logout', array(
+                'route' => 'fos_user_security_logout',
+                'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())
+            ));
         } else {
-            $menu->addChild('Login', array('route' => 'fos_user_security_login', 'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())));
+            $menu->addChild('Login', array(
+                'route' => 'fos_user_security_login',
+                'routeParameters' => array('subdomain' => $this->getSiteManager()->getSubdomain())
+            ));
         }
 
         return $menu;
