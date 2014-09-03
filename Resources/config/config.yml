@@ -15,3 +15,7 @@ manhattan_console:
 # MOPA Bootstrap
 mopa_bootstrap:
     menu: ~
+    form:
+        render_fieldset: false # default is true
+        render_collection_item: true # default is true
+        show_legend: false # default is true
