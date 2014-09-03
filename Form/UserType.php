@@ -21,6 +21,12 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('firstName', 'text', array(
+                'label' => 'First Name'
+            ))
+            ->add('lastName', 'text', array(
+                'label' => 'Last Name'
+            ))
             ->add('username', 'text', array(
                 'label' => 'Username',
                 'help_block' => 'Username has no spaces. eg: johndoe'
@@ -53,3 +59,6 @@ class UserType extends AbstractType
         return 'user';
     }
 }
+
+
+
