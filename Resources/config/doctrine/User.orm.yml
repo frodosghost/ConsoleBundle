@@ -9,6 +9,16 @@ Manhattan\Bundle\ConsoleBundle\Entity\User:
             id: true
             generator:
                 strategy: AUTO
+        firstName:
+            type: string
+            length: 255
+            column: first_name
+            nullable: true
+        lastName:
+            type: string
+            length: 255
+            column: last_name
+            nullable: true
         created_at:
             type: datetime
         updated_at:
