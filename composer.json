@@ -27,7 +27,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "tinymce-dev"
+            "dev-tinymce": "3.0.x-dev"
         }
     }
 }
