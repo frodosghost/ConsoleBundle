@@ -94,7 +94,9 @@ class UserController extends Controller
             $this->get('manhattan.console.mailer.twig_swift')->sendCreateUserEmailMessage($user);
             $user_manager->updateUser($user);
 
-            return $this->redirect($this->generateUrl('console_users'));
+            return $this->redirect($this->generateUrl('console_users', array(
+                'subdomain' => $this->get('manhattan.console.site')->getSubdomain())
+            ));
         }
 
         return $this->render('ManhattanConsoleBundle:User:new.html.twig', array(
@@ -155,7 +157,10 @@ class UserController extends Controller
         if ($editForm->isValid()) {
             $user_manager->updateUser($user);
 
-            return $this->redirect($this->generateUrl('console_users_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('console_users_edit', array(
+                'subdomain' => $this->get('manhattan.console.site')->getSubdomain(),
+                'id' => $id
+            )));
         }
 
         return $this->render('ManhattanConsoleBundle:User:edit.html.twig', array(
@@ -248,7 +253,9 @@ class UserController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('console_users'));
+        return $this->redirect($this->generateUrl('console_users', array(
+            'subdomain' => $this->get('manhattan.console.site')->getSubdomain()
+        )));
     }
 
     private function createDeleteForm($id)
@@ -274,12 +281,17 @@ class UserController extends Controller
             $user->setConfirmationToken($tokenGenerator->generateToken());
         }
 
-        $url = $this->get('router')->generate('console_users_password_set', array('token' => $user->getConfirmationToken()), true);
+        $url = $this->get('router')->generate('console_users_password_set', array(
+            'token' => $user->getConfirmationToken(),
+            'subdomain' => $this->get('manhattan.console.site')->getSubdomain()
+        ), true);
         $context = array(
             'user' => $user,
             'url'  => $url,
             'console_name' => $emails['console_name'],
-            'console_url' => $this->get('router')->generate('console_index', array(), true)
+            'console_url' => $this->get('router')->generate('console_index', array(
+                'subdomain' => $this->get('manhattan.console.site')->getSubdomain()
+            ), true)
         );
 
         $message = \Swift_Message::newInstance()
