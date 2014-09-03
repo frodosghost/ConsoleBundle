@@ -6,10 +6,17 @@
 
 {% block content_content %}
 
-
     <div class="table-responsive">
         <table class="table table-striped">
             <tbody>
+                <tr>
+                    <th>{{ 'form.firstname'|trans({}, 'FOSUserBundle') }}</th>
+                    <td>{{ user.firstname }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'form.lastname'|trans({}, 'FOSUserBundle') }}</th>
+                    <td>{{ user.lastname }}</td>
+                </tr>
                 <tr>
                     <th>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}</th>
                     <td>{{ user.username }}</td>

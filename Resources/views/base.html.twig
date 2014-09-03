@@ -4,7 +4,6 @@
     {% block head_style %}
 {% stylesheets filter='less,cssembed,cssrewrite,?yui_css' output='css/style.default.css'
     '@ManhattanConsoleBundle/Resources/public/less/bootstrap.less'
-    '@ManhattanConsoleBundle/Resources/public/css/font-awesome.min.css'
     '@ManhattanConsoleBundle/Resources/public/css/prettify.css'
     '@ManhattanConsoleBundle/Resources/public/less/dashboard.less'
 %}
@@ -39,101 +38,3 @@
 {% block footer %}
     <p>&copy; <a href="http://antelopestudios.com.au" target="_blank">Manhattan Console</a> 2012-{{ "now"|date("Y") }}</p>
 {% endblock footer %}
-
-{# '@ErrorApiDashboardBundle/Resources/public/css/air-responsive.css'
-
-
-<!DOCTYPE html>
-
-{% block html_tag %}
-<html lang="en">
-{% endblock html_tag %}
-
-{% block head %}
-<head>
-    <meta charset="UTF-8" />
-    {% block head_style %}
-    {% stylesheets filter='less,cssembed,cssrewrite,?yui_css' output='css/screen.css'
-        '@ManhattanConsoleBundle/Resources/public/css/normalize.css'
-        '@ManhattanConsoleBundle/Resources/public/css/buttons.css'
-        '@ManhattanConsoleBundle/Resources/public/css/forms.css'
-        '@ManhattanConsoleBundle/Resources/public/css/grids.css'
-        '@ManhattanConsoleBundle/Resources/public/css/menus.css'
-        '@ManhattanConsoleBundle/Resources/public/css/tables.css'
-        '@ManhattanConsoleBundle/Resources/public/less/console.less'
-    %}
-    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
-    {% endstylesheets %}
-    {% endblock head_style %}
-
-    <!-- Set the viewport width to device width for mobile -->
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1.0" />
-    <meta name="handheldfriendly" content="true" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
-
-    {% block head_script %}
-
-    {% endblock head_script %}
-
-
-    {% block head_bottom %}
-    {% endblock head_bottom %}
-</head>
-{% endblock head %}
-
-{% block body_tag %}
-<body>
-{% endblock body_tag %}
-
-    <div class="{% block container_class %}container pure-g-r{% endblock container_class %}"{% block container_id %} id="layout"{% endblock container_id %}>
-        {% block navigationbar %}
-        <div class="pure-u-1-5" id="navigation">
-            <a href="#" class="nav-menu-button">Menu</a>
-            {{ topHeader() }}
-            <nav class="pure-menu pure-menu-open" id="main-menu">
-                <div class="nav-inner">
-                {{ knp_menu_render('mainmenu') }}
-                </div>
-            </nav>
-            <nav class="pure-menu pure-menu-open" id="user-menu">
-                {{ knp_menu_render('usermenu') }}
-            </nav>
-        </div>
-        {% endblock navigationbar %}
-
-        <div class="{% block content_class %}pure-u-4-5{% endblock content_class %}" id="main">
-        {% block content %}
-            {{ block('fos_user_content') }}
-        {% endblock %}
-
-            <footer>
-                {% block footer %}
-                <div>
-                    <p>Manhattan Console. Maintained by <a href="http://antelopestudios.com.au">Antelope Studios</a> under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</p>
-                </div>
-                {% endblock footer %}
-            </footer>
-        </div>
-    </div>
-
-{% block foot_script %}
-    {# To only use a subset or add more js overwrite and copy paste this block
-    To speed up page loads save a copy of jQuery in your project and override this block to include the correct path
-    Otherwise the regeneration is done on every load in dev more with use_controller: true
-
-
-    {% javascripts
-        '@ManhattanConsoleBundle/Resources/public/js/mootools/mootools-core-1.4.5-full-nocompat.js'
-        '@ManhattanConsoleBundle/Resources/public/js/mootools/mootools-more-1.4.0.1.js'
-        '@ManhattanConsoleBundle/Resources/public/js/mootools/SymfonyApplication.js'
-    %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
-{% endblock foot_script %}
-
-</body>
-</html>
-#}
