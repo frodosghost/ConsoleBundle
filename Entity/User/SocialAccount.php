@@ -102,7 +102,7 @@ class SocialAccount extends Publish
      * @param \EnviroRisk\ConsoleBundle\Entity\User $user
      * @return User
      */
-    public function setUser(User $user = null)
+    public function setUser(User $user)
     {
         $this->user = $user;
 

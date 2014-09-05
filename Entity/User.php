@@ -12,6 +12,7 @@
 namespace Manhattan\Bundle\ConsoleBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Manhattan\Bundle\ConsoleBundle\Entity\User\SocialAccount;
 
@@ -61,9 +62,9 @@ class User extends BaseUser
      */
     public function __construct()
     {
-        parent::__construct();
-
         $this->socialAccounts = new ArrayCollection();
+
+        parent::__construct();
     }
 
 
@@ -127,11 +128,14 @@ class User extends BaseUser
      * Add socialAccounts
      *
      * @param \Manhattan\Bundle\ConsoleBundle\Entity\User\SocialAccount $socialAccounts
-     * @return Company
+     * @return User
      */
     public function addSocialAccount(SocialAccount $socialAccount)
     {
-        $this->socialAccounts[] = $socialAccount;
+        if (!$this->socialAccounts->contains($socialAccount)) {
+            $socialAccount->setUser($this);
+            $this->socialAccounts->add($socialAccount);
+        }
 
         return $this;
     }
@@ -144,6 +148,13 @@ class User extends BaseUser
     public function removeSocialAccount(SocialAccount $socialAccount)
     {
         $this->socialAccounts->removeElement($socialAccount);
+    }
+
+    public function setSocialAccounts(Collection $socialAccounts)
+    {
+        $this->socialAccounts = $socialAccounts;
+
+        return $this;
     }
 
     /**
