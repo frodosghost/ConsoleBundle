@@ -15,6 +15,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Manhattan\Bundle\ConsoleBundle\Form\EventListener\ProfileSocialSubscriber;
+
 class ProfileFormType extends AbstractType
 {
     private $class;
@@ -47,6 +49,9 @@ class ProfileFormType extends AbstractType
                 'translation_domain' => 'FOSUserBundle'
             ))
         ;
+
+        $subscriber = new ProfileSocialSubscriber();
+        $builder->addEventSubscriber($subscriber);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
