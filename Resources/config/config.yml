@@ -19,3 +19,17 @@ mopa_bootstrap:
         render_fieldset: false # default is true
         render_collection_item: true # default is true
         show_legend: false # default is true
+        horizontal_label_class:  col-sm-3 control-label
+        collection:
+            widget_remove_btn:
+                attr:
+                    class:            btn btn-danger
+                label:                Remove
+                icon:                 trash
+                icon_inverted:        true
+            widget_add_btn:
+                attr:
+                    class:            btn btn-info
+                label:                Add
+                icon:                 plus-sign
+                icon_inverted:        true
