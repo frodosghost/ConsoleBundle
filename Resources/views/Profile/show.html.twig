@@ -25,6 +25,16 @@
                     <th>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</th>
                     <td>{{ user.email }}</td>
                 </tr>
+                {% if user.socialAccounts|length > 0 %}
+                    <tr>
+                        <th>Social Accounts</th>
+                        <td><ul class="social-accounts">
+                            {% for social in user.socialAccounts %}
+                            <li><a href="{{ social }}"><i class="fa fa-{{ social.outlet }}"></i> {{ social.provider }}</a></li>
+                            {% endfor %}
+                        </ul></td>
+                    </tr>
+                {% endif %}
             </tbody>
         </table>
     </div>

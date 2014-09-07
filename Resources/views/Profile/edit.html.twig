@@ -2,7 +2,7 @@
 
 {% block headline %}Console: Profile | Edit Profile{% endblock headline %}
 {% block title %}Console: Edit Profile{% endblock title %}
-{% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li class="active">Edit Profile</li>{% endblock breadcrumbs %}
+{% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li><a href="{{ path('fos_user_profile_show', { 'subdomain': subdomain }) }}">View Profile</a></li><li class="active">Edit Profile</li>{% endblock breadcrumbs %}
 
 {% block content_content %}
     <form action="{{ path('fos_user_profile_edit', { 'subdomain': subdomain }) }}" {{ form_enctype(form) }} method="POST" role="form" class="form-horizontal" novalidate>
