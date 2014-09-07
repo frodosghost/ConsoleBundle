@@ -20,6 +20,12 @@ use Manhattan\Bundle\ConsoleBundle\Entity\User;
 class SocialAccount extends Publish
 {
 
+    const GOOGLE_URL = 'https://plus.google.com/%s/posts';
+
+    const TWITTER_URL = 'http://twitter.com/%s';
+
+    const LINKEDIN_URL = 'http://www.linkedin.com/in/%s/';
+
     /**
      * @var integer
      */
@@ -39,6 +45,46 @@ class SocialAccount extends Publish
      * @var Manhattan\Bundle\ConsoleBundle\Entity\User
      */
     private $user;
+
+    /**
+     * Return a string of the element
+     * @return string
+     */
+    public function __toString()
+    {
+        $url = '';
+        switch ($this->outlet) {
+            case 'google-plus':
+                $url = sprintf(self::GOOGLE_URL, $this->identifier);
+                break;
+            case 'twitter':
+                $url = sprintf(self::TWITTER_URL, $this->identifier);
+                break;
+            case 'linkedin':
+                $url = sprintf(self::LINKEDIN_URL, $this->identifier);
+                break;
+        }
+
+        return $url;
+    }
+
+    public function getProvider()
+    {
+        $provider = '';
+        switch ($this->outlet) {
+            case 'google-plus':
+                $provider = 'Google Plus';
+                break;
+            case 'twitter':
+                $provider = 'Twitter';
+                break;
+            case 'linkedin':
+                $provider = 'LinkedIn';
+                break;
+        }
+
+        return $provider;
+    }
 
     /**
      * Get id

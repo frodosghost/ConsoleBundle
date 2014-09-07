@@ -23,7 +23,7 @@ class ProfileSocialType extends AbstractType
             ->add('outlet', 'choice', array(
                 'label' => false,
                 'choices' => array(
-                    'googleplus' => 'Google Plus',
+                    'google-plus' => 'Google Plus',
                     'linkedin' => 'LinkedIn',
                     'twitter' => 'Twitter',
                 ),
