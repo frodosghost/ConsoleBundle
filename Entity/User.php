@@ -67,6 +67,30 @@ class User extends BaseUser
         parent::__construct();
     }
 
+    /**
+     * Get Gravatar
+     *
+     * @link(http://en.gravatar.com/site/implement/images/php/)
+     *
+     * @param  integer $size     Size in pixels, defaults to 80px [ 1 - 2048 ]
+     * @param  string  $imageset Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
+     * @param  string  $rating   Maximum rating (inclusive) [ g | pg | r | x ]
+     * @param  boolean $secure   Determines if the secure URL is requried
+     * @return string
+     */
+    function getGravatar($size = 80, $imageset = 'mm', $rating = 'g', $secure = false) {
+        $http_url = 'http://www.gravatar.com/avatar/';
+        $https_url = 'https://secure.gravatar.com/avatar/';
+
+        $imageset = (in_array($imageset, array('404', 'mm', 'identicon', 'monsterid', 'wavatar'))) ? $imageset : 'mm';
+        $rating = (in_array($rating, array('g', 'pg', 'r', 'x'))) ? $rating : 'g';
+
+        $url = ($secure) ? $https_url : $http_url;
+        $url .= md5(strtolower(trim($this->getEmail())));
+        $url .= "?s=$size&d=$imageset&r=$rating";
+
+        return $url;
+    }
 
     /**
      * Get id
