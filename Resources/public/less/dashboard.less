@@ -1,4 +1,5 @@
 @import "fonts.less";
+@import "mixins.less";
 @import "variables.less";
 
 /* =============================================================================
@@ -117,6 +118,43 @@ ul.inline {
     float: left;
     margin-left: @baseSpacing;
     width: auto;
+}
+
+/* =============================================================================
+   Nested Tree
+   ========================================================================== */
+
+ul.nested-tree {
+    list-style: none;
+    padding-left: 0;
+    display: inline-block;
+    width: 100%;
+}
+
+ul.nested-tree ul {
+    padding-left: @baseSpacing;
+    .bgfade(@midGrey, 0.4);
+}
+
+ul.nested-tree li {
+    width: 100%;
+    display: inline-block;
+}
+
+ul.nested-tree > li:not(:first-child) {
+    margin-bottom: 10px;
+}
+
+ul.nested-tree a {
+    padding: @baseSpacing/2 @baseSpacing;
+    display: inline-block;
+}
+
+ul.nested-tree span {
+    float: right;
+    line-height: 1em;
+    display: inline-block;
+    margin-top: 0.6em;
 }
 
 /* =============================================================================

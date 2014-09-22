@@ -5,8 +5,8 @@
 
 {% block preview_file_widget %}
     {% spaceless %}
-        <div class="preview">
-            {% if preview %}<img src="{{ asset(preview) | imagine_filter('thumb') }}" />{% endif %}
+        <div class="media">
+            {% if preview %}<img class="media-object" src="{{ asset(preview) | imagine_filter('thumb') }}" />{% endif %}
         </div>
         {{ block('form_widget_simple') }}
     {% endspaceless %}
