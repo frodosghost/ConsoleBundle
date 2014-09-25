@@ -17,7 +17,9 @@
         <parameter key="manhattan.console.console_twig.class">Manhattan\Bundle\ConsoleBundle\Twig\ConsoleTwigExtension</parameter>
         <parameter key="manhattan.console.subdomain.twig.extension.class">Manhattan\Bundle\ConsoleBundle\Twig\ConsoleSubdomainTwigExtension</parameter>
         <parameter key="manhattan.console.user_roles.type.class">Manhattan\Bundle\ConsoleBundle\Form\Type\UserRolesType</parameter>
+
         <parameter key="manhattan.console.persist.subscriber.class">Manhattan\Bundle\ConsoleBundle\EventListener\ObjectPersistSubscriber</parameter>
+        <parameter key="manhattan.console.asset.persist.subscriber.class">Manhattan\Bundle\ConsoleBundle\EventListener\AssetPersistSubscriber</parameter>
 
         <parameter key="manhattan.console.type.suggest.class">Manhattan\Bundle\ConsoleBundle\Form\Type\SuggestType</parameter>
 
@@ -36,6 +38,10 @@
 
         <service id="manhattan.console.persist.subscriber" class="%manhattan.console.persist.subscriber.class%">
             <argument type="service" id="service_container" />
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+
+        <service id="console.asset.persist.subscriber" class="%manhattan.console.asset.persist.subscriber.class%">
             <tag name="doctrine.event_subscriber" connection="default" />
         </service>
 

@@ -15,15 +15,9 @@ Manhattan\Bundle\ConsoleBundle\Entity\Asset:
             length: 255
 
     lifecycleCallbacks:
-        prePersist:
-            - preUpload
-        preUpdate:
-            - preUpdateAsset
-        postPersist:
-            - upload
-        postUpdate:
-            - replace
-        preRemove:
-            - storeFilenameForRemove
-        postRemove:
-            - removeUpload
+        prePersist:  [ preUpload ]
+        preUpdate:   [ preUpdateAsset ]
+        postPersist: [ upload ]
+        postUpdate:  [ replace ]
+        preRemove:   [ storeFilenameForRemove ]
+        postRemove:  [ removeUpload ]
