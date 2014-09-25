@@ -143,7 +143,7 @@ abstract class Asset extends Publish
 
     private function getUploadRootDir()
     {
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return __DIR__.'/../../../../../../../web/'.$this->getUploadDir();
     }
 
     abstract public function getUploadDir();
