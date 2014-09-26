@@ -70,4 +70,28 @@ class SocialAccountTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Testing ->hasProvider()
+     *
+     * @dataProvider hasProvider
+     */
+    public function testHasProvider($outlet, $provider, $expected)
+    {
+        $socialAccount = new SocialAccount();
+
+        $socialAccount->setOutlet($outlet);
+        $this->assertEquals($expected, $socialAccount->hasProvider($provider), sprintf('->hasProvider() returns "%s" when Outlet is set to "%s" and Identifer is set to "%s"', $expected, $outlet, $provider));
+    }
+
+    public function hasProvider()
+    {
+        return array(
+            array('', '', TRUE),
+            array('foo', 'bar', FALSE),
+            array('google-plus', 'google-plus', TRUE),
+            array('twitter', 'twitter', TRUE),
+            array('linkedin', 'foo', FALSE)
+        );
+    }
+
 }

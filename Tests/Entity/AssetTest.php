@@ -57,7 +57,7 @@ class AssetTest extends \PHPUnit_Framework_TestCase
         // Setup a realpath because of the __DIR__ used in the absolute path function
         $test_path = realpath(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..').DIRECTORY_SEPARATOR.'Entity';
 
-        $this->assertEquals($test_path. '/../../../../web/bar/foo', $this->_asset->getAbsolutePath(),
+        $this->assertEquals($test_path. '/../../../../../../../web/bar/foo', $this->_asset->getAbsolutePath(),
             '->getAbsolutePath() returns the correct path when data is set.');
     }
 

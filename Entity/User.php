@@ -192,6 +192,21 @@ class User extends BaseUser
     }
 
     /**
+     * Get socialAccount
+     *
+     * @param  string $accountType
+     * @return Manhattan\Bundle\ConsoleBundle\Entity\User\SocialAccount|null
+     */
+    public function getSocialAccount($accountType)
+    {
+        $account = $this->socialAccounts->filter(function($element) use ($accountType) {
+            return $element->hasProvider($accountType);
+        });
+
+        return $account;
+    }
+
+    /**
      * Set created_at
      *
      * @param \DateTime $createdAt

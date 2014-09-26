@@ -68,6 +68,11 @@ class SocialAccount extends Publish
         return $url;
     }
 
+    /**
+     * Returns Capitalised string of Provider
+     *
+     * @return string
+     */
     public function getProvider()
     {
         $provider = '';
@@ -84,6 +89,17 @@ class SocialAccount extends Publish
         }
 
         return $provider;
+    }
+
+    /**
+     * Returns Boolean if the provider matches the requested item
+     *
+     * @param  string  $provider
+     * @return boolean
+     */
+    public function hasProvider($provider)
+    {
+        return (!is_null($this->outlet) && $this->outlet == $provider) ? TRUE : FALSE;
     }
 
     /**
