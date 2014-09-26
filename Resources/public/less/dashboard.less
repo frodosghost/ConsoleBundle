@@ -251,6 +251,35 @@ table {
 }
 
 /* =============================================================================
+   Forms
+   ========================================================================== */
+
+input[type="file"] {
+    border: 0 none;
+    box-shadow: none;
+    height: auto;
+}
+div.preview div.image {
+    border: 1px solid #cccccc;
+    display: inline-block;
+    float: left;
+    padding: 5px;
+    width: auto;
+    margin-right: @baseSpacing;
+}
+
+div.preview label {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+
+    input[type="file"] {
+        display: none;
+    }
+}
+
+/* =============================================================================
    Collections
    ========================================================================== */
 .control-label a[data-collection-add-btn] {

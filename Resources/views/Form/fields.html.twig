@@ -20,12 +20,17 @@
 {% endblock telephone_widget %}
 
 {% block file_widget %}
-    {% spaceless %}
-    {{ block('form_widget') }}
+{% spaceless %}<div class="preview">
     {% if image_url is defined and image_url is not null %}
-        <div class="preview">
+        <div class="image">
             <img src="{{ asset(image_url) | imagine_filter('thumb') }}" />
         </div>
     {% endif %}
-    {% endspaceless %}
+    {% set label_attr = label_attr|merge({'for': id}) %}
+    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+        <i class="fa fa-cloud-upload"></i> Upload File
+        {% set type = type|default('text') -%}
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    </label>
+</div>{% endspaceless %}
 {% endblock %}
