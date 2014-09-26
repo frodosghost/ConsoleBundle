@@ -203,7 +203,7 @@ class User extends BaseUser
             return $element->hasProvider($accountType);
         });
 
-        return $account;
+        return ($account instanceof Collection) ? $account->first() : null;
     }
 
     /**
