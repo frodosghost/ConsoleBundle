@@ -18,6 +18,8 @@
         <parameter key="manhattan.console.subdomain.twig.extension.class">Manhattan\Bundle\ConsoleBundle\Twig\ConsoleSubdomainTwigExtension</parameter>
         <parameter key="manhattan.console.user_roles.type.class">Manhattan\Bundle\ConsoleBundle\Form\Type\UserRolesType</parameter>
 
+        <parameter key="manhattan.console.redirect.events.class">Manhattan\Bundle\ConsoleBundle\EventSubscriber\ConsoleRedirectListener</parameter>
+
         <parameter key="manhattan.console.persist.subscriber.class">Manhattan\Bundle\ConsoleBundle\EventListener\ObjectPersistSubscriber</parameter>
         <parameter key="manhattan.console.asset.persist.subscriber.class">Manhattan\Bundle\ConsoleBundle\EventListener\AssetPersistSubscriber</parameter>
 
@@ -34,6 +36,12 @@
             <argument type="service" id="router" />
             <argument type="service" id="manhattan.console.site" />
             <argument>%fos_user.resetting.token_ttl%</argument>
+        </service>
+
+        <service id="manhattan.console.redirect.events" class="%manhattan.console.redirect.events.class%">
+            <argument type="service" id="router" />
+            <argument type="service" id="manhattan.console.site" />
+            <tag name="kernel.event_subscriber" />
         </service>
 
         <service id="manhattan.console.persist.subscriber" class="%manhattan.console.persist.subscriber.class%">
