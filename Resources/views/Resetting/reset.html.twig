@@ -3,37 +3,27 @@
 {% block title %}Manhattan Console: Reset Your Password{% endblock %}
 
 {% block fos_user_content %}
-<div class="pure-u-1">
-    <div class="login">
-
-        <header class="login-header">
+<div class="col-md-6 col-md-offset-3">
+    <div class="hero-unit">
+        <div class="header">
             <h2>Reset Your Password</h2>
-        </header>
+        </div>
 
         <div class="l-box">
 
             {% trans_default_domain 'FOSUserBundle' %}
 
-            <form action="{{ path('fos_user_resetting_reset', {'subdomain': subdomain, 'token': token}) }}" {{ form_enctype(form) }} method="POST" class="pure-form" novalidate>
+            <form action="{{ path('fos_user_resetting_reset', {'subdomain': subdomain, 'token': token}) }}" {{ form_enctype(form) }} class="form-horizontal" method="post" role="form" novalidate>
 
                 {{ form_widget(form) }}
 
                 <div class="submit pure-control-group">
-                    <input type="submit" class="pure-button pure-button-primary" value="{{ 'resetting.reset.submit'|trans }}" />
+                    <input type="submit" class="btn btn-primary" value="{{ 'resetting.reset.submit'|trans }}" />
                 </div>
             </form>
-        </div>,
-
-        <footer class="login-footer">
-            Maintained by Antelope Studios, under MIT Licence.
-        </footer>
+        </div>
 
     </div>
 </div>
 
 {% endblock fos_user_content %}
-
-{% block content_class %}pure-u-1{% endblock content_class %}
-{% block navigationbar %}{% endblock navigationbar %}
-{% block container_id %}{% endblock container_id %}
-{% block footer %}{% endblock footer %}

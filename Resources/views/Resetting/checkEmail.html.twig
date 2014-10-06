@@ -4,7 +4,7 @@
 {% block title %}Manhattan Console: Password Requested{% endblock %}
 
 {% block fos_user_content %}
-<div class="pure-u-1">
+<div class="col-md-6 col-md-offset-3">
     <div class="login">
 
         <header class="login-header">
@@ -15,16 +15,9 @@
             <p>{{ 'resetting.check_email'|trans({'%email%': email}) }}</p>
         </div>
 
-        <footer class="login-footer">
-            Maintained by Antelope Studios, under MIT Licence.
-        </footer>
-
     </div>
 </div>
 
-{% endblock fos_user_content %}
+<div class="clear"></div>
 
-{% block content_class %}pure-u-1{% endblock content_class %}
-{% block navigationbar %}{% endblock navigationbar %}
-{% block container_id %}{% endblock container_id %}
-{% block footer %}{% endblock footer %}
+{% endblock fos_user_content %}
