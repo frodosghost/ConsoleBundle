@@ -135,7 +135,6 @@ ul.content-ordering {
 ul.nested-tree ul,
 ul.content-ordering ul {
     padding-left: @baseSpacing;
-    .bgfade(@midGrey, 0.4);
 }
 
 ul.nested-tree li,
@@ -148,13 +147,13 @@ ul.nested-tree > li:not(:first-child) {
     margin-bottom: 10px;
 }
 
-ul.nested-tree a
+ul.nested-tree a,
 ul.content-ordering a {
     padding: @baseSpacing/2 @baseSpacing;
     display: inline-block;
 }
 
-ul.nested-tree span
+ul.nested-tree span,
 ul.content-ordering span {
     float: right;
     line-height: 1em;
@@ -173,9 +172,10 @@ ul.content-ordering span {
     background-color: #fff;
 }
     .content-ordering li .draggable {
+        float: left;
         cursor: move;
         display: inline-block;
-        margin-right: 20px;
+        margin: 15px 20px;
     }
 
 .content-ordering li {
@@ -196,6 +196,7 @@ ul.content-ordering span {
         text-transform: uppercase;
     }
 
+ul.nested-tree li span.publish,
 .content-ordering li span.publish {
     float: right;
 }
