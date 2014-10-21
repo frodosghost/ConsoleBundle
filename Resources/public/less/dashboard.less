@@ -124,19 +124,22 @@ ul.inline {
    Nested Tree
    ========================================================================== */
 
-ul.nested-tree {
+ul.nested-tree,
+ul.content-ordering {
     list-style: none;
     padding-left: 0;
     display: inline-block;
     width: 100%;
 }
 
-ul.nested-tree ul {
+ul.nested-tree ul,
+ul.content-ordering ul {
     padding-left: @baseSpacing;
     .bgfade(@midGrey, 0.4);
 }
 
-ul.nested-tree li {
+ul.nested-tree li,
+ul.content-ordering li {
     width: 100%;
     display: inline-block;
 }
@@ -145,16 +148,56 @@ ul.nested-tree > li:not(:first-child) {
     margin-bottom: 10px;
 }
 
-ul.nested-tree a {
+ul.nested-tree a
+ul.content-ordering a {
     padding: @baseSpacing/2 @baseSpacing;
     display: inline-block;
 }
 
-ul.nested-tree span {
+ul.nested-tree span
+ul.content-ordering span {
     float: right;
     line-height: 1em;
     display: inline-block;
     margin-top: 0.6em;
+}
+
+.sortable-ghost {
+    opacity: .2;
+}
+
+.content-ordering {
+    padding: 20px 0;
+    margin-top: -8px;
+    margin-left: 5px;
+    background-color: #fff;
+}
+    .content-ordering li .draggable {
+        cursor: move;
+        display: inline-block;
+        margin-right: 20px;
+    }
+
+.content-ordering li {
+    background-color: #fff;
+    padding: 10px;
+    font-size: 1.2em;
+    line-height: 2em;
+}
+    .content-ordering li:nth-child(2n+2) {
+        background-color: @lightGrey;
+    }
+    .content-ordering .sortable-ghost {
+        opacity: 0.4;
+        background-color: #F4E2C9;
+    }
+
+    .content-ordering li:first-letter {
+        text-transform: uppercase;
+    }
+
+.content-ordering li span.publish {
+    float: right;
 }
 
 /* =============================================================================
