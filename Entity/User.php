@@ -149,6 +149,16 @@ class User extends BaseUser
     }
 
     /**
+     * Get Name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->getFirstName() .' '. $this->getLastName();
+    }
+
+    /**
      * Add socialAccounts
      *
      * @param \Manhattan\Bundle\ConsoleBundle\Entity\User\SocialAccount $socialAccounts
