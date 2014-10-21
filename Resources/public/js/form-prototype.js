@@ -215,7 +215,7 @@ CollectionItem = new Class({
 	},
 
 	get: function(parameter) {
-    	return (this._protected[parameter] !== 'undefined') ? this._protected[parameter] : false;
+        return (this._protected[parameter] !== 'undefined') ? this._protected[parameter] : false;
     },
 
     // Configures buttons that can be used within the element
