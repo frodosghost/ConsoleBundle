@@ -79,10 +79,13 @@ class TwigSwiftMailer
     {
         $template = $this->parameters['template']['confirmation'];
         $url = $this->router->generate('console_users_password_set', array(
-            'token' => $user->getConfirmationToken()
+            'token' => $user->getConfirmationToken(),
+            'subdomain' => $this->siteManager->getSubdomain()
         ), true);
         $indexUrl = $this->parameters['console_link'];
-        $consoleIndex = $this->router->generate($indexUrl, array(), true);
+        $consoleIndex = $this->router->generate($indexUrl, array(
+            'subdomain' => $this->siteManager->getSubdomain()
+        ), true);
 
         $context = array(
             'user' => $user,

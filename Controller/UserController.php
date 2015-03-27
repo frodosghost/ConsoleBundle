@@ -91,7 +91,7 @@ class UserController extends Controller
                 $user->setConfirmationToken($tokenGenerator->generateToken());
             }
 
-            $this->get('fos_user.mailer.twig_swift')->sendCreateUserEmailMessage($user);
+            $this->get('manhattan.console.mailer.twig_swift')->sendCreateUserEmailMessage($user);
             $user_manager->updateUser($user);
 
             return $this->redirect($this->generateUrl('console_users', array(
