@@ -6,6 +6,7 @@
 
     <route id="console_index" pattern="/" host="{subdomain}.%domain%">
         <default key="_controller">ManhattanConsoleBundle:Console:index</default>
+        <requirement key="subdomain">^((?!.*(preview))[^\/]+)$</requirement>
     </route>
 
     <import resource="@ManhattanConsoleBundle/Resources/config/routing/user.xml" host="{subdomain}.%domain%" />
