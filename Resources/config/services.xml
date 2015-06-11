@@ -61,12 +61,14 @@
             <argument type="service" id="manhattan.console.site" />
         </service>
 
-        <service id="error_api.dashboard.mainmenu" class="Knp\Menu\MenuItem" factory-service="manhattan.console.menu_builder" factory-method="createMainMenu" scope="request">
+        <service id="error_api.dashboard.mainmenu" class="Knp\Menu\MenuItem" scope="request">
+            <factory service="manhattan.console.menu_builder" method="createMainMenu" />
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="mainmenu" />
         </service>
 
-        <service id="error_api.dashboard.usermenu" class="Knp\Menu\MenuItem" factory-service="manhattan.console.menu_builder" factory-method="createRightSideMenu" scope="request">
+        <service id="error_api.dashboard.usermenu" class="Knp\Menu\MenuItem" scope="request">
+            <factory service="manhattan.console.menu_builder" method="createRightSideMenu" />
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="usermenu" />
         </service>
