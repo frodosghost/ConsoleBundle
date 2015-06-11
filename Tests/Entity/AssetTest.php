@@ -76,16 +76,14 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     public function testPreUpload()
     {
         // Setup mock class for testing upload file
-        $mock_file = $this->getMockBuilder('\Symfony\Component\HttpFoundation\File\UploadedFile')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock_file = $this->createUploadedFileMock('abcdef', 'original.jpg', true);
 
         $mock_file->expects($this->any())
             ->method('getMimetype')
             ->will($this->returnValue('foo'));
         $mock_file->expects($this->any())
             ->method('getClientOriginalName')
-            ->will($this->returnValue('bar.foo'));
+            ->will($this->returnValue('original.jpg'));
 
         // Sets the mock class and initiates the preupload function
         $this->_asset->setFile($mock_file);
@@ -94,16 +92,14 @@ class AssetTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $this->_asset->getMimeType(),
             '->preUpload() correctly adds the mime_type when preparing file object.');
 
-        $this->assertEquals('bar.foo', $this->_asset->getFilename(),
+        $this->assertEquals('original.jpg', $this->_asset->getFilename(),
             '->preUpload() correctly adds the filename when preparing file object.');
     }
 
     public function testUpload()
     {
         // Setup mock class for testing upload file
-        $mock_file = $this->getMockBuilder('\Symfony\Component\HttpFoundation\File\UploadedFile')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock_file = $this->createUploadedFileMock('abcdef', 'original.jpg', true);
 
         // Sets the mock class and initiates the preupload function
         $this->_asset->setFile($mock_file);
@@ -117,9 +113,7 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     public function testUploadException()
     {
         // Setup mock class for testing upload file
-        $mock_file = $this->getMockBuilder('\Symfony\Component\HttpFoundation\File\UploadedFile')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock_file = $this->createUploadedFileMock('abcdef', 'original.jpg', true);
 
         // Sets exception to be sent and caught
         $mock_file->expects($this->any())
@@ -175,6 +169,32 @@ class AssetTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('', $this->_asset->getExtension(),
             '->getExtension() returns the correct file extension');
+    }
+
+    private function createUploadedFileMock($name, $originalName, $valid)
+    {
+        $file = $this
+            ->getMockBuilder('Symfony\Component\HttpFoundation\File\UploadedFile')
+            ->setConstructorArgs(array(__DIR__.'/../Fixtures/foo', 'foo'))
+            ->getMock()
+        ;
+        $file
+            ->expects($this->any())
+            ->method('getBasename')
+            ->will($this->returnValue($name))
+        ;
+        $file
+            ->expects($this->any())
+            ->method('getClientOriginalName')
+            ->will($this->returnValue($originalName))
+        ;
+        $file
+            ->expects($this->any())
+            ->method('isValid')
+            ->will($this->returnValue($valid))
+        ;
+
+        return $file;
     }
 
 }
