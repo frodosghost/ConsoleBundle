@@ -175,7 +175,7 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     {
         $file = $this
             ->getMockBuilder('Symfony\Component\HttpFoundation\File\UploadedFile')
-            ->setConstructorArgs(array(__DIR__.'/../Fixtures/foo', 'foo'))
+            ->setConstructorArgs(array(__DIR__.'/../DataFixtures/foo', 'foo'))
             ->getMock()
         ;
         $file
