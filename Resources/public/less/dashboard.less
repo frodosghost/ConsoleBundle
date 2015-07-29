@@ -202,6 +202,49 @@ ul.nested-tree li span.publish,
 }
 
 /* =============================================================================
+   Documents
+   ========================================================================== */
+
+div.document-list .well {
+    padding: @baseSpacing/4;
+    display: inline-block;
+    width: 100%;
+}
+
+div.document-list ul.actions {
+    display: inline-block;
+    margin: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.panel-btns a {
+   margin-left: 8px;
+   float: right;
+   display: inline-block;
+   font-size: 1.2rem;
+   padding: 2px 5px 0;
+   -moz-transition: all 0.2s ease-out 0s;
+    -webkit-transition: all 0.2s ease-out 0s;
+    transition: all 0.2s ease-out 0s;
+}
+
+.panel-btns a.minimize {
+   font-size: 18px;
+}
+
+.panel-btns a:hover {
+   text-decoration: none;
+   opacity: 0.5;
+   cursor: pointer;
+}
+
+.panel-btns a.minimize:active,
+.panel-btns a.minimize:focus {
+   text-decoration: none;
+}
+
+/* =============================================================================
    Footer
    ========================================================================== */
 footer {
