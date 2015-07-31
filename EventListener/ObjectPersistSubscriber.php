@@ -13,7 +13,7 @@ namespace Manhattan\Bundle\ConsoleBundle\EventListener;
 
 use Doctrine\ORM\Events;
 use Doctrine\Common\EventSubscriber;
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Manhattan\Bundle\ConsoleBundle\Entity\User;
 use Manhattan\Bundle\ConsoleBundle\Entity\Publish;
 use Symfony\Component\DependencyInjection\ContainerInterface;

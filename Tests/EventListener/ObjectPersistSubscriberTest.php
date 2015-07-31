@@ -44,7 +44,7 @@ class ObjectPersistSubscriberTest extends \PHPUnit_Framework_TestCase
             ->method('get')
             ->will($this->returnValue($mockSecurity));
 
-        $mockEventArgs = $this->getMockBuilder('Doctrine\ORM\Event\LifecycleEventArgs')
+        $mockEventArgs = $this->getMockBuilder('Doctrine\Common\Persistence\Event\LifecycleEventArgs')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -75,7 +75,7 @@ class ObjectPersistSubscriberTest extends \PHPUnit_Framework_TestCase
             ->with('security.context')
             ->will($this->returnValue($mockSecurity));
 
-        $mockEventArgs = $this->getMockBuilder('Doctrine\ORM\Event\LifecycleEventArgs')
+        $mockEventArgs = $this->getMockBuilder('Doctrine\Common\Persistence\Event\LifecycleEventArgs')
             ->disableOriginalConstructor()
             ->getMock();
 
