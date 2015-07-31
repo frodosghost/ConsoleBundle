@@ -21,14 +21,23 @@
         "twbs/bootstrap": "v3.2.0",
         "knplabs/knp-paginator-bundle": "~2.3",
         "knplabs/knp-menu-bundle": "~2.0@dev",
-        "friendsofsymfony/user-bundle": "dev-master",
+        "friendsofsymfony/user-bundle": "~1.3",
         "knplabs/knp-markdown-bundle": "1.2.*@dev",
-        "stfalcon/tinymce-bundle": "dev-master",
+        "stfalcon/tinymce-bundle": "0.3.*",
         "ornj/markdown-bundle": "dev-master"
+    },
+    "require-dev": {
+        "liip/functional-test-bundle": "1.0.*@dev"
+    },
+    "suggest": {
+        "manhattan/publish-bundle": "For using publish behaviour to saved entities.",
+        "manhattan/public-bundle": "For making setup of the public facing web site easy.",
+        "manhattan/posts-bundle": "For adding Post into the project.",
+        "liip/imagine-bundle": "For handling images."
     },
     "extra": {
         "branch-alias": {
-            "dev-tinymce": "3.0.x-dev"
+            "dev-factory": "3.0.x-dev"
         }
     }
 }
