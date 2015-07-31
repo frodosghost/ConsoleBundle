@@ -1,5 +1,7 @@
 # Manhattan Console Bundle
 
+[![Build Status](https://secure.travis-ci.org/frodosghost/ConsoleBundle.png)](http://travis-ci.org/frodosghost/ConsoleBundle)
+
 ## What
 
 Console Bundle is a basic backend system for managing websites. It is a the basic container of a CMS, allowing individual configuration for other bundles to be included. It includes that ability to reuse Styles, Layout, Menu Building and User Management to give clients a way to manage data, or Users.
