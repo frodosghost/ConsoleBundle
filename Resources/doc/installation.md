@@ -1,21 +1,20 @@
-# Manhattan Console Bundle
+# Install Manhattan Console Bundle
 
-## What
-
-Console Bundle is a basic backend system for managing websites. It is a the basic container of a CMS, allowing individual configuration for other bundles to be included. It includes that ability to reuse Styles, Layout, Menu Building and User Management to give clients a way to manage data, or Users.
-
-## Documentation
-
-All the documentation is located in the [documentation](https://github.com/frodosghost/ConsoleBundle/blob/master/index.md).
-
-## Installing
+## How
 
 1. Add this bundle to the composer file:
 
         {
             "require": {
                 ...
-                "manhattan/console-bundle": "dev-master"
+                "manhattan/console-bundle": "dev-master",
+                // Other bundles
+                "liip/imagine-bundle": "dev-master",
+                "atom/logger-bundle": "1.0.*",
+                "mopa/bootstrap-bundle": "3.*@dev",
+                "knplabs/knp-components": "1.2.2",
+                "knplabs/knp-menu-bundle": "2.0.*@dev",
+                "knplabs/knp-paginator-bundle": "2.4.*@dev",
             }
         }
 
