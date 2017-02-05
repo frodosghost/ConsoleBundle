@@ -4,39 +4,39 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="console_users" pattern="/users">
+    <route id="console_users" path="/users">
         <default key="_controller">ManhattanConsoleBundle:User:list</default>
-        <requirement key="_method">GET</requirement>
+        <requirement key="methods">GET</requirement>
     </route>
 
-    <route id="console_users_new" pattern="/users/new">
+    <route id="console_users_new" path="/users/new">
         <default key="_controller">ManhattanConsoleBundle:User:new</default>
-        <requirement key="_method">GET</requirement>
+        <requirement key="methods">GET</requirement>
     </route>
 
-    <route id="console_users_create" pattern="/users/create">
+    <route id="console_users_create" path="/users/create">
         <default key="_controller">ManhattanConsoleBundle:User:create</default>
-        <requirement key="_method">POST</requirement>
+        <requirement key="methods">POST</requirement>
     </route>
 
-    <route id="console_users_edit" pattern="/users/{id}/edit">
+    <route id="console_users_edit" path="/users/{id}/edit">
         <default key="_controller">ManhattanConsoleBundle:User:edit</default>
-        <requirement key="_method">GET</requirement>
+        <requirement key="methods">GET</requirement>
     </route>
 
-    <route id="console_users_update" pattern="/users/{id}/update">
+    <route id="console_users_update" path="/users/{id}/update">
         <default key="_controller">ManhattanConsoleBundle:User:update</default>
-        <requirement key="_method">POST</requirement>
+        <requirement key="methods">POST</requirement>
     </route>
 
-    <route id="console_users_password_set" pattern="/users/welcome/{token}">
+    <route id="console_users_password_set" path="/users/welcome/{token}">
         <default key="_controller">ManhattanConsoleBundle:User:passwordset</default>
-        <requirement key="_method">GET|POST</requirement>
+        <requirement key="methods">GET|POST</requirement>
     </route>
 
-    <route id="console_user_delete" pattern="/users/{id}">
+    <route id="console_user_delete" path="/users/{id}">
         <default key="_controller">ManhattanConsoleBundle:User:delete</default>
-        <requirement key="_method">DELETE</requirement>
+        <requirement key="methods">DELETE</requirement>
     </route>
 
 </routes>

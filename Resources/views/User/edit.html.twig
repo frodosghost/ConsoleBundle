@@ -5,7 +5,7 @@
 {% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li><a href="{{ path('console_users', { 'subdomain': subdomain }) }}">Users</a></li><li class="active">Edit User</li>{% endblock breadcrumbs %}
 
 {% block content_content %}
-    <form action="{{ path('console_users_update', { 'subdomain': subdomain, 'id': entity.id }) }}" {{ form_enctype(edit_form) }} method="POST" role="form" class="form-horizontal" novalidate>
+    <form action="{{ path('console_users_update', { 'subdomain': subdomain, 'id': entity.id }) }}" method="POST" role="form" class="form-horizontal" novalidate>
 
         {{ form_widget(edit_form) }}
 
@@ -26,7 +26,7 @@
     <div class="panel-body">
         <p><a href="{{ path('console_users', { 'subdomain': subdomain }) }}" class="btn btn-info">Back to the list</a></p>
         <form action="{{ path('console_user_delete', { 'subdomain': subdomain, 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
+            <input type="hidden" name="methods" value="DELETE" />
             {{ form_row(delete_form.id) }}
             {{ form_rest(delete_form) }}
             <button type="submit" class="btn btn-danger">Delete</button>

@@ -56,7 +56,7 @@ class ConsoleTwigExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'topHeader' => new \Twig_Function_Method($this, 'topHeader', array('is_safe' => array('html')))
+            new \Twig_SimpleFunction('topHeader', array($this, 'topHeader'), array('is_safe' => array('html')))
         );
     }
 

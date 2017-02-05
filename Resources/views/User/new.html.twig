@@ -5,7 +5,7 @@
 {% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li><a href="{{ path('console_users', { 'subdomain': subdomain }) }}">Users</a></li><li class="active">Create New User</li>{% endblock breadcrumbs %}
 
 {% block content_content %}
-    <form action="{{ path('console_users_create', { 'subdomain': subdomain }) }}" {{ form_enctype(form) }} method="POST" role="form" class="form-horizontal" novalidate>
+    <form action="{{ path('console_users_create', { 'subdomain': subdomain }) }}" method="POST" role="form" class="form-horizontal" novalidate>
 
         {{ form_widget(form) }}
 

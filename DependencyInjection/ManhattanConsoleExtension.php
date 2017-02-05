@@ -86,10 +86,10 @@ class ManhattanConsoleExtension extends Extension implements PrependExtensionInt
         // determine if TwigBundle is registered
         if (isset($bundles['TwigBundle'])) {
 
-            $config = array('form' => array('resources' => array (
+            $config = array('form_themes' => array (
                 'ManhattanConsoleBundle:Form:fields.html.twig',
                 'OrnjMarkdownBundle:Form:fields.html.twig'
-            )));
+            ));
 
             foreach ($container->getExtensions() as $name => $extension) {
                 switch ($name) {

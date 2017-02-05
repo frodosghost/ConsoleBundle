@@ -53,23 +53,23 @@
             <tag name="doctrine.event_subscriber" connection="default" />
         </service>
 
-        <service id="manhattan.console.menu_builder" class="%console.dashboard.menu_builder.class%" scope="request">
-            <argument type="service" id="request" />
+        <service id="manhattan.console.menu_builder" class="%console.dashboard.menu_builder.class%">
+            <argument type="service" id="request_stack" />
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="security.context" />
             <argument type="service" id="manhattan.console.site" />
         </service>
 
-        <service id="error_api.dashboard.mainmenu" class="Knp\Menu\MenuItem" scope="request">
+        <service id="error_api.dashboard.mainmenu" class="Knp\Menu\MenuItem">
             <factory service="manhattan.console.menu_builder" method="createMainMenu" />
-            <argument type="service" id="request" />
+            <argument type="service" id="request_stack" />
             <tag name="knp_menu.menu" alias="mainmenu" />
         </service>
 
-        <service id="error_api.dashboard.usermenu" class="Knp\Menu\MenuItem" scope="request">
+        <service id="error_api.dashboard.usermenu" class="Knp\Menu\MenuItem">
             <factory service="manhattan.console.menu_builder" method="createRightSideMenu" />
-            <argument type="service" id="request" />
+            <argument type="service" id="request_stack" />
             <tag name="knp_menu.menu" alias="usermenu" />
         </service>
 
@@ -130,11 +130,11 @@
         </service>
 
         <service id="form.type.image_type_extension" class="%form.type.image_type_extension.class%">
-            <tag name="form.type_extension" alias="file" />
+            <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\FileType" />
         </service>
 
         <service id="form.type.help_type.extension" class="%form.type.help_type.extension.class%">
-            <tag name="form.type_extension" alias="form" />
+            <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\FormType" />
         </service>
 
         <service id="fos_user.profile.form.type" class="Manhattan\Bundle\ConsoleBundle\Form\Type\ProfileFormType">

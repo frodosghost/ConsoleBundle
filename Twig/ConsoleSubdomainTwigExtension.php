@@ -18,7 +18,7 @@ use Manhattan\Bundle\ConsoleBundle\Site\SiteManager;
  *
  * @author James Rickard <james@frodosghost.com>
  */
-class ConsoleSubdomainTwigExtension extends \Twig_Extension
+class ConsoleSubdomainTwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
     /**
      * @var Symfony\Component\DependencyInjection\ContainerInterface

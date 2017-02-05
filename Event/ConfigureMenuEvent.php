@@ -17,7 +17,8 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 use Manhattan\Bundle\ConsoleBundle\Site\SiteManager;
 use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class ConfigureMenuEvent extends Event
 {
@@ -42,23 +43,30 @@ class ConfigureMenuEvent extends Event
     private $securityContext;
 
     /**
+     * @param Knp\Menu\ItemInterface $securityContext
+     */
+    private $token;
+
+    /**
      * @var Manhattan\Bundle\ConsoleBundle\Site\SiteManager
      */
     private $siteManager;
 
     /**
-     * @param Request                  $request
-     * @param FactoryInterface         $factory
-     * @param ItemInterface            $menu
-     * @param SecurityContextInterface $securityContext
-     * @param SiteManager              $siteManager
+     * @param Request                $request
+     * @param FactoryInterface       $factory
+     * @param ItemInterface          $menu
+     * @param AuthorizationChecker   $securityContext
+     * @param TokenStorage           $token
+     * @param SiteManager            $siteManager
      */
-    public function __construct(Request $request, FactoryInterface $factory, ItemInterface $menu, SecurityContextInterface $securityContext, SiteManager $siteManager)
+    public function __construct(Request $request, FactoryInterface $factory, ItemInterface $menu, AuthorizationChecker $securityContext, TokenStorage $token, SiteManager $siteManager)
     {
         $this->request = $request;
         $this->factory = $factory;
         $this->menu = $menu;
         $this->securityContext = $securityContext;
+        $this->token = $token;
         $this->siteManager = $siteManager;
     }
 
@@ -111,10 +119,6 @@ class ConfigureMenuEvent extends Event
      */
     public function getSecurityToken()
     {
-        if ($this->getSecurityContext()->getToken() instanceof TokenInterface) {
-            return $this->getSecurityContext()->getToken();
-        }
-
-        return null;
+        return $this->token;
     }
 }
